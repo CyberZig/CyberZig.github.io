@@ -1,7 +1,355 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Eaton - Information Security Analyst</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Changed background to a subtle radial gradient */
+            background: radial-gradient(circle at top left, #f0f4f8, #e5e7eb);
+            line-height: 1.6; /* Improved readability */
+            min-height: 100vh; /* Ensure body takes full viewport height for gradient */
+        }
+        .section-heading {
+            border-left: 4px solid #7c3aed; /* Purple-600 */
+            padding-left: 1.25rem; /* Increased padding */
+            font-weight: 700; /* Bold heading */
+            color: #1f2937; /* Darker gray for section headings */
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1rem; /* More rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Enhanced shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Subtle lift on hover */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* More pronounced shadow on hover */
+        }
+        .nav-item {
+            cursor: pointer;
+            padding: 0.75rem 1.5rem; /* Increased padding for larger touch targets */
+            border-radius: 9999px; /* Fully rounded pills */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+        .nav-item:hover {
+            background-color: #a78bfa; /* Purple-400 on hover */
+            color: #ffffff;
+            transform: translateY(-2px); /* Subtle lift on hover */
+        }
+        .nav-item.active {
+            background-color: #7c3aed; /* Purple-600 background for active */
+            color: #ffffff; /* White text for active */
+            box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3); /* Subtle shadow for active item */
+        }
+
+        /* Timeline specific styles */
+        .timeline {
+            position: relative;
+            max-width: 1200px; /* Keeping max-width for timeline for readability */
+            margin: 0 auto;
+            padding-top: 20px; /* Add some space at the top */
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px; /* Thinner line */
+            background-color: #c4b5fd; /* Lighter purple for timeline line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px; /* Adjust for thinner line */
+        }
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 20px; /* Smaller dot */
+            height: 20px; /* Smaller dot */
+            right: -10px; /* Adjusted position */
+            background-color: #7c3aed; /* Purple-600 for dots */
+            border: 3px solid #ffffff; /* White border for contrast */
+            top: 20px; /* Adjusted position */
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 25px; /* Adjusted position */
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 25px; /* Adjusted position */
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+        .right::after {
+            left: -8px; /* Adjusted position */
+        }
+        .timeline-content {
+            padding: 25px 30px; /* More padding */
+            background-color: white;
+            position: relative;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Shadow for content */
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            .left::after, .right::after {
+                left: 15px;
+            }
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    <!-- Main wrapper for the entire page content -->
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation Bar -->
+        <!-- Placed outside the main content wrapper to allow full width and align right -->
+        <nav class="sticky top-0 z-50 p-4 bg-white bg-opacity-95 shadow-lg flex flex-col md:flex-row justify-center md:justify-end space-y-4 md:space-y-0 md:space-x-4 text-lg font-semibold text-gray-700">
+            <div id="nav-home" class="nav-item active" onclick="showPage('home-page', 'nav-home')">Home</div>
+            <div id="nav-experience" class="nav-item" onclick="showPage('experience-page', 'nav-experience')">Experience</div>
+            <div id="nav-contact" class="nav-item" onclick="showPage('contact-page', 'nav-contact')">Contact</div>
+        </nav>
+
+        <!-- Page Content Wrapper (now full width) -->
+        <div class="flex-grow w-full p-4 md:p-8">
+
+            <!-- Home Page -->
+            <div id="home-page" class="page-content">
+                <!-- Header Section -->
+                <header class="text-center mb-12 py-8">
+                    <h1 class="text-6xl font-extrabold text-purple-900 mb-4 tracking-tight">David Eaton</h1>
+                    <p class="text-3xl font-semibold text-purple-700">Information Security Analyst</p>
+                </header>
+
+                <!-- Profile Section -->
+                <section class="mb-10 card p-8 mx-auto max-w-4xl">
+                    <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Profile</h2>
+                    <div class="text-gray-700 leading-relaxed text-lg">
+                        <p class="mb-4">I am a reliable and confident Information Security Analyst with over 8+ years of experience in the IT & Security industry with proven ability to work under pressure and to time constraints.</p>
+                        <p class="mb-4">Having transitioned over from Network Engineering to Information Security in the past few years, I want to now take my knowledge and experience further to pave a career in Cyber Security.</p>
+                        <p>I am completely open and transparent as to why am I looking for a new role, and the reason is that I have moved from a hands-on technical role to a role which is heavy focussed on GRC. I enjoy the involvement I have with many stakeholders within and outside the business and the work that I do, the reason I want to make a move is to create a long-term career in a business that is dedicated to drive security improvement.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Experience Page -->
+            <div id="experience-page" class="page-content hidden">
+                <section class="mb-10 card p-8 mx-auto max-w-4xl">
+                    <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Employment History</h2>
+
+                    <div class="timeline">
+                        <!-- Resonate Group Limited -->
+                        <div class="timeline-container left">
+                            <div class="timeline-content card">
+                                <h3 class="text-xl font-semibold text-purple-700 mb-2">Information Security Analyst at Resonate Group Limited</h3>
+                                <p class="text-gray-500 mb-3 text-sm">August 2022 - Present | Industry: Information Technology Solutions | Clients: UK Rail Industry</p>
+                                <p class="text-gray-700 mb-4 text-base">Resonate Group Limited design, develop, and deploy digital railway and connected transport solutions to the UK rail industry with a long history of success and a thriving future ahead. My role at Resonate is Information Security Analyst sits organisationally directly below the CTO and working closely with the head of Technical Operations to drive a security mindset across the business.</p>
+                                <h4 class="font-medium text-gray-800 mb-2 text-lg">My role includes:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1 text-base">
+                                    <li>Maintaining compliance to ISO27001 accreditation</li>
+                                    <li>Supporting IT and Quality teams in maintaining ISO9001, 14001, and Cyber Essentials</li>
+                                    <li>Responsible for Information Security across the business directed by the CTO</li>
+                                    <li>Work closely with Head of Technical Operations to maintain and enhance security controls across IT estate</li>
+                                    <li>Work closely with Product Owners to maintain and enhance a security posture of OT systems</li>
+                                    <li>Maintain compliance across the business to IT & Security Policies (internal audits and regular discussions with staff)</li>
+                                    <li>Influence changes to existing, and design new policies to the ISMS in line with changing threat landscape</li>
+                                    <li>Monitor threat landscape through horizon scanning, partner collaboration, and supplier relationships</li>
+                                    <li>Manage internal and external security projects such as penetration testing, security auditing, framework assessments, and security Improvements</li>
+                                    <li>Provide role specific training to all staff on security and policy assurance</li>
+                                    <li>Provide security assurance for supply chain management</li>
+                                    <li>Maintain vulnerability management programmes across the IT and OT estate</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Acorn Insurance & Financial Services Ltd -->
+                        <div class="timeline-container right">
+                            <div class="timeline-content card">
+                                <h3 class="text-xl font-semibold text-purple-700 mb-2">Information Security Analyst at Acorn Insurance & Financial Services Ltd</h3>
+                                <p class="text-gray-500 mb-3 text-sm">November 2021 - August 2022 | Industry: Insurance and Financial Services | Clients: Insurance Brokers and Customers</p>
+                                <p class="text-gray-700 mb-4 text-base">Acorn Insurance & Financial Services Ltd is a large insurance supplier to hundreds of thousands of customers and brokers across the UK and has been in the top 100 insurance companies and top 100 growing companies over the past few years.</p>
+                                <p class="text-gray-700 mb-4 text-base">I work as part of the InfoSec team in communication with the IT and Infrastructure teams daily. My core responsibilities include reviewing new and existing supplier due diligence on a regular basis to ensure suppliers maintain a baseline for Acorn Insurance risk appetite, reviewing and implementing new systems alongside the relevant teams in relation to information security, and regularly updating policy documentation upon review.</p>
+                                <p class="text-gray-700 mb-4 text-base">I am responsible for researching and evaluating emerging cyber security threats and how to manage and mitigate them. Reviewing alerts on a number of critical systems is a daily task to ensure unauthorised or suspicious activity is investigated and resolved immediately to ensure the integrity of Acorn Insurance systems.</p>
+                                <p class="text-gray-700 mb-4 text-base">Aside from the technical tasks, I am responsible for generating regular reports for technical and non-technical staff and stakeholders across several systems.</p>
+                                <p class="text-gray-700 text-base">User training is at the heart of Acorn Insurance when it comes to security and awareness, I am responsible for regular email newsletters to all staff as well as managing the cyber security training portal.</p>
+                            </div>
+                        </div>
+
+                        <!-- Safetynet Solutions Ltd -->
+                        <div class="timeline-container left">
+                            <div class="timeline-content card">
+                                <h3 class="text-xl font-semibold text-purple-700 mb-2">Network Engineer at Safetynet Solutions Ltd</h3>
+                                <p class="text-gray-500 mb-3 text-sm">September 2016 - November 2021 | Industry: Visitor Management Software | Clients: Clients Worldwide</p>
+                                <p class="text-gray-700 mb-4 text-base">Safetynet Solutions is a SME with 50-100 employees across 2 offices that supplies in-house Visitor Management solutions to customers from the education system to tenanted building across several countries.</p>
+                                <p class="text-gray-700 mb-4 text-base">My role developed massively over the course of 5 years starting from helpdesk support technician to Network Engineer.</p>
+                                <h4 class="font-medium text-gray-800 mb-2 text-lg">My core responsibilities included:</h4>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1 text-base">
+                                    <li>Responsible for IT and Security for the business directed by the company directors</li>
+                                    <li>Providing 3rd line support for customer support tickets</li>
+                                    <li>Maintain compliance to SLA for customer support desk</li>
+                                    <li>Support software implementation teams on complex software builds</li>
+                                    <li>Support software implementation teams on installations remotely</li>
+                                    <li>Carry out installations of on-premise software offerings</li>
+                                    <li>Carry out on-premise installations of networking equipment</li>
+                                    <li>Maintain customer servers and systems including SQL Server, Web Services, and Storage solutions</li>
+                                    <li>Maintain the IT infrastructure for the business including IT software, production software, IT equipment, telecommunications equipment, and SaaS applications</li>
+                                    <li>Manage IT and complex customer projects</li>
+                                    <li>Maintain compliance with Cyber Essentials</li>
+                                    <li>Complete third-party supplier forms and questionnaires</li>
+                                    <li>Maintain supplier assurance to security controls</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Contact Page -->
+            <div id="contact-page" class="page-content hidden">
+                <!-- Contact Section -->
+                <section class="mb-10 card p-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center mx-auto max-w-4xl">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-purple-700">Email</h3>
+                        <a href="mailto:davidzeaton@proton.me" class="text-gray-700 hover:text-purple-500 transition duration-300 text-base">davidzeaton@proton.me</a>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-purple-700">Phone</h3>
+                        <a href="tel:07990032875" class="text-gray-700 hover:text-purple-500 transition duration-300 text-base">07990032875</a>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-purple-700">Website - WIP</h3>
+                        <a href="https://www.davidziggyeaton.co.uk" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-purple-500 transition duration-300 text-base">www.davidziggyeaton.co.uk</a>
+                    </div>
+                </section>
+
+                <!-- Qualifications Section -->
+                <section class="card p-8 mx-auto max-w-4xl">
+                    <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Qualifications</h2>
+                    <p class="text-gray-700 mb-6 text-base">Throughout my time in the IT industry, I have gained a range of qualifications and certifications:</p>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                            <thead class="bg-purple-100">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-sm font-semibold text-purple-700 uppercase tracking-wider">Qualification / Certification</th>
+                                    <th class="py-3 px-4 text-left text-sm font-semibold text-purple-700 uppercase tracking-wider">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">ISO/IEC 27001:2022 Lead Implementor</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">October 2023</td>
+                                </tr>
+                                <tr class="bg-gray-50"> <!-- Added subtle stripe -->
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">PRINCE2 Practitioner</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">November 2019</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">Level 4 Network Engineer Apprenticeship - Distinction</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">January 2019</td>
+                                </tr>
+                                <tr class="bg-gray-50"> <!-- Added subtle stripe -->
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">MTA Mobility and Device Fundamentals</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">April 2018</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">MTA Security Fundamentals</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">May 2017</td>
+                                </tr>
+                                <tr class="bg-gray-50"> <!-- Added subtle stripe -->
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">MTA Networking Fundamentals</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">May 2017</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">Level 3 Apprenticeship - IT, Telecoms, and Digital Communications - Pass</td>
+                                    <td class="py-3 px-4 whitespace-nowrap text-base">October 2017</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-gray-700 mt-6 text-base">Even though I have completed several certifications and qualifications, I am always eager to continue my learning path with an aim to gain the CISSP and CISM certifications.</p>
+                    <p class="text-gray-700 mt-4 text-base">For more information on my career or to get in touch, please use the contact details at the top of my CV or visit my website on <a href="https://www.davidziggyeaton.co.uk" target="_blank" rel="noopener noreferrer" class="text-purple-500 hover:underline">www.davidziggyeaton.co.uk</a>, I look forward to hearing from you.</p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="text-center mt-12 p-6 text-gray-600 text-sm border-t border-gray-200">
+            <p>&copy; 2025 David Eaton. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function showPage(pageId, navItemId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            // Deactivate all navigation items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // Show the selected page
+            document.getElementById(pageId).classList.remove('hidden');
+
+            // Activate the selected navigation item
+            document.getElementById(navItemId).classList.add('active');
+        }
+
+        // Initially show the home page when the site loads
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home-page', 'nav-home');
+        });
+    </script>
 </body>
 </html>

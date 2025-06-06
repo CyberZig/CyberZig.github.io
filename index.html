@@ -17,11 +17,7 @@
             color: #ccd6f6;
         }
 
-        .glass-effect {
-            background: rgba(13, 30, 51, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        .glass-effect { background: rgba(13, 30, 51, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
 
         .skill-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -32,25 +28,9 @@
             box-shadow: 0 20px 25px -5px rgba(0, 255, 255, 0.1), 0 10px 10px -5px rgba(0, 255, 255, 0.04);
         }
 
-        .section-title {
-            position: relative;
-            padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: #64ffda;
-        }
+        .section-title { position: relative; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.25rem; font-weight: 700; color: #64ffda; }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 4px;
-            background-color: #64ffda;
-            border-radius: 2px;
-        }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background-color: #64ffda; border-radius: 2px; }
         
         #particles-js {
             position: fixed;
@@ -80,7 +60,8 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
                     <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
-                    <a href="#experience" class="text-slate-300 hover:text-cyan-400 transition">Experience</a>
+					<a href="#qualifications" class="text-slate-300 hover:text-cyan-400 transition">Qualifications</a>
+                    <a href="experience.html" class="text-slate-300 hover:text-cyan-400 transition">Experience</a>
                 </div>
                 <button id="get-in-touch-btn" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition">Get In Touch</button>
                 <button id="mobile-menu-button" class="md:hidden text-white">
@@ -103,9 +84,9 @@
                     <div>
                         <p class="text-cyan-400 text-lg mb-2">Hi, my name is</p>
                         <h1 class="text-5xl md:text-7xl font-bold text-slate-100 mb-4">David Eaton.</h1>
-                        <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mb-6">I build defenses for the web.</h2>
+                        <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mb-6">The Cybersecurity Expert You Can Trust.</h2>
                         <p class="text-lg text-slate-400 max-w-xl mb-8">
-                            I am an Information Security Analyst specializing in threat detection, vulnerability management, and incident response. My passion is to protect digital assets and ensure the integrity and confidentiality of information systems.
+                            I am an Information Security Analyst specialising in threat detection, vulnerability management, and incident response. My passion is to empower and guide individuals to effectively protect their assets and ensure the integrity and confidentiality of systems and software.
                         </p>
                          <button id="hero-contact-btn" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 inline-block">
                             Contact Me
@@ -125,7 +106,11 @@
                 <h2 class="section-title">About Me</h2>
                 <div class="grid md:grid-cols-5 gap-10">
                     <div class="md:col-span-3 text-slate-400 text-lg space-y-4">
-                        <p>Hello! I'm David, an Information Security Analyst with a deep-seated passion for cybersecurity...</p>
+                        <p>Hello! I'm David, an Information Security Analyst with a deep-seated passion for cybersecurity over 8+ years of experience.</p>
+						<p>My career journey has provided me with a comprehensive understanding of the IT and security landscape. I've advanced through roles such as a Second and Third Line Support Analyst and Network Engineer, which laid a robust foundation for my specialization in information security. This hands-on experience has honed my ability to not only identify and mitigate risks but also to understand the broader technical implications of security measures.</p>
+						<p>Currently I am and Information Security Analyst at Resoante where I actively drive cybersecurity initiatives to protect safety critical systems provided to the UK Critical National Infrastructure (CNI), enhance organisational resilience, and implement robust security controls to ensure compliance to ISO27001 and Cyber Essentails Plus.</p>
+						
+
                     </div>
                     <div class="md:col-span-2 flex justify-center items-start">
                         <div class="relative w-full max-w-xs">
@@ -143,30 +128,33 @@
                  <h2 class="section-title">Skills & Expertise</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-shield-alt fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Network Security</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-bug fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Vulnerability Assessment</h3></div>
+					<div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-door-open fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Physical Security</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-bug fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Vulnerability Management</h3></div>
                     <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-fire-extinguisher fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Incident Response</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-magnifying-glass-chart fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">SIEM & Log Analysis</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fab fa-python fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Python Scripting</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-file-contract fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Compliance (GDPR, ISO 27001)</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-cloud-shield fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cloud Security (AWS, Azure)</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-lock fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cryptography</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-magnifying-glass-chart fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Digital Forensics</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-file-contract fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Compliance (Cyber Essentials, ISO 27001)</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-cloud fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cloud Security (AWS, Azure)</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-book fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Security Training Delivery</h3></div>
                 </div>
             </section>
+			
+			    <!-- Qualifications Section -->
+            <section id="qualifications" class="py-24">
+                 <h2 class="section-title">Qualifications & Certifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                   <div class="skill-card p-6 rounded-lg bg-slate-800 flex items-center space-x-4"><i class="fas fa-certificate fa-3x text-cyan-400"></i><div><h3 class="text-xl font-bold text-slate-100">Lead Implementor</h3><p class="text-slate-400">ISO/IEC 27001:2022 Lead Implementor</p></div></div>
+                   <div class="skill-card p-6 rounded-lg bg-slate-800 flex items-center space-x-4"><i class="fas fa-id-badge fa-3x text-cyan-400"></i><div><h3 class="text-xl font-bold text-slate-100">PRINCE2</h3><p class="text-slate-400">PRINCE2 Practitioner</p></div></div>
+                   <div class="skill-card p-6 rounded-lg bg-slate-800 flex items-center space-x-4"><i class="fas fa-user-secret fa-3x text-cyan-400"></i><div><h3 class="text-xl font-bold text-slate-100">L4 Cyber Security</h3><p class="text-slate-400">Level 4 Apprenticeship in Cyber Security</p></div></div>
+                   <div class="skill-card p-6 rounded-lg bg-slate-800 flex items-center space-x-4"><i class="fas fa-graduation-cap fa-3x text-cyan-400"></i><div><h3 class="text-xl font-bold text-slate-100">L4 Network Engineer</h3><p class="text-slate-400">Level 4 Network Engineer Apprenticeship</p></div></div>
+                </div>
+           </section>
 
-            <!-- Experience Section -->
-            <section id="experience" class="py-24">
-                <h2 class="section-title">Professional Experience</h2>
-                <div class="relative border-l-2 border-cyan-700 ml-4 md:ml-0">
-                    <div class="mb-12 ml-8"><div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div><h3 class="text-2xl font-bold text-slate-100">Senior Information Security Analyst</h3><p class="text-lg text-cyan-400 mb-2">SecureTech Solutions | 2021 - Present</p><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Lead incident response efforts...</li></ul></div>
-                    <div class="mb-12 ml-8"><div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div><h3 class="text-2xl font-bold text-slate-100">Information Security Analyst</h3><p class="text-lg text-cyan-400 mb-2">CyberDefend Inc. | 2018 - 2021</p><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Monitored security alerts...</li></ul></div>
-                    <div class="ml-8"><div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div><h3 class="text-2xl font-bold text-slate-100">IT Support Technician (Security Focus)</h3><p class="text-lg text-cyan-400 mb-2">DataSafe Corp. | 2016 - 2018</p><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Provided first-line support...</li></ul></div>
-                </div>
-            </section>
+            
         </main>
         
         <footer class="text-center py-6 text-slate-500 text-sm">
             <p>Designed & Built by David Eaton</p>
-            <p>&copy; 2024. All rights reserved.</p>
+            <p>&copy; 2025. All rights reserved.</p>
         </footer>
     </div>
 
@@ -185,8 +173,7 @@
                 </p>
             </div>
             
-            <!-- IMPORTANT: To make this form work, create a free account on formspree.io, -->
-            <!-- create a new form, and replace 'YOUR_UNIQUE_ID' with your form's ID. -->
+            <!-- FORM from formspree -->
             <form action="https://formspree.io/f/xpwrqwnd" method="POST" class="space-y-6">
                 <!-- Honeypot Field for Bot Protection -->
                 <input type="text" name="_gotcha" style="display:none">
@@ -212,9 +199,9 @@
              <div class="mt-12 text-center">
                  <p class="text-slate-400">Or connect with me on social media:</p>
                  <div class="flex justify-center space-x-6 mt-4">
-                    <a href="https://github.com/davideaton-sec" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-github fa-2x"></i></a>
-                    <a href="https://linkedin.com/in/davideaton-sec" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-linkedin fa-2x"></i></a>
-                    <a href="https://twitter.com/davideaton_sec" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-twitter fa-2x"></i></a>
+                    <a href="https://github.com/CyberZig" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-github fa-2x"></i></a>
+                    <a href="https://www.linkedin.com/in/david-ziggy-eaton-9833aa140/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="https://x.com/davidziggyeaton" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-twitter fa-2x"></i></a>
                 </div>
             </div>
         </div>

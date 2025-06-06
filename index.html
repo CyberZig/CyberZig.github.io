@@ -91,15 +91,17 @@
                 <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Skills</a>
                 <a href="#qualifications" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Qualifications</a>
                 <a href="/experience/" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Experience</a>
-                <a href="/contact/" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-700">Get In Touch</a>
-                <div class="relative group">
-                    <a class="px-4 pt-2 pb-1 text-sm hover:bg-gray-700 transition cursor-pointer flex items-center">
-                        Projects <i class="fas fa-chevron-down text-xs ml-2"></i>
-                    </a>
-                    <div class="absolute hidden group-hover:block bg-slate-800 rounded-md mt-2 w-48 shadow-lg py-1 z-50">
-                        <a href="/projects/professional/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-cyan-400">Professional</a>
-                        <a href="/projects/personal/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-cyan-400">Personal</a>
-                    </div>
+                <!-- Mobile Projects Accordion -->
+            <div>
+                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center py-2 px-4 text-sm hover:bg-gray-700">
+                    <span>Projects</span>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+                <div id="mobile-projects-submenu" class="hidden pl-4">
+                    <a href="/projects/professional/" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Professional</a>
+                    <a href="/projects/personal/" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Personal</a>
+                </div>
+                <a href="/contact/" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-700">Get In Touch</a>            
             </div>
         </header>
 
@@ -206,32 +208,28 @@
     </div>
 
 
+ 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // --- Page Navigation Logic ---
-        const mainPage = document.getElementById('main-portfolio-page');
-        const contactPage = document.getElementById('contact-page');
-
-        const showContactPage = () => {
-            mainPage.classList.add('hidden');
-            contactPage.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        };
-
-        const showMainPage = () => {
-            contactPage.classList.add('hidden');
-            mainPage.classList.remove('hidden');
-        };
-
-
-        // --- Original Site Logic ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const mobileProjectsButton = document.getElementById('mobile-projects-button');
+        const mobileProjectsSubmenu = document.getElementById('mobile-projects-submenu');
+
+        // Toggle main mobile menu
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Hide mobile menu on nav link click
+        // Toggle projects submenu
+        mobileProjectsButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent the main menu from closing
+            mobileProjectsSubmenu.classList.toggle('hidden');
+            const icon = mobileProjectsButton.querySelector('i');
+            icon.classList.toggle('rotate-180');
+        });
+
+        // Hide main menu when a link is clicked
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -250,8 +248,8 @@
         };
 
         particlesJS('particles-js', {
-            "particles": {"number": {"value": 80, "density": {"enable": true, "value_area": 800}},"color": {"value": "#64ffda"},"shape": {"type": "circle","stroke": {"width": 0,"color": "#000000"},"polygon": {"nb_sides": 5}},"opacity": {"value": 0.2,"random": false,"anim": {"enable": false,"speed": 1,"opacity_min": 0.1,"sync": false}},"size": {"value": 3,"random": true,"anim": {"enable": false,"speed": 40,"size_min": 0.1,"sync": false}},"line_linked": {"enable": true,"distance": 150,"color": "#25416a","opacity": 0.4,"width": 1},"move": {"enable": true,"speed": 2,"direction": "none","random": false,"straight": false,"out_mode": "out","bounce": false,"attract": {"enable": false,"rotateX": 600,"rotateY": 1200}}},
-            "interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": true,"mode": "grab"},"onclick": {"enable": true,"mode": "push"},"resize": true},"modes": {"grab": {"distance": 140,"line_linked": {"opacity": 1}},"bubble": {"distance": 400,"size": 40,"duration": 2,"opacity": 8,"speed": 3},"repulse": {"distance": 200,"duration": 0.4},"push": {"particles_nb": 4},"remove": {"particles_nb": 2}}},
+            "particles": {"number": {"value": 80, "density": {"enable": true, "value_area": 800}},"color": {"value": "#64ffda"},"shape": {"type": "circle"},"opacity": {"value": 0.2},"size": {"value": 3,"random": true},"line_linked": {"enable": true,"distance": 150,"color": "#25416a","opacity": 0.4,"width": 1},"move": {"enable": true,"speed": 2,"out_mode": "out"}},
+            "interactivity": {"events": {"onhover": {"enable": true,"mode": "grab"},"onclick": {"enable": true,"mode": "push"}},"modes": {"grab": {"distance": 140,"line_linked": {"opacity": 1}},"push": {"particles_nb": 4}}},
             "retina_detect": true
         });
     </script>

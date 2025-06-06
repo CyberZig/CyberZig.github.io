@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - David Eaton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a192f; color: #ccd6f6; }
+        .glass-effect { background: rgba(13, 30, 51, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .section-title { position: relative; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.25rem; font-weight: 700; color: #64ffda; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background-color: #64ffda; border-radius: 2px; }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect" id="header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">DE.</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
+                <a href="index.html#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
+                <a href="index.html#qualifications" class="text-slate-300 hover:text-cyan-400 transition">Qualifications</a>
+                <a href="experience.html" class="text-cyan-400 font-bold">Experience</a>
+            </div>
+            <a href="contact.html" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition">Get In Touch</a>
+            <button id="mobile-menu-button" class="md:hidden text-white"><i class="fas fa-bars fa-2x"></i></button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="index.html#about" class="block py-2 px-4 text-sm hover:bg-gray-700">About</a>
+            <a href="index.html#skills" class="block py-2 px-4 text-sm hover:bg-gray-700">Skills</a>
+            <a href="index.html#qualifications" class="block py-2 px-4 text-sm hover:bg-gray-700">Qualifications</a>
+            <a href="experience.html" class="block py-2 px-4 text-sm bg-gray-700 text-cyan-400">Experience</a>
+            <a href="contact.html" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-700">Get In Touch</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 lg:px-20 pt-32 pb-24">
+        <!-- Experience Section -->
+            <section id="experience" class="py-24">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="relative border-l-2 border-cyan-700 ml-4 md:ml-0">
+                <!-- Job 1 -->
+                <div class="mb-12 ml-8">
+                    <div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div>
+                    <h3 class="text-2xl font-bold text-slate-100">Information Security Lead</h3>
+                    <p class="text-lg text-cyan-400 mb-2">Resonate Group Ltd | Aug 2022 - Present</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-2">
+					<p> My role at Resonate is Information Security Analyst sits below the CTO and working closely with the head of Technical Operations to drive a security initiatives across the business.</p>
+					<p> My role includes:</p>
+                        <li>Maintaining compliance with ISO27001 accreditation</li>
+                        <li>Supporting IT and Quality teams in maintaining ISO9001, 14001, and Cyber Essentials</li>
+                        <li>Responsible for Information Security across the business directed by the CTO</li>
+						<li>Work closely with the Head of Technical Operations to maintain and enhance security controls across IT estate</li>
+						<li>Work closely with Product Owners to maintain and enhance a security posture of OT systems</li>
+						<li>Maintain compliance across the business to IT & Security Policies</li>
+						<li>Influence changes to existing, and design new policies for the ISMS in line with the changing threat landscape</li>
+						<li>Monitor threat landscape through horizon scanning, partner collaboration, and supplier relationships</li>
+						<li>Manage internal and external security projects such as penetration testing, security auditing, framework assessments, and security Improvements</li>
+						<li>Provide role-specific training to all staff on security and policy assurance</li>
+						<li>Provide security assurance for supply chain management</li>
+						<li>Maintain vulnerability management programme across the IT and OT estate</li>
+                    </ul>
+                </div>
+                <!-- Job 2 -->
+                <div class="mb-12 ml-8">
+                    <div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div>
+                    <h3 class="text-2xl font-bold text-slate-100">Information Security Analyst</h3>
+                    <p class="text-lg text-cyan-400 mb-2">Acorn Insurance & Financial Services Ltd | Nov 2021 - Aug 2022</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-2">
+					<p>I previously worked as an Information Security Analyst for Acorn Insurance. I worked as part of the InfoSec team in communication with the IT and Infrastructure teams daily.</p>
+					<p>My core responsibilities included reviewing new and existing supplier due diligence on a regular basis to ensure suppliers maintain a baseline for Acorn Insurance risk appetite, reviewing and implementing new systems alongside the relevant teams in relation to information security, and regularly updating policy documentation upon review.</p>
+					<p>I was responsible for researching and evaluating emerging cyber security threats and how to manage and mitigate them. Reviewing alerts on a number of critical systems is a daily task to ensure unauthorised or suspicious activity is investigated and resolved immediately to ensure the integrity of Acorn Insurance systems.</p>
+					<p>Aside from the technical tasks, I was responsible for generating regular reports for technical and non-technical staff and stakeholders across several systems.</p>
+                    <p>User training is at the heart of Acorn Insurance when it comes to security and awareness, I was responsible for regular email newsletters to all staff as well as managing the cyber security training portal.</p>
+                    </ul>
+                </div>
+                 <!-- Job 3 -->
+                <div class="ml-8">
+                    <div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div>
+                    <h3 class="text-2xl font-bold text-slate-100">Network Engineer</h3>
+                    <p class="text-lg text-cyan-400 mb-2">Safetynet Solutions Ltd | Sep 2016 - Nov 2021</p>
+                    <ul class="list-disc list-inside text-slate-400 space-y-2">
+					<p>Safetynet Solutions is a SME with 50 – 100 employees across 2 offices that supplies in-house Visitor Management solutions to customers from the education system to tenanted building across several countries.</p>
+					<p>My role developed massively over the course of 5 years starting from helpdesk support technician to Network Engineer.</p>
+					<p>My role included:</p>
+                        <li>Responsible for IT and Security for the business directed by the company directors</li>
+                        <li>Providing 3rd line support for customer support tickets</li>
+                        <li>Maintain compliance to SLA for customer support desk</li>
+						<li>Support software implementation teams on complex software builds</li>
+                        <li>Support software implementation teams on installations remotely</li>
+                        <li>Carry out installations of on-premise software offerings</li>
+                        <li>Carry out on-premise installations of networking equipment</li>
+                        <li>Maintain customer servers and systems including SQL Server, Web Services, and Storage solutions</li>
+                        <li>Maintain the IT infrastructure for the business including IT software, production software, IT equipment, telecommunications equipment, and SaaS applications</li>
+                        <li>Manage IT and complex customer projects</li>
+                        <li>Maintain compliance to SLA for customer support deskMaintain compliance with Cyber Essentials</li>
+						<li>Complete third-party supplier forms and questionnaires</li>
+                        <li>Maintain supplier assurance to security controls</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="text-center py-6 text-slate-500 text-sm">
+        <p>Designed & Built by David Eaton</p>
+        <p>&copy; 2024. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        particlesJS('particles-js', {
+            "particles": {"number": {"value": 80, "density": {"enable": true, "value_area": 800}},"color": {"value": "#64ffda"},"shape": {"type": "circle"},"opacity": {"value": 0.2,"random": false},"size": {"value": 3,"random": true},"line_linked": {"enable": true,"distance": 150,"color": "#25416a","opacity": 0.4,"width": 1},"move": {"enable": true,"speed": 2,"direction": "none","random": false,"straight": false,"out_mode": "out"}},
+            "interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": true,"mode": "grab"},"onclick": {"enable": true,"mode": "push"},"resize": true},"modes": {"grab": {"distance": 140,"line_linked": {"opacity": 1}},"push": {"particles_nb": 4}}},
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>

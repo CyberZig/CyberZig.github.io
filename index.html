@@ -1,350 +1,283 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>David Eaton - Information Security Analyst</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Changed background to a subtle radial gradient */
-            background: radial-gradient(circle at top left, #f0f4f8, #e5e7eb);
-            line-height: 1.6; /* Improved readability */
-            min-height: 100vh; /* Ensure body takes full viewport height for gradient */
-        }
-        .section-heading {
-            border-left: 4px solid #7c3aed; /* Purple-600 */
-            padding-left: 1.25rem; /* Increased padding */
-            font-weight: 700; /* Bold heading */
-            color: #1f2937; /* Darker gray for section headings */
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 1rem; /* More rounded corners */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Enhanced shadow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
-        }
-        .card:hover {
-            transform: translateY(-5px); /* Subtle lift on hover */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* More pronounced shadow on hover */
-        }
-        .nav-item {
-            cursor: pointer;
-            padding: 0.75rem 1.5rem; /* Increased padding for larger touch targets */
-            border-radius: 9999px; /* Fully rounded pills */
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            white-space: nowrap; /* Prevent wrapping */
-        }
-        .nav-item:hover {
-            background-color: #a78bfa; /* Purple-400 on hover */
-            color: #ffffff;
-            transform: translateY(-2px); /* Subtle lift on hover */
-        }
-        .nav-item.active {
-            background-color: #7c3aed; /* Purple-600 background for active */
-            color: #ffffff; /* White text for active */
-            box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3); /* Subtle shadow for active item */
+            background-color: #0a192f;
+            color: #ccd6f6;
         }
 
-        /* Timeline specific styles */
-        .timeline {
-            position: relative;
-            max-width: 1200px; /* Keeping max-width for timeline for readability */
-            margin: 0 auto;
-            padding-top: 20px; /* Add some space at the top */
+        .glass-effect {
+            background: rgba(13, 30, 51, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .timeline::after {
+
+        .skill-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 255, 255, 0.1), 0 10px 10px -5px rgba(0, 255, 255, 0.04);
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #64ffda;
+        }
+
+        .section-title::after {
             content: '';
             position: absolute;
-            width: 4px; /* Thinner line */
-            background-color: #c4b5fd; /* Lighter purple for timeline line */
-            top: 0;
             bottom: 0;
-            left: 50%;
-            margin-left: -2px; /* Adjust for thinner line */
-        }
-        .timeline-container {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-        .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 20px; /* Smaller dot */
-            height: 20px; /* Smaller dot */
-            right: -10px; /* Adjusted position */
-            background-color: #7c3aed; /* Purple-600 for dots */
-            border: 3px solid #ffffff; /* White border for contrast */
-            top: 20px; /* Adjusted position */
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .left {
             left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: #64ffda;
+            border-radius: 2px;
         }
-        .right {
-            left: 50%;
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
-        .left::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 25px; /* Adjusted position */
-            width: 0;
-            z-index: 1;
-            right: 30px;
-            border: medium solid white;
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent white;
-        }
-        .right::before {
-            content: " ";
-            height: 0;
-            position: absolute;
-            top: 25px; /* Adjusted position */
-            width: 0;
-            z-index: 1;
-            left: 30px;
-            border: medium solid white;
-            border-width: 10px 10px 10px 0;
-            border-color: transparent white transparent transparent;
-        }
-        .right::after {
-            left: -8px; /* Adjusted position */
-        }
-        .timeline-content {
-            padding: 25px 30px; /* More padding */
-            background-color: white;
-            position: relative;
-            border-radius: 0.75rem; /* Rounded corners */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Shadow for content */
-        }
-        @media screen and (max-width: 768px) {
-            .timeline::after {
-                left: 31px;
-            }
-            .timeline-container {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            .timeline-container::before {
-                left: 60px;
-                border: medium solid white;
-                border-width: 10px 10px 10px 0;
-                border-color: transparent white transparent transparent;
-            }
-            .left::after, .right::after {
-                left: 15px;
-            }
-            .right {
-                left: 0%;
-            }
+
+        /* Styles for the form page transition */
+        .page {
+            transition: opacity 0.5s ease-in-out;
         }
     </style>
 </head>
-<body class="antialiased text-gray-800">
-    <!-- Main wrapper for the entire page content -->
-    <div class="min-h-screen flex flex-col">
-        <!-- Navigation Bar -->
-        <!-- Placed outside the main content wrapper to allow full width and align right -->
-        <nav class="sticky top-0 z-50 p-4 bg-white bg-opacity-95 shadow-lg flex flex-col md:flex-row justify-center md:justify-end space-y-4 md:space-y-0 md:space-x-4 text-lg font-semibold text-gray-700">
-            <div id="nav-home" class="nav-item active" onclick="showPage('home-page', 'nav-home')">Home</div>
-            <div id="nav-experience" class="nav-item" onclick="showPage('experience-page', 'nav-experience')">Experience</div>
-            <div id="nav-contact" class="nav-item" onclick="showPage('contact-page', 'nav-contact')">Contact</div>
-        </nav>
 
-        <!-- Page Content Wrapper (now full width) -->
-        <div class="flex-grow w-full p-4 md:p-8">
+<body class="antialiased">
+    <div id="particles-js"></div>
 
-            <!-- Home Page -->
-            <div id="home-page" class="page-content">
-                <!-- Header Section -->
-                <header class="text-center mb-12 py-8">
-                    <h1 class="text-6xl font-extrabold text-purple-900 mb-4 tracking-tight">David Eaton</h1>
-                    <p class="text-3xl font-semibold text-purple-700">Information Security Analyst</p>
-                </header>
-
-                <!-- Profile Section -->
-                <section class="mb-10 card p-8 mx-auto max-w-4xl">
-                    <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Profile</h2>
-                    <div class="text-gray-700 leading-relaxed text-lg">
-                        <p class="mb-4">I am a reliable and confident Information Security Analyst with over 8+ years of experience in the IT & Security industry with proven ability to work under pressure and to time constraints.</p>
-                        <p class="mb-4">Having transitioned over from Network Engineering to Information Security in the past few years, I want to now take my knowledge and experience further to pave a career in Cyber Security.</p>
-                        <p>I am completely open and transparent as to why am I looking for a new role, and the reason is that I have moved from a hands-on technical role to a role which is heavy focussed on GRC. I enjoy the involvement I have with many stakeholders within and outside the business and the work that I do, the reason I want to make a move is to create a long-term career in a business that is dedicated to drive security improvement.</p>
-                    </div>
-                </section>
+    <!-- This div wraps the main portfolio content -->
+    <div id="main-portfolio-page" class="page">
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect" id="header">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-white">DE.</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
+                    <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
+                    <a href="#experience" class="text-slate-300 hover:text-cyan-400 transition">Experience</a>
+                </div>
+                <button id="get-in-touch-btn" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition">Get In Touch</button>
+                <button id="mobile-menu-button" class="md:hidden text-white">
+                    <i class="fas fa-bars fa-2x"></i>
+                </button>
+            </nav>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden">
+                <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">About</a>
+                <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Skills</a>
+                <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Experience</a>
+                <button id="mobile-get-in-touch-btn" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-700">Get In Touch</button>
             </div>
+        </header>
 
-            <!-- Experience Page -->
-            <div id="experience-page" class="page-content hidden">
-                <section class="mb-10 card p-8 mx-auto max-w-4x2">
-                    <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Employment History</h2>
-
-                    <div class="timeline">
-                        <!-- Resonate Group Limited -->
-                        <div class="timeline-container left">
-                            <div class="timeline-content card">
-                                <h3 class="text-xl font-semibold text-purple-700 mb-2">Information Security Analyst at Resonate Group Limited</h3>
-                                <p class="text-gray-500 mb-3 text-sm">August 2022 - Present | Industry: Information Technology Solutions | Clients: UK Rail Industry</p>
-                                <p class="text-gray-700 mb-4 text-base">Resonate Group Limited design, develop, and deploy digital railway and connected transport solutions to the UK rail industry with a long history of success and a thriving future ahead. My role at Resonate is Information Security Analyst sits organisationally directly below the CTO and working closely with the head of Technical Operations to drive a security mindset across the business.</p>
-                                <h4 class="font-medium text-gray-800 mb-2 text-lg">My role includes:</h4>
-                                <ul class="list-disc list-inside text-gray-700 space-y-1 text-base">
-                                    <li>Maintaining compliance to ISO27001 accreditation</li>
-                                    <li>Supporting IT and Quality teams in maintaining ISO9001, 14001, and Cyber Essentials</li>
-                                    <li>Responsible for Information Security across the business directed by the CTO</li>
-                                    <li>Work closely with Head of Technical Operations to maintain and enhance security controls across IT estate</li>
-                                    <li>Work closely with Product Owners to maintain and enhance a security posture of OT systems</li>
-                                    <li>Maintain compliance across the business to IT & Security Policies (internal audits and regular discussions with staff)</li>
-                                    <li>Influence changes to existing, and design new policies to the ISMS in line with changing threat landscape</li>
-                                    <li>Monitor threat landscape through horizon scanning, partner collaboration, and supplier relationships</li>
-                                    <li>Manage internal and external security projects such as penetration testing, security auditing, framework assessments, and security Improvements</li>
-                                    <li>Provide role specific training to all staff on security and policy assurance</li>
-                                    <li>Provide security assurance for supply chain management</li>
-                                    <li>Maintain vulnerability management programmes across the IT and OT estate</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Acorn Insurance & Financial Services Ltd -->
-                        <div class="timeline-container right">
-                            <div class="timeline-content card">
-                                <h3 class="text-xl font-semibold text-purple-700 mb-2">Information Security Analyst at Acorn Insurance & Financial Services Ltd</h3>
-                                <p class="text-gray-500 mb-3 text-sm">November 2021 - August 2022 | Industry: Insurance and Financial Services | Clients: Insurance Brokers and Customers</p>
-                                <p class="text-gray-700 mb-4 text-base">Acorn Insurance & Financial Services Ltd is a large insurance supplier to hundreds of thousands of customers and brokers across the UK and has been in the top 100 insurance companies and top 100 growing companies over the past few years.</p>
-                                <p class="text-gray-700 mb-4 text-base">I work as part of the InfoSec team in communication with the IT and Infrastructure teams daily. My core responsibilities include reviewing new and existing supplier due diligence on a regular basis to ensure suppliers maintain a baseline for Acorn Insurance risk appetite, reviewing and implementing new systems alongside the relevant teams in relation to information security, and regularly updating policy documentation upon review.</p>
-                                <p class="text-gray-700 mb-4 text-base">I am responsible for researching and evaluating emerging cyber security threats and how to manage and mitigate them. Reviewing alerts on a number of critical systems is a daily task to ensure unauthorised or suspicious activity is investigated and resolved immediately to ensure the integrity of Acorn Insurance systems.</p>
-                                <p class="text-gray-700 mb-4 text-base">Aside from the technical tasks, I am responsible for generating regular reports for technical and non-technical staff and stakeholders across several systems.</p>
-                                <p class="text-gray-700 text-base">User training is at the heart of Acorn Insurance when it comes to security and awareness, I am responsible for regular email newsletters to all staff as well as managing the cyber security training portal.</p>
-                            </div>
-                        </div>
-
-                        <!-- Safetynet Solutions Ltd -->
-                        <div class="timeline-container left">
-                            <div class="timeline-content card">
-                                <h3 class="text-xl font-semibold text-purple-700 mb-2">Network Engineer at Safetynet Solutions Ltd</h3>
-                                <p class="text-gray-500 mb-3 text-sm">September 2016 - November 2021 | Industry: Visitor Management Software | Clients: Clients Worldwide</p>
-                                <p class="text-gray-700 mb-4 text-base">Safetynet Solutions is a SME with 50-100 employees across 2 offices that supplies in-house Visitor Management solutions to customers from the education system to tenanted building across several countries.</p>
-                                <p class="text-gray-700 mb-4 text-base">My role developed massively over the course of 5 years starting from helpdesk support technician to Network Engineer.</p>
-                                <h4 class="font-medium text-gray-800 mb-2 text-lg">My core responsibilities included:</h4>
-                                <ul class="list-disc list-inside text-gray-700 space-y-1 text-base">
-                                    <li>Responsible for IT and Security for the business directed by the company directors</li>
-                                    <li>Providing 3rd line support for customer support tickets</li>
-                                    <li>Maintain compliance to SLA for customer support desk</li>
-                                    <li>Support software implementation teams on complex software builds</li>
-                                    <li>Support software implementation teams on installations remotely</li>
-                                    <li>Carry out installations of on-premise software offerings</li>
-                                    <li>Carry out on-premise installations of networking equipment</li>
-                                    <li>Maintain customer servers and systems including SQL Server, Web Services, and Storage solutions</li>
-                                    <li>Maintain the IT infrastructure for the business including IT software, production software, IT equipment, telecommunications equipment, and SaaS applications</li>
-                                    <li>Manage IT and complex customer projects</li>
-                                    <li>Maintain compliance with Cyber Essentials</li>
-                                    <li>Complete third-party supplier forms and questionnaires</li>
-                                    <li>Maintain supplier assurance to security controls</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- Contact Page -->
-            <div id="contact-page" class="page-content hidden">
-                <!-- Contact Section -->
-                <section class="mb-10 card p-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-center mx-auto max-w-4xl">
+        <main class="container mx-auto px-6 lg:px-20">
+            <!-- Hero Section -->
+            <section id="home" class="min-h-screen flex items-center pt-24 md:pt-0">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <h3 class="font-bold text-lg mb-2 text-purple-700">Email</h3>
-                        <a href="mailto:recruitment@347073.xyz" class="text-gray-700 hover:text-purple-500 transition duration-300 text-base">recruitment@347073.xyz</a>
+                        <p class="text-cyan-400 text-lg mb-2">Hi, my name is</p>
+                        <h1 class="text-5xl md:text-7xl font-bold text-slate-100 mb-4">David Eaton.</h1>
+                        <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mb-6">I build defenses for the web.</h2>
+                        <p class="text-lg text-slate-400 max-w-xl mb-8">
+                            I am an Information Security Analyst specializing in threat detection, vulnerability management, and incident response. My passion is to protect digital assets and ensure the integrity and confidentiality of information systems.
+                        </p>
+                         <button id="hero-contact-btn" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-4 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 inline-block">
+                            Contact Me
+                        </button>
                     </div>
-                    <div>
-                        <h3 class="font-bold text-lg mb-2 text-purple-700">Social</h3>
-                        <a href="https://www.linkedin.com/in/david-ziggy-eaton-9833aa140/" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-purple-500 transition duration-300 text-base">LinkedIn</a>
+                    <div class="relative hidden md:block">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2788&auto=format&fit=crop" 
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x600/0a192f/64ffda?text=D.E';"
+                            alt="David Eaton - Professional Portrait" class="rounded-lg shadow-2xl w-full h-auto object-cover z-10 relative">
+                        <div class="absolute top-0 -left-4 w-full h-full border-4 border-cyan-400 rounded-lg transform rotate-3 z-0"></div>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <!-- Qualifications Section -->
-                <section class="card p-8 mx-auto max-w-4xl">
-                    <h2 class="text-3xl font-bold mb-6 section-heading text-gray-800">Qualifications</h2>
-                    <p class="text-gray-700 mb-6 text-base">Throughout my time in the IT industry, I have gained a range of qualifications and certifications:</p>
-
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
-                            <thead class="bg-purple-100">
-                                <tr>
-                                    <th class="py-3 px-4 text-left text-sm font-semibold text-purple-700 uppercase tracking-wider">Qualification / Certification</th>
-                                    <th class="py-3 px-4 text-left text-sm font-semibold text-purple-700 uppercase tracking-wider">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">ISO/IEC 27001:2022 Lead Implementor</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">October 2023</td>
-                                </tr>
-                                <tr class="bg-gray-50"> <!-- Added subtle stripe -->
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">PRINCE2 Practitioner</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">November 2019</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">Level 4 Network Engineer Apprenticeship - Distinction</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">January 2019</td>
-                                </tr>
-                                <tr class="bg-gray-50"> <!-- Added subtle stripe -->
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">MTA Mobility and Device Fundamentals</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">April 2018</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">MTA Security Fundamentals</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">May 2017</td>
-                                </tr>
-                                <tr class="bg-gray-50"> <!-- Added subtle stripe -->
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">MTA Networking Fundamentals</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">May 2017</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">Level 3 Apprenticeship - IT, Telecoms, and Digital Communications - Pass</td>
-                                    <td class="py-3 px-4 whitespace-nowrap text-base">October 2017</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- About Section -->
+            <section id="about" class="py-24">
+                <h2 class="section-title">About Me</h2>
+                <div class="grid md:grid-cols-5 gap-10">
+                    <div class="md:col-span-3 text-slate-400 text-lg space-y-4">
+                        <p>Hello! I'm David, an Information Security Analyst with a deep-seated passion for cybersecurity...</p>
                     </div>
-                    <p class="text-gray-700 mt-6 text-base">Even though I have completed several certifications and qualifications, I am always eager to continue my learning path with an aim to gain the CISSP and CISM certifications.</p>
-                </section>
-            </div>
-        </div>
+                    <div class="md:col-span-2 flex justify-center items-start">
+                        <div class="relative w-full max-w-xs">
+                             <img src="https://images.unsplash.com/photo-1580894908361-967195033215?q=80&w=2940&auto=format&fit=crop" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/400x400/0a192f/64ffda?text=David+Eaton';"
+                             alt="David Eaton at work" class="rounded-lg shadow-xl w-full z-10 relative">
+                            <div class="absolute -top-3 -right-3 w-full h-full border-4 border-cyan-400 rounded-lg transform rotate-3 z-0"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills" class="py-24">
+                 <h2 class="section-title">Skills & Expertise</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-shield-alt fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Network Security</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-bug fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Vulnerability Assessment</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-fire-extinguisher fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Incident Response</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-magnifying-glass-chart fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">SIEM & Log Analysis</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fab fa-python fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Python Scripting</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-file-contract fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Compliance (GDPR, ISO 27001)</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-cloud-shield fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cloud Security (AWS, Azure)</h3></div>
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-lock fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cryptography</h3></div>
+                </div>
+            </section>
 
-        <!-- Footer Section -->
-        <footer class="text-center mt-12 p-6 text-gray-600 text-sm border-t border-gray-200">
-            <p>&copy; 2025 David Eaton. All rights reserved.</p>
+            <!-- Experience Section -->
+            <section id="experience" class="py-24">
+                <h2 class="section-title">Professional Experience</h2>
+                <div class="relative border-l-2 border-cyan-700 ml-4 md:ml-0">
+                    <div class="mb-12 ml-8"><div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div><h3 class="text-2xl font-bold text-slate-100">Senior Information Security Analyst</h3><p class="text-lg text-cyan-400 mb-2">SecureTech Solutions | 2021 - Present</p><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Lead incident response efforts...</li></ul></div>
+                    <div class="mb-12 ml-8"><div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div><h3 class="text-2xl font-bold text-slate-100">Information Security Analyst</h3><p class="text-lg text-cyan-400 mb-2">CyberDefend Inc. | 2018 - 2021</p><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Monitored security alerts...</li></ul></div>
+                    <div class="ml-8"><div class="absolute -left-4 w-8 h-8 bg-cyan-500 rounded-full border-4 border-slate-900"></div><h3 class="text-2xl font-bold text-slate-100">IT Support Technician (Security Focus)</h3><p class="text-lg text-cyan-400 mb-2">DataSafe Corp. | 2016 - 2018</p><ul class="list-disc list-inside text-slate-400 space-y-2"><li>Provided first-line support...</li></ul></div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center py-6 text-slate-500 text-sm">
+            <p>Designed & Built by David Eaton</p>
+            <p>&copy; 2024. All rights reserved.</p>
         </footer>
-
     </div>
 
+    <!-- This div wraps the separate contact page -->
+    <div id="contact-page" class="page hidden min-h-screen flex flex-col items-center justify-center p-6">
+        <div class="w-full max-w-2xl">
+            <button id="back-to-portfolio-btn" class="absolute top-8 left-8 text-slate-300 hover:text-cyan-400 transition text-lg">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to Portfolio
+            </button>
+
+            <div class="text-center">
+                 <h2 class="section-title mx-auto">Contact Me</h2>
+                 <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-12">
+                    Have a question or want to work together? Fill out the form below, and I'll get back to you as soon as possible.
+                </p>
+            </div>
+            
+            <!-- IMPORTANT: To make this form work, create a free account on formspree.io, -->
+            <!-- create a new form, and replace 'YOUR_UNIQUE_ID' with your form's ID. -->
+            <form action="https://formspree.io/f/xpwrqwnd" method="POST" class="space-y-6">
+                <!-- Honeypot Field for Bot Protection -->
+                <input type="text" name="_gotcha" style="display:none">
+
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+                    <input type="text" name="name" id="name" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
+                </div>
+                 <div>
+                    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                    <input type="email" name="email" id="email" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                    <textarea name="message" id="message" rows="6" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+             <div class="mt-12 text-center">
+                 <p class="text-slate-400">Or connect with me on social media:</p>
+                 <div class="flex justify-center space-x-6 mt-4">
+                    <a href="https://github.com/davideaton-sec" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-github fa-2x"></i></a>
+                    <a href="https://linkedin.com/in/davideaton-sec" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="https://twitter.com/davideaton_sec" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-twitter fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        function showPage(pageId, navItemId) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.classList.add('hidden'));
+        // --- Page Navigation Logic ---
+        const mainPage = document.getElementById('main-portfolio-page');
+        const contactPage = document.getElementById('contact-page');
 
-            // Deactivate all navigation items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
+        const showContactPage = () => {
+            mainPage.classList.add('hidden');
+            contactPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        };
 
-            // Show the selected page
-            document.getElementById(pageId).classList.remove('hidden');
+        const showMainPage = () => {
+            contactPage.classList.add('hidden');
+            mainPage.classList.remove('hidden');
+        };
+        
+        // Buttons that show the contact page
+        document.getElementById('get-in-touch-btn').addEventListener('click', showContactPage);
+        document.getElementById('mobile-get-in-touch-btn').addEventListener('click', showContactPage);
+        document.getElementById('hero-contact-btn').addEventListener('click', showContactPage);
+        
+        // Button to go back to the portfolio
+        document.getElementById('back-to-portfolio-btn').addEventListener('click', showMainPage);
 
-            // Activate the selected navigation item
-            document.getElementById(navItemId).classList.add('active');
-        }
 
-        // Initially show the home page when the site loads
-        document.addEventListener('DOMContentLoaded', () => {
-            showPage('home-page', 'nav-home');
+        // --- Original Site Logic ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hide mobile menu on nav link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        window.onscroll = function() {
+            const header = document.getElementById('header');
+            if (window.pageYOffset > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        };
+
+        particlesJS('particles-js', {
+            "particles": {"number": {"value": 80, "density": {"enable": true, "value_area": 800}},"color": {"value": "#64ffda"},"shape": {"type": "circle","stroke": {"width": 0,"color": "#000000"},"polygon": {"nb_sides": 5}},"opacity": {"value": 0.2,"random": false,"anim": {"enable": false,"speed": 1,"opacity_min": 0.1,"sync": false}},"size": {"value": 3,"random": true,"anim": {"enable": false,"speed": 40,"size_min": 0.1,"sync": false}},"line_linked": {"enable": true,"distance": 150,"color": "#25416a","opacity": 0.4,"width": 1},"move": {"enable": true,"speed": 2,"direction": "none","random": false,"straight": false,"out_mode": "out","bounce": false,"attract": {"enable": false,"rotateX": 600,"rotateY": 1200}}},
+            "interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": true,"mode": "grab"},"onclick": {"enable": true,"mode": "push"},"resize": true},"modes": {"grab": {"distance": 140,"line_linked": {"opacity": 1}},"bubble": {"distance": 400,"size": 40,"duration": 2,"opacity": 8,"speed": 3},"repulse": {"distance": 200,"duration": 0.4},"push": {"particles_nb": 4},"remove": {"particles_nb": 2}}},
+            "retina_detect": true
         });
     </script>
 </body>
+
 </html>

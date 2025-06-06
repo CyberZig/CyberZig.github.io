@@ -60,12 +60,12 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
                     <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
-					<a href="#qualifications" class="text-slate-300 hover:text-cyan-400 transition">Qualifications</a>
-                    <a href="experience.html" class="text-slate-300 hover:text-cyan-400 transition">Experience</a>
+		    <a href="#qualifications" class="text-slate-300 hover:text-cyan-400 transition">Qualifications</a>
+                    <a href="/experience/" class="text-slate-300 hover:text-cyan-400 transition">Experience</a>
                 </div>
-                <button id="get-in-touch-btn" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition">Get In Touch</button>
+                <a href="/contact/" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition">Get In Touch</a>
                 <button id="mobile-menu-button" class="md:hidden text-white">
-                    <i class="fas fa-bars fa-2x"></i>
+                 <i class="fas fa-bars fa-2x"></i>
                 </button>
             </nav>
             <!-- Mobile Menu -->
@@ -73,7 +73,7 @@
                 <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">About</a>
                 <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Skills</a>
                 <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-700 mobile-nav-link">Experience</a>
-                <button id="mobile-get-in-touch-btn" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-700">Get In Touch</button>
+                <a href="/contact/" class="w-full text-left block py-2 px-4 text-sm hover:bg-gray-700">Get In Touch</a>
             </div>
         </header>
 
@@ -156,55 +156,6 @@
             <p>Designed & Built by David Eaton</p>
             <p>&copy; 2025. All rights reserved.</p>
         </footer>
-    </div>
-
-    <!-- This div wraps the separate contact page -->
-    <div id="contact-page" class="page hidden min-h-screen flex flex-col items-center justify-center p-6">
-        <div class="w-full max-w-2xl">
-            <button id="back-to-portfolio-btn" class="absolute top-8 left-8 text-slate-300 hover:text-cyan-400 transition text-lg">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Back to Portfolio
-            </button>
-
-            <div class="text-center">
-                 <h2 class="section-title mx-auto">Contact Me</h2>
-                 <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-12">
-                    Have a question or want to work together? Fill out the form below, and I'll get back to you as soon as possible.
-                </p>
-            </div>
-            
-            <!-- FORM from formspree -->
-            <form action="https://formspree.io/f/xpwrqwnd" method="POST" class="space-y-6">
-                <!-- Honeypot Field for Bot Protection -->
-                <input type="text" name="_gotcha" style="display:none">
-
-                <div>
-                    <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
-                    <input type="text" name="name" id="name" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
-                </div>
-                 <div>
-                    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
-                    <input type="email" name="email" id="email" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
-                </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
-                    <textarea name="message" id="message" rows="6" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"></textarea>
-                </div>
-                <div>
-                    <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105">
-                        Send Message
-                    </button>
-                </div>
-            </form>
-             <div class="mt-12 text-center">
-                 <p class="text-slate-400">Or connect with me on social media:</p>
-                 <div class="flex justify-center space-x-6 mt-4">
-                    <a href="https://github.com/CyberZig" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-github fa-2x"></i></a>
-                    <a href="https://www.linkedin.com/in/david-ziggy-eaton-9833aa140/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-linkedin fa-2x"></i></a>
-                    <a href="https://x.com/davidziggyeaton" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-twitter fa-2x"></i></a>
-                </div>
-            </div>
-        </div>
     </div>
 
 

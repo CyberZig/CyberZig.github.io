@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - David Eaton</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a192f; color: #ccd6f6; }
+        .glass-effect { background: rgba(13, 30, 51, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .section-title { position: relative; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.25rem; font-weight: 700; color: #64ffda; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background-color: #64ffda; border-radius: 2px; }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+    </style>
+</head>
+
+<body class="antialiased">
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect" id="header">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">DE.</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
+                <a href="index.html#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
+                <a href="index.html#qualifications" class="text-slate-300 hover:text-cyan-400 transition">Qualifications</a>
+                <a href="experience.html" class="text-slate-300 hover:text-cyan-400 transition">Experience</a>
+            </div>
+            <a href="contact.html" class="hidden md:block bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg">Get In Touch</a>
+            <button id="mobile-menu-button" class="md:hidden text-white"><i class="fas fa-bars fa-2x"></i></button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="index.html#about" class="block py-2 px-4 text-sm hover:bg-gray-700">About</a>
+            <a href="index.html#skills" class="block py-2 px-4 text-sm hover:bg-gray-700">Skills</a>
+            <a href="index.html#qualifications" class="block py-2 px-4 text-sm hover:bg-gray-700">Qualifications</a>
+            <a href="experience.html" class="block py-2 px-4 text-sm hover:bg-gray-700">Experience</a>
+            <a href="contact.html" class="w-full text-left block py-2 px-4 text-sm bg-gray-700 text-cyan-400">Get In Touch</a>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex flex-col items-center justify-center p-6 pt-32 pb-24">
+        <div class="w-full max-w-2xl">
+            <div class="text-center">
+                 <h2 class="section-title mx-auto">Contact Me</h2>
+                 <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-12">
+                    Have a question or want to work together? Fill out the form below, and I'll get back to you as soon as possible.
+                </p>
+            </div>
+            
+            <!-- FORM from formspree -->
+            <form action="https://formspree.io/f/xpwrqwnd" method="POST" class="space-y-6">
+                <!-- Honeypot Field for Bot Protection -->
+                <input type="text" name="_gotcha" style="display:none">
+
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+                    <input type="text" name="name" id="name" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
+                </div>
+                 <div>
+                    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                    <input type="email" name="email" id="email" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                    <textarea name="message" id="message" rows="6" required class="w-full bg-slate-800 border border-slate-600 rounded-md py-3 px-4 text-slate-200 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-transform transform hover:scale-105">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+             <div class="mt-12 text-center">
+                 <p class="text-slate-400">Or connect with me on social media:</p>
+                 <div class="flex justify-center space-x-6 mt-4">
+                    <a href="https://github.com/CyberZig" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-github fa-2x"></i></a>
+                    <a href="https://www.linkedin.com/in/david-ziggy-eaton-9833aa140/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="https://x.com/davidziggyeaton" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-cyan-400 transition transform hover:-translate-y-1"><i class="fab fa-twitter fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-6 text-slate-500 text-sm">
+        <p>Designed & Built by David Eaton</p>
+        <p>&copy; 2024. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        particlesJS('particles-js', {
+            "particles": {"number": {"value": 80, "density": {"enable": true, "value_area": 800}},"color": {"value": "#64ffda"},"shape": {"type": "circle"},"opacity": {"value": 0.2,"random": false},"size": {"value": 3,"random": true},"line_linked": {"enable": true,"distance": 150,"color": "#25416a","opacity": 0.4,"width": 1},"move": {"enable": true,"speed": 2,"direction": "none","random": false,"straight": false,"out_mode": "out"}},
+            "interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": true,"mode": "grab"},"onclick": {"enable": true,"mode": "push"},"resize": true},"modes": {"grab": {"distance": 140,"line_linked": {"opacity": 1}},"push": {"particles_nb": 4}}},
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>

@@ -51,6 +51,15 @@
              transform: translateY(-8px);
              border-color: #64ffda;
         }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-container {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateY(-20px) scale(0.95);
+        }
 
     </style>
 </head>
@@ -153,8 +162,10 @@
             <section id="skills" class="py-24">
                  <h2 class="section-title">Skills & Expertise</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-shield-alt fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Network Security</h3></div>
-                                        <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-door-open fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Physical Security</h3></div>
+                    <!-- EXAMPLE: Add a unique data-modal-target attribute to each card you want to make clickable -->
+                <div data-modal-target="network-security-modal" class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-shield-alt fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Network Security</h3></div>
+                    
+                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-door-open fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Physical Security</h3></div>
                     <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-bug fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Vulnerability Management</h3></div>
                     <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-fire-extinguisher fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Incident Response</h3></div>
                     <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-magnifying-glass-chart fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Digital Forensics</h3></div>
@@ -206,7 +217,30 @@
             <p>&copy; 2025. All rights reserved.</p>
         </footer>
     </div>
-
+    
+    <!-- MODAL SECTION -->
+    <!-- EXAMPLE: Add a modal for each skill card here. Make sure the id matches the data-modal-target from the card. -->
+    <div id="network-security-modal" class="modal-overlay hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex justify-center items-center p-4 opacity-0">
+        <div class="modal-container bg-slate-800 w-full max-w-2xl rounded-lg shadow-xl p-8 opacity-0">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-100">Network Security</h3>
+                <button class="modal-close text-slate-400 hover:text-cyan-400 text-2xl">&times;</button>
+            </div>
+            <!-- Modal Content -->
+            <div class="text-slate-400 space-y-4">
+                <p>My expertise in Network Security involves designing and implementing secure network architectures for both IT Infrastucture, as well as production production environments for customers. This includes designing firewalls policies, intrusion detection/prevention systems (IDS/IPS), and ensuring network security controls are place.</p>
+                <p>Key skills include:</p>
+                <ul class="list-disc list-inside space-y-2 pl-4">
+                    <li>Firewall Management (Fortigate)</li>
+                    <li>VPN Configuration (OpenVPN, IPsec)</li>
+                    <li>Packet Analysis (Wireshark)</li>
+                    <li>Network Hardening and Segmentation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Add more modals here, e.g., <div id="vulnerability-assessment-modal" ...> -->
 
  
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -235,6 +269,75 @@
                 mobileMenu.classList.add('hidden');
             });
         });
+
+  // --- Modal Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Find all skill cards that are meant to open a modal
+            const modalTriggers = document.querySelectorAll('[data-modal-target]');
+
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const modalId = trigger.getAttribute('data-modal-target');
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        openModal(modal);
+                    }
+                });
+            });
+
+            function openModal(modal) {
+                const modalOverlay = modal;
+                const modalContainer = modal.querySelector('.modal-container');
+                const closeButtons = modal.querySelectorAll('.modal-close');
+
+                // Show the modal
+                modalOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                
+                // Use a short timeout to allow the display property to apply before starting transitions
+                setTimeout(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modalContainer.classList.remove('opacity-0');
+                    modalContainer.style.transform = 'translateY(0) scale(1)';
+                }, 10);
+                
+                // Close modal function
+                const closeModal = () => {
+                    modalContainer.style.transform = 'translateY(-20px) scale(0.95)';
+                    modalOverlay.classList.add('opacity-0');
+                    modalContainer.classList.add('opacity-0');
+
+                    // Wait for transition to finish before hiding
+                    setTimeout(() => {
+                        modalOverlay.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }, 300); // Should match transition duration
+
+                    // Clean up event listeners
+                    closeButtons.forEach(button => button.removeEventListener('click', closeModal));
+                    modalOverlay.removeEventListener('click', handleOverlayClick);
+                    document.removeEventListener('keydown', handleEscKey);
+                };
+
+                const handleOverlayClick = (event) => {
+                    if (event.target === modalOverlay) {
+                        closeModal();
+                    }
+                };
+                
+                const handleEscKey = (event) => {
+                    if (event.key === 'Escape') {
+                        closeModal();
+                    }
+                };
+
+                // Add event listeners
+                closeButtons.forEach(button => button.addEventListener('click', closeModal));
+                modalOverlay.addEventListener('click', handleOverlayClick);
+                document.addEventListener('keydown', handleEscKey);
+            }
+        });
+
 
         window.onscroll = function() {
             const header = document.getElementById('header');

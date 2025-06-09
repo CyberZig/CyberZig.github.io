@@ -106,13 +106,17 @@
                  </div>
                  <div class="w-full md:w-auto text-right space-y-2">
                     <p class="text-lg font-semibold text-gray-800">Total Score: <span id="total-score" class="text-indigo-600">0</span></p>
-                     <button id="summary-btn" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 text-sm">🏆 View Summary</button>
+                    <p id="timer-display" class="text-sm text-gray-600">Total Time: <span id="timer">00:00:00</span></p>
+                    <button id="summary-btn" class="text-white font-bold py-2 px-4 rounded-lg transition duration-300 text-sm" disabled>🏆 View Score</button>
                  </div>
+            </div>
+            <div class="text-center mb-8">
+                <p class="text-lg font-semibold text-gray-800">Ready to become a <span class="font-bold text-indigo-600">Cyber Hero</span>? Test your skills below!</p>
             </div>
              <div class="mb-6 md:mb-8">
                 <div class="flex justify-between items-center mb-2">
                     <p class="text-sm font-medium text-gray-600">Overall Completion</p>
-                    <p id="completion-text" class="text-sm font-bold text-indigo-600">0/6 Quizzes</p>
+                    <p id="completion-text" class="text-sm font-bold text-indigo-600">0/7 Quizzes</p>
                 </div>
                 <div class="progress-bar-container"><div id="overall-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
             </div>
@@ -180,8 +184,8 @@
             <button id="close-summary-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
             <div class="max-h-[70vh] overflow-y-auto p-4">
                 <h2 id="summary-modal-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-4"></h2>
-                <img id="summary-modal-image" src="" alt="Score Summary Image" class="w-full h-48 object-cover rounded-lg mb-4 hidden">
                 <p id="summary-modal-score" class="text-lg md:text-xl font-bold text-indigo-600"></p>
+                <p id="summary-modal-time" class="text-md text-gray-600"></p>
                 <p id="summary-modal-text" class="text-gray-600 mt-4"></p>
             </div>
         </div>
@@ -190,7 +194,382 @@
     <script>
         // === Static Data ===
         const quizzes = [
-            { title: "Phishing Fundamentals", icon: "🎣", questions: [ { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Urgent+Text+Message", question: "You get a text: 'Your bank account is locked...'. What is the attacker's main goal?", options: ["To steal your login credentials", "To help you secure your account", "To sell you security software", "To check if your number is active"], answer: "To steal your login credentials", explanation: "Attackers use urgent messages to create panic, making you click a fake link to steal your username and password." }, { image: "https://placehold.co/600x200/fee2e2/b91c1c?text=Payment+Failed!", question: "An email from 'Netflixx Support' (two 'x's) greets you 'Dear User'. What's the biggest red flag?", options: ["The generic greeting and misspelled company name", "The request for payment information", "The urgent tone", "The subject line"], answer: "The generic greeting and misspelled company name", explanation: "Legitimate companies usually address you by name, and misspellings are a common sign of a scam." }, { image: "https://placehold.co/600x200/f3e8ff/8b5cf6?text=Gift+Card+Request", question: "Your 'boss' emails asking you to urgently buy gift cards. What is your safest next move?", options: ["Contact your boss through a different channel (e.g., phone call) to verify", "Reply to the email to confirm the amount", "Immediately buy the gift cards as requested", "Forward the email to the accounting department"], answer: "Contact your boss through a different channel (e.g., phone call) to verify", explanation: "This is a classic scam. Always verify unusual financial requests out-of-band (e.g., a call or in person), not by replying to the suspicious email." }, { image: "https://placehold.co/600x200/e0e7ff/3730a3?text=Wire+Transfer+Email", question: "A hacker emails the new CFO, pretending to be the CEO, requesting an urgent wire transfer. This targeted attack is called:", options: ["Spear Phishing", "A Brute Force Attack", "Ransomware", "A Trojan Horse"], answer: "Spear Phishing", explanation: "Spear phishing is a targeted attack on a specific individual or organization, often using information gathered from research." }, { image: "https://placehold.co/600x200/dcfce7/166534?text=Check+the+Link!", question: "A link says 'Go to Your Bank', but hovering shows a different URL. This helps you identify:", options: ["A misleading link where the destination is not what it seems", "That the email contains a virus", "The sender's physical location", "If the link is encrypted"], answer: "A misleading link where the destination is not what it seems", explanation: "Always hover over links before clicking to see the actual web address. If it looks suspicious or doesn't match the text, don't click." } ] },
+            { title: "Phishing Fundamentals", icon: "🎣", questions: [ { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Urgent+Text+Message", question: "You get a text: 'Your bank account is locked...'. What is the attacker's main goal?", options: ["To steal your login credentials", "To help you secure your account", "To sell you security software", "To check if your number is active"], answer: "To steal your login credentials", explanation: "Attackers use urgent messages to create panic, making you click a fake link to steal your username and password." }, { image: "https://placehold.co/600x200/fee2e2/b91c1c?text=Payment+Failed!", question: "An email from 'Netflixx Support' (two 'x's) greets you 'Dear User'. What's the biggest red flag?", options: ["The generic greeting and misspelled company name", "The request for payment information", "The urgent tone", "The subject line"], answer: "The generic greeting and misspelled company name", explanation: "Legitimate companies usually address you by name, and misspellings are a common sign of a scam." }, { image: "https://placehold.co/600x200/f3e8ff/8b5cf6?text=Gift+Card+Request", question: "Your 'boss' emails asking you to urgently buy gift cards. What is your safest next move?", options: ["Contact your boss through a different channel (e.g., phone call) to verify", "Reply to the email to confirm the amount", "Immediately buy the gift cards as requested", "Forward the email to the accounting department"], answer: "Contact your boss through a different channel (e.g., phone call) to verify", explanation: "This is a classic scam. Always verify unusual financial requests out-of-band (e.g., a call or in person), not by replying to the suspicious email." }, { image: "https://placehold.co/600x200/e0e7ff/3730a3?text=Wire+Transfer+Email", question: "A hacker emails the new CFO, pretending to be the CEO, requesting an urgent wire transfer. This highly targeted attack is called:", options: ["Spear Phishing", "A Brute Force Attack", "Ransomware", "A Trojan Horse"], answer: "Spear Phishing", explanation: "Spear phishing is a targeted attack on a specific individual or organization, often using information gathered from research." }, { image: "https://placehold.co/600x200/dcfce7/166534?text=Check+the+Link!", question: "A link says 'Go to Your Bank', but hovering shows a different URL. This helps you identify:", options: ["A misleading link where the destination is not what it seems", "That the email contains a virus", "The sender's physical location", "If the link is encrypted"], answer: "A misleading link where the destination is not what it seems", explanation: "Always hover over links before clicking to see the actual web address. If it looks suspicious or doesn't match the text, don't click." } ] },
             { title: "Password Security", icon: "🔒", questions: [ { image: "https://placehold.co/600x200/ede9fe/5b21b6?text=Strong+Password", question: "What is the most important characteristic of a strong password?", options: ["Length and complexity", "Using your pet's name", "Being easy to remember", "Changing it every day"], answer: "Length and complexity", explanation: "A long password with a mix of uppercase, lowercase, numbers, and symbols is much harder for attackers to guess." }, { image: "https://placehold.co/600x200/dbeafe/1e40af?text=2FA+Code", question: "What is Two-Factor Authentication (2FA)?", options: ["A second layer of security after your password", "Using two different passwords", "A type of antivirus software", "A password that is two characters long"], answer: "A second layer of security after your password", explanation: "2FA requires a second piece of information (like a code from your phone) in addition to your password, making unauthorized access much harder." }, { image: "https://placehold.co/600x200/fee2e2/991b1b?text=Reused+Passwords", question: "Is it safe to reuse passwords across multiple websites?", options: ["No, it's very risky", "Yes, if it's a strong password", "Only for unimportant websites", "Yes, it makes them easier to remember"], answer: "No, it's very risky", explanation: "If one site is breached, attackers will use your stolen password to try and log into your other accounts, like email and banking." }, { image: "https://placehold.co/600x200/f3e8ff/7e22ce?text=Password+Manager", question: "What is a password manager?", options: ["A secure application to store and generate complex passwords", "A person who remembers your passwords", "A notebook where you write passwords", "A type of computer virus"], answer: "A secure application to store and generate complex passwords", explanation: "Password managers securely store all your unique passwords and can generate strong new ones, so you only have to remember one master password." }, { image: "https://placehold.co/600x200/ffedd5/9a3412?text=Brute+Force", question: "What does 'brute force attack' mean in the context of passwords?", options: ["Trying every possible combination to guess a password", "Forgetting your password", "A very strong password", "Changing your password forcefully"], answer: "Trying every possible combination to guess a password", explanation: "A brute force attack is an automated method where software tries millions of password combinations until it finds the correct one." } ] },
             { title: "Malware Awareness", icon: "🦠", questions: [ { image: "https://placehold.co/600x200/fee2e2/ef4444?text=FILES+ENCRYPTED!", question: "You see a message: 'Your files are encrypted! To get them back, send Bitcoin'. This is:", options: ["Ransomware", "Spyware", "A Worm", "Adware"], answer: "Ransomware", explanation: "Ransomware is malware that locks your files and demands a ransom payment to unlock them." }, { image: "https://placehold.co/600x200/dcfce7/22c55e?text=Funny_Cat_Video.exe", question: "You run 'cat_video.exe'. Now all your contacts get the same file from you. This is a:", options: ["Virus", "Firewall", "Keylogger", "Phishing scam"], answer: "Virus", explanation: "A computer virus is a type of malware that attaches to a program and is designed to replicate and spread to other computers." }, { image: "https://placehold.co/600x200/fefce8/eab308?text=Slow+Computer", question: "Your PC is slow and you see ads for things you just searched for. This could be:", options: ["Spyware", "A hardware failure", "A normal system update", "Ransomware"], answer: "Spyware", explanation: "Spyware is malware designed to secretly monitor your activities, track browsing habits, and collect personal information." }, { image: "https://placehold.co/600x200/e0e7ff/4338ca?text=Free+Photo+Editor", question: "You download a 'free' app, but it secretly installs a malicious program. The free app is a:", options: ["Trojan Horse", "VPN", "Firewall", "Rootkit"], answer: "Trojan Horse", explanation: "A Trojan Horse disguises itself as a legitimate program but contains malicious code that executes when the program is run." }, { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Final+Step?", question: "Besides antivirus and strong passwords, what is the most crucial step to avoid malware?", options: ["Being cautious about what you click and download", "Never turning off your computer", "Deleting all your emails", "Using a different web browser"], answer: "Being cautious about what you click and download", explanation: "Technology helps, but human caution is the best defense. Thinking before you click a link or download a file can prevent most infections." } ] },
-            { title: "Public Wi-Fi Safety", icon: "📶", questions: [ { image: "https://placehold.co/600x200/fef9c3/ca8a04?text=Public+Wi-Fi", question: "What is the main risk of using public Wi-Fi?", options: ["Your data can be intercepted by hackers", "It is usually very slow", "It costs money", "It drains your battery"], answer: "Your data can be intercepted by hackers", explanation: "Public Wi-Fi networks are often unsecured, allowing attackers on the same network to intercept your data." }, { image: "https://placehold.co/600x200/dcfce7/15803d?text=VPN+Shield", question: "What is a VPN (Virtual Private Network)?", options: ["A tool that encrypts your internet connection", "A public Wi-Fi network", "A type of internet browser", "A physical network cable"], answer: "A tool that encrypts your internet connection", explanation: "A VPN creates a secure, encrypted 'tunnel' for your internet traffic, protecting it from eavesdroppers, especially on public Wi-Fi." }, { image: "https://placehold.co/600x200/ecfdf5/059669?text=https://", question: "Which of these indicates a secure website connection?", options: ["The URL starts with https://", "The website has lots of images", "The URL starts with http://", "The website asks for your location"], answer: "The URL starts with https://", explanation: "HTTPS (Hypertext Transfer Protocol Secure) means the connection between your browser and the website is encrypted and secure." }, { image: "https://placehold.co/600x200/fee2e2/dc2626?text=Evil+Twin", question: "What is an 'Evil Twin' attack?", options: ["A fake Wi-Fi hotspot that mimics a legitimate one", "When someone looks exactly like you", "A type of computer virus", "Two routers interfering with each other"], answer: "A fake Wi-Fi hotspot that mimics a legitimate one", explanation: "Attackers set up fake Wi-Fi hotspots with familiar names (e.g., 'CoffeeShop_FreeWiFi') to trick you into connecting so they can steal your data." }, { image: "https://placehold.co/600x200/ffedd5/c2410c?text=Sensitive+Logins", question: "When using public Wi-Fi, you should avoid...", options: ["Logging into sensitive accounts like banking", "Checking the weather", "Browsing news
+            { title: "Public Wi-Fi Safety", icon: "📶", questions: [ { image: "https://placehold.co/600x200/fef9c3/ca8a04?text=Public+Wi-Fi", question: "What is the main risk of using public Wi-Fi?", options: ["Your data can be intercepted by hackers", "It is usually very slow", "It costs money", "It drains your battery"], answer: "Your data can be intercepted by hackers", explanation: "Public Wi-Fi networks are often unsecured, allowing attackers on the same network to intercept your data." }, { image: "https://placehold.co/600x200/dcfce7/15803d?text=VPN+Shield", question: "What is a VPN (Virtual Private Network)?", options: ["A tool that encrypts your internet connection", "A public Wi-Fi network", "A type of internet browser", "A physical network cable"], answer: "A tool that encrypts your internet connection", explanation: "A VPN creates a secure, encrypted 'tunnel' for your internet traffic, protecting it from eavesdroppers, especially on public Wi-Fi." }, { image: "https://placehold.co/600x200/ecfdf5/059669?text=https://", question: "Which of these indicates a secure website connection?", options: ["The URL starts with https://", "The website has lots of images", "The URL starts with http://", "The website asks for your location"], answer: "The URL starts with https://", explanation: "HTTPS (Hypertext Transfer Protocol Secure) means the connection between your browser and the website is encrypted and secure." }, { image: "https://placehold.co/600x200/fee2e2/dc2626?text=Evil+Twin", question: "What is an 'Evil Twin' attack?", options: ["A fake Wi-Fi hotspot that mimics a legitimate one", "When someone looks exactly like you", "A type of computer virus", "Two routers interfering with each other"], answer: "A fake Wi-Fi hotspot that mimics a legitimate one", explanation: "Attackers set up fake Wi-Fi hotspots with familiar names (e.g., 'CoffeeShop_FreeWiFi') to trick you into connecting so they can steal your data." }, { image: "https://placehold.co/600x200/ffedd5/c2410c?text=Sensitive+Logins", question: "When using public Wi-Fi, you should avoid...", options: ["Logging into sensitive accounts like banking", "Checking the weather", "Browsing news websites", "Watching videos"], answer: "Logging into sensitive accounts like banking", explanation: "Avoid accessing any account that requires a password, especially banking or email, as your credentials could be stolen on an unsecured network." } ] },
+            { title: "Social Engineering", icon: "👥", questions: [ { image: "https://placehold.co/600x200/fce7f3/db2777?text=Manipulation", question: "What is social engineering?", options: ["The art of manipulating people to divulge confidential information", "A type of software development", "Networking at social events", "An engineering discipline"], answer: "The art of manipulating people to divulge confidential information", explanation: "Social engineering relies on human psychology rather than technical hacking to trick people into giving up sensitive information." }, { image: "https://placehold.co/600x200/faf5ff/9333ea?text=Invented+Scenario", question: "What is 'pretexting'?", options: ["Creating an invented scenario to engage a victim", "Sending a text message before calling", "Writing the preface to a book", "A type of secure communication"], answer: "Creating an invented scenario to engage a victim", explanation: "Pretexting is when an attacker creates a believable story or pretext to build trust and manipulate their victim." }, { image: "https://placehold.co/600x200/fefce8/a16207?text=IT+Support+Call", question: "An attacker calls, pretending to be from IT support, asking for your password. This is:", options: ["Vishing", "Baiting", "Quid pro quo", "Tailgating"], answer: "Vishing", explanation: "Vishing (Voice Phishing) is a phishing attack that takes place over the phone or via voicemail." }, { image: "https://placehold.co/600x200/e0f2fe/0891b2?text=USB+Drive", question: "What is 'baiting' in the context of social engineering?", options: ["Leaving a malware-infected USB drive in a public place", "Fishing with live bait", "Arguing with someone online", "Offering someone a compliment"], answer: "Leaving a malware-infected USB drive in a public place", explanation: "Baiting relies on curiosity, tempting victims to pick up and plug in an infected device like a USB drive." }, { image: "https://placehold.co/600x200/eef2ff/4338ca?text=Skepticism", question: "How can you protect yourself from social engineering?", options: ["By being skeptical and verifying requests independently", "By never talking to strangers", "By sharing all your information to be transparent", "By having a very complex password"], answer: "By being skeptical and verifying requests independently", explanation: "The best defense is to always be skeptical of unsolicited requests and to verify them through a separate, trusted communication channel." } ] },
+            { title: "Finance Security", icon: "💰", questions: [ { image: "https://placehold.co/600x200/fffbeb/b45309?text=Fake+Invoice", question: "Your accounting department receives an invoice from a known supplier, but the bank details for payment are different. What should they do first?", options: ["Verify the change with the supplier using a trusted phone number", "Pay the invoice to the new account to avoid delays", "Reply to the email to ask if they are sure", "Forward the email to your manager for approval"], answer: "Verify the change with the supplier using a trusted phone number", explanation: "Invoice fraud is common. Always verbally confirm changes to bank details using a known contact number, not one from the suspicious email." }, { image: "https://placehold.co/600x200/eff6ff/7c3aed?text=CEO's+Urgent+Email", question: "An email that appears to be from your CEO asks a junior finance employee to process a secret, urgent payment for a 'confidential acquisition'. This is a classic example of:", options: ["Business Email Compromise (BEC)", "Ransomware", "Denial-of-Service", "Spyware"], answer: "Business Email Compromise (BEC)", explanation: "BEC attacks impersonate executives to trick employees into making unauthorized financial transactions." }, { image: "https://placehold.co/600x200/f0fdf4/16a34a?text=Accounting+Login", question: "To protect your company's accounting software from unauthorized access, which of these is the MOST critical security measure?", options: ["Multi-Factor Authentication (MFA) for all users", "A very long password for the main admin", "Changing passwords every 30 days", "Accessing it only from the office"], answer: "Multi-Factor Authentication (MFA) for all users", explanation: "MFA provides the strongest protection, as even if a password is stolen, the attacker cannot log in without the second factor (e.g., a phone code)." }, { image: "https://placehold.co/600x200/f1f5f9/475569?text=Excel+Macros", question: "An employee receives an Excel file named 'Q3_Financials.xlsm'. To view the data, a prompt asks them to 'Enable Content'. This is a common trick to deliver what?", options: ["Malware hidden in the macro script", "A legitimate, updated spreadsheet", "A password-protected file", "A read-only document"], answer: "Malware hidden in the macro script", explanation: "Macros are scripts that can automate tasks, but attackers use them to run malicious code. Never enable macros from an untrusted source." }, { image: "https://placehold.co/600x200/fff1f2/e11d48?text=Payroll+Change", question: "An HR employee receives an email from a coworker asking to change their direct deposit bank account. What is the safest action before making the change?", options: ["Confirm the request with the colleague in person or via video call", "Make the change immediately to ensure they get paid on time", "Reply to the email to get written confirmation", "Ask your manager if the request is legitimate"], answer: "Confirm the request with the colleague in person or via video call", explanation: "Payroll fraud is a common goal of account takeovers. Always verify such sensitive requests through a secure, separate channel like a call or in-person chat." } ] },
+            { title: "Spot the URL", icon: "🔗", questions: [ { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Amazon+Login", question: "You need to log in to your Amazon account. Which URL is the correct one?", options: ["amazon.co.uk", "amzn.co-uk.com", "amazon.login.com", "amazon-support.net"], answer: "amazon.co.uk", explanation: "Always look for the official domain name (`amazon.co.uk` or `amazon.com`). Scammers often add extra words or use different endings like `.net` or `.login.com` to trick you." }, { image: "https://placehold.co/600x200/bfdbfe/1d4ed8?text=PayPal+Login", question: "You need to send money via PayPal. Which of these is the official website?", options: ["paypal.com", "pay-pal.com", "paypal.net", "paypal-login.org"], answer: "paypal.com", explanation: "The official PayPal domain is `paypal.com`. Scammers use hyphens or different domain endings (`.net`, `.org`) to create convincing fakes." }, { image: "https://placehold.co/600x200/e0e7ff/3730a3?text=GOV.UK", question: "You need to check your tax information. Which is the only legitimate UK government website?", options: ["gov.uk", "gov-uk.com", "uk-government.org", "gov.co.uk"], answer: "gov.uk", explanation: "The official UK Government website always ends in `gov.uk`. Any other variation, like `.com` or `.co.uk`, is not official and should not be trusted." }, { image: "https://placehold.co/600x200/f3f4f6/111827?text=Apple+ID", question: "An alert says your Apple ID is locked. Which is the safe URL to use?", options: ["apple.com", "apple-support.com", "icloud-login.net", "apple.co"], answer: "apple.com", explanation: "Apple's official domain is `apple.com`. Be wary of subdomains that look official but are on a different root domain, like `apple-support.com`." }, { image: "https://placehold.co/600x200/cffafe/0e7490?text=Microsoft+365", question: "You need to log in to your Microsoft 365 account. Which URL is correct?", options: ["microsoft.com", "micosoft.com", "microsoft-office.net", "office365-login.com"], answer: "microsoft.com", explanation: "Look out for subtle misspellings like `micosoft.com` (missing the 'r'). This is a very common trick used by attackers to catch you off guard." } ] }
+        ];
+
+        const badges = {
+            "Phishing Phenom": { icon: "🎣", description: "Perfect score on Phishing" },
+            "Digital Locksmith": { icon: "🔑", description: "Perfect score on Password Security" },
+            "Malware Master": { icon: "🦠", description: "Perfect score on Malware" },
+            "Coffee Shop Commando": { icon: "☕", description: "Perfect score on Public Wi-Fi Safety" },
+            "Social Sleuth": { icon: "👥", description: "Perfect score on Social Engineering" },
+            "Finance Fortress": { icon: "💰", description: "Perfect score on Finance Security" },
+            "URL Eagle-Eye": { icon: "🔗", description: "Perfect score on Spot the URL" },
+            "Cybersecurity Champion": { icon: "🏆", description: "Complete all quizzes" },
+            "Perfectionist": { icon: "⭐", description: "Perfect score on all quizzes" },
+        };
+
+        // === DOM Elements ===
+        const allViews = { nameEntry: document.getElementById('name-entry-view'), mainMenu: document.getElementById('main-menu'), quiz: document.getElementById('quiz-view'), score: document.getElementById('score-view') };
+        const nameInput = document.getElementById('name-input'), startBtn = document.getElementById('start-btn');
+        const welcomeMessage = document.getElementById('welcome-message'), resetUserBtn = document.getElementById('reset-user-btn');
+        const totalScoreEl = document.getElementById('total-score'), overallProgressBar = document.getElementById('overall-progress-bar'), completionText = document.getElementById('completion-text'), timerDisplay = document.getElementById('timer-display'), timerEl = document.getElementById('timer');
+        const badgesContainer = document.getElementById('badges-container'), badgesList = document.getElementById('badges-list');
+        const quizList = document.getElementById('quiz-list');
+        const quizTitle = document.getElementById('quiz-title'), streakCounter = document.getElementById('streak-counter'), questionCounter = document.getElementById('question-counter');
+        const progressBar = document.getElementById('progress-bar'), questionImage = document.getElementById('question-image'), questionText = document.getElementById('question-text'), optionsContainer = document.getElementById('options-container'), nextBtn = document.getElementById('next-btn'), prevBtn = document.getElementById('prev-btn');
+        const scoreText = document.getElementById('score-text'), scoreFeedback = document.getElementById('score-feedback'), mainMenuBtnScore = document.getElementById('main-menu-btn');
+        const explainBtn = document.getElementById('explain-btn'), explanationContainer = document.getElementById('explanation-container'), explanationContent = document.getElementById('explanation-content');
+        const toast = document.getElementById('toast'), toastText = document.getElementById('toast-text');
+        const summaryBtn = document.getElementById('summary-btn');
+        const backToMenuFromQuizBtn = document.getElementById('back-to-menu-from-quiz');
+        const reviewModal = document.getElementById('review-modal'), reviewModalTitle = document.getElementById('review-modal-title'), reviewModalContent = document.getElementById('review-modal-content'), closeModalBtn = document.getElementById('close-modal-btn');
+        const summaryModal = document.getElementById('summary-modal'), summaryModalTitle = document.getElementById('summary-modal-title'), summaryModalScore = document.getElementById('summary-modal-score'), summaryModalText = document.getElementById('summary-modal-text'), summaryModalTime = document.getElementById('summary-modal-time'), closeSummaryModalBtn = document.getElementById('close-summary-modal-btn');
+
+
+        // === App State ===
+        let user = {}, currentQuiz = null, currentQuestionIndex = 0, score = 0, selectedOption = null;
+        let isQuestionAnswered = false, currentStreak = 0, userAnswers = [], timerInterval;
+
+        // === Storage Functions ===
+        function loadUser() { const savedUser = localStorage.getItem('cyberQuizUser'); if (savedUser) { user = JSON.parse(savedUser); return true; } return false; }
+        function saveUser() { localStorage.setItem('cyberQuizUser', JSON.stringify(user)); }
+        function saveQuizState() { if (!currentQuiz) return; const quizState = { quizTitle: currentQuiz.title, currentQuestionIndex, score, currentStreak, userAnswers }; sessionStorage.setItem('cyberQuizSession', JSON.stringify(quizState)); }
+        function clearQuizState() { sessionStorage.removeItem('cyberQuizSession'); }
+
+        // === Gamification Functions ===
+        function awardBadge(badgeName) { if (!user.badges) user.badges = []; if (user.badges.includes(badgeName)) return; user.badges.push(badgeName); saveUser(); showBadgeNotification(badgeName); }
+        function showBadgeNotification(badgeName) { const badge = badges[badgeName]; if (!badge) return; toastText.innerHTML = `🏆 Badge Unlocked: <strong>${badgeName}</strong>`; toast.classList.remove('hidden'); setTimeout(() => toast.classList.add('hidden'), 4000); }
+        
+        // === Timer Functions ===
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            return [hours, minutes, seconds].map(v => v.toString().padStart(2, '0')).join(':');
+        }
+
+        function updateTimer() {
+            if (user.completionTime) {
+                const duration = user.completionTime - user.startTime;
+                timerEl.textContent = formatTime(duration);
+                clearInterval(timerInterval);
+                return;
+            }
+            if (user.startTime) {
+                const elapsed = Date.now() - user.startTime;
+                timerEl.textContent = formatTime(elapsed);
+            }
+        }
+
+        // === App Logic ===
+        function showView(viewName) { Object.values(allViews).forEach(v => v && v.classList.add('hidden')); if(allViews[viewName]) allViews[viewName].classList.remove('hidden'); }
+        
+        function updateMainMenu() {
+            welcomeMessage.textContent = `Welcome, ${user.name}!`;
+            quizList.innerHTML = quizzes.map(q => {
+                const quizData = user.scores ? user.scores[q.title] : null;
+                const bestScore = quizData ? quizData.score : 0;
+                const isCompleted = !!quizData;
+                return `<div class="quiz-card bg-white p-6 rounded-xl shadow-md cursor-pointer flex flex-col justify-between" data-quiz-title="${q.title}"><div><div class="text-4xl mb-4">${q.icon}</div><h3 class="text-xl font-bold text-gray-800 mb-2">${q.title}</h3></div><div class="mt-4 pt-4 border-t border-gray-200">${isCompleted ? `<p class="text-sm font-semibold text-gray-700">Best Score: <span class="text-indigo-600">${bestScore}/${q.questions.length}</span></p>`:`<p class="text-sm font-medium text-gray-500">Not attempted yet</p>`}</div></div>`
+            }).join('');
+            
+            document.querySelectorAll('.quiz-card').forEach(c => c.addEventListener('click', e => {
+                const clickedQuizTitle = e.currentTarget.dataset.quizTitle;
+                const selectedQuiz = quizzes.find(q => q.title === clickedQuizTitle);
+                const completedQuizData = user.scores ? user.scores[clickedQuizTitle] : null;
+                if(completedQuizData) {
+                    showReviewModal(selectedQuiz, completedQuizData.answers);
+                } else {
+                    startQuiz(selectedQuiz);
+                }
+            }));
+
+            const scores = user.scores || {};
+            const completedCount = Object.keys(scores).length;
+            overallProgressBar.style.width = `${(completedCount / quizzes.length) * 100}%`;
+            completionText.textContent = `${completedCount}/${quizzes.length} Quizzes`;
+            totalScoreEl.textContent = Object.values(scores).reduce((s, c) => s + (c.score || 0), 0);
+
+            if (user.badges && user.badges.length > 0) {
+                badgesContainer.classList.remove('hidden');
+                badgesList.innerHTML = user.badges.map(bName => `<div class="badge"><span class="icon">${badges[bName]?.icon || '🏅'}</span> ${bName}</div>`).join('');
+            } else {
+                badgesContainer.classList.add('hidden');
+            }
+            
+            clearInterval(timerInterval);
+            updateTimer();
+            if (user.startTime && !user.completionTime) {
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+
+            const allQuizzesCompleted = completedCount === quizzes.length;
+            summaryBtn.disabled = !allQuizzesCompleted;
+            if (allQuizzesCompleted) {
+                summaryBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                summaryBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+            } else {
+                summaryBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                summaryBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            }
+        }
+        
+        function startQuiz(quiz) {
+            currentQuiz = quiz;
+            currentQuestionIndex = 0;
+            score = 0;
+            currentStreak = 0;
+            userAnswers = [];
+            saveQuizState();
+            showView('quiz');
+            allViews.quiz.classList.add('fade-in');
+            quizTitle.textContent = currentQuiz.title;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            selectedOption = null;
+            explanationContainer.classList.add('hidden');
+            explainBtn.classList.add('hidden');
+            
+            if (currentQuestionIndex < userAnswers.length) {
+                isQuestionAnswered = true;
+                const answeredData = userAnswers[currentQuestionIndex];
+                selectedOption = answeredData.userAnswer;
+                
+                nextBtn.textContent = 'Next →';
+                nextBtn.disabled = false;
+                explainBtn.classList.remove('hidden');
+            } else {
+                isQuestionAnswered = false;
+                nextBtn.textContent = 'Submit';
+                nextBtn.disabled = true;
+            }
+
+            prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+            const question = currentQuiz.questions[currentQuestionIndex];
+            
+            if (question.image) {
+                questionImage.src = question.image;
+                questionImage.classList.remove('hidden');
+            } else {
+                questionImage.classList.add('hidden');
+            }
+
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuiz.questions.length}`;
+            questionText.textContent = question.question;
+            progressBar.style.width = `${(currentQuestionIndex / currentQuiz.questions.length) * 100}%`;
+            streakCounter.textContent = currentStreak > 1 ? `🔥 ${currentStreak}` : '';
+            streakCounter.classList.toggle('scale-0', currentStreak < 2);
+            
+            const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+            optionsContainer.innerHTML = shuffledOptions.map(o => `<button class="option-btn w-full text-left p-4 rounded-lg bg-gray-100 hover:bg-gray-200">${o}</button>`).join('');
+            
+            optionsContainer.querySelectorAll('.option-btn').forEach(b => {
+                if(isQuestionAnswered) {
+                    b.disabled = true;
+                    const answeredData = userAnswers[currentQuestionIndex];
+                    if (b.textContent === answeredData.correctAnswer) b.classList.add('correct');
+                    else if (b.textContent === answeredData.userAnswer) b.classList.add('incorrect');
+                } else {
+                    b.addEventListener('click', () => selectOption(b, b.textContent));
+                }
+            });
+        }
+        
+        function selectOption(button, option) {
+            if (isQuestionAnswered) return;
+            selectedOption = option;
+            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+            nextBtn.disabled = false;
+        }
+
+        function handleSubmitAnswer() {
+            if (!selectedOption) return;
+            isQuestionAnswered = true;
+            
+            const question = currentQuiz.questions[currentQuestionIndex];
+            const isCorrect = selectedOption === question.answer;
+
+            if (isCorrect) {
+                score++;
+                currentStreak++;
+            } else {
+                currentStreak = 0;
+            }
+            streakCounter.textContent = currentStreak > 1 ? `🔥 ${currentStreak}` : '';
+            streakCounter.classList.toggle('scale-0', currentStreak < 2);
+
+            userAnswers.push({ question: question.question, userAnswer: selectedOption, correctAnswer: question.answer, isCorrect: isCorrect });
+            
+            optionsContainer.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === question.answer) btn.classList.add('correct');
+                else if (btn.textContent === selectedOption) btn.classList.add('incorrect');
+            });
+            
+            explainBtn.classList.remove('hidden');
+            nextBtn.textContent = 'Next →';
+            saveQuizState();
+        }
+
+        function showScore() {
+            showView('score');
+            clearQuizState();
+            
+            const currentBest = (user.scores && user.scores[currentQuiz.title]?.score) || 0;
+            if (score >= currentBest) {
+                 user.scores[currentQuiz.title] = { score: score, answers: userAnswers };
+                 saveUser();
+            }
+
+            if (score === currentQuiz.questions.length) {
+                const badgeMap = { "Phishing Fundamentals": "Phishing Phenom", "Password Security": "Digital Locksmith", "Malware Awareness": "Malware Master", "Public Wi-Fi Safety": "Coffee Shop Commando", "Social Engineering": "Social Sleuth", "Finance Security": "Finance Fortress", "Spot the URL": "URL Eagle-Eye" };
+                const badgeName = badgeMap[currentQuiz.title];
+                if (badgeName) awardBadge(badgeName);
+            }
+
+            if (user.scores && Object.keys(user.scores).length === quizzes.length) {
+                awardBadge("Cybersecurity Champion");
+                 if (!user.completionTime) {
+                    user.completionTime = Date.now();
+                    saveUser();
+                }
+                const allPerfect = quizzes.every(q => (user.scores[q.title]?.score || 0) === q.questions.length);
+                if(allPerfect) awardBadge("Perfectionist");
+            }
+            
+            scoreText.textContent = `Your score: ${score} out of ${currentQuiz.questions.length}`;
+            scoreFeedback.textContent = (score/currentQuiz.questions.length) >= 0.8 ? "Excellent Work!" : (score/currentQuiz.questions.length) >= 0.5 ? "Good effort!" : "Keep learning!";
+        }
+        
+        function showReviewModal(quiz, answers) {
+            reviewModalTitle.textContent = `Review: ${quiz.title}`;
+            reviewModalContent.innerHTML = answers.map(ans => {
+                const icon = ans.isCorrect ? '✅' : '❌';
+                const bgColor = ans.isCorrect ? 'bg-green-50' : 'bg-red-50';
+                const borderColor = ans.isCorrect ? 'border-green-200' : 'border-red-200';
+                return `<div class="p-3 rounded-lg border ${bgColor} ${borderColor}"><p class="font-medium text-gray-800">${ans.question}</p><p class="text-sm mt-1">Your answer: <span class="font-semibold">${ans.userAnswer}</span> ${icon}</p>${!ans.isCorrect ? `<p class="text-sm text-green-700">Correct answer: <span class="font-semibold">${ans.correctAnswer}</span></p>` : ''}</div>`;
+            }).join('');
+            reviewModal.classList.remove('hidden');
+        }
+
+        function showSummaryDashboard() {
+            const scores = user.scores || {};
+            const totalUserScore = Object.values(scores).reduce((sum, quizData) => sum + quizData.score, 0);
+            const MAX_POSSIBLE_SCORE = quizzes.length * 5;
+
+            let animal = {};
+            if (totalUserScore === MAX_POSSIBLE_SCORE) { animal = { name: "Lion", message: "King of the Cybersecurity Jungle!" }; } 
+            else if (totalUserScore >= 30) { animal = { name: "Wolf", message: "A formidable pack leader!" }; } 
+            else if (totalUserScore >= 25) { animal = { name: "Fox", message: "Quick, clever, and cunning!" }; } 
+            else if (totalUserScore >= 20) { animal = { name: "Dog", message: "A loyal and reliable defender!" }; } 
+            else if (totalUserScore >= 15) { animal = { name: "Cat", message: "Curious and learning the ropes!" }; } 
+            else if (totalUserScore >= 10) { animal = { name: "Rabbit", message: "Quick to learn, but still cautious!" }; } 
+            else { animal = { name: "Mouse", message: "Even the smallest creature can learn to roar!" }; }
+
+            summaryModalTitle.textContent = `Congratulations! You're a ${animal.name}!`;
+            summaryModalScore.textContent = `Overall Score: ${totalUserScore} / ${MAX_POSSIBLE_SCORE}`;
+            summaryModalText.textContent = animal.message;
+            summaryModalTime.textContent = user.completionTime ? `Total Time: ${formatTime(user.completionTime - user.startTime)}` : "";
+            
+            summaryModal.classList.remove('hidden');
+        }
+
+        function setupEventListeners() {
+            startBtn.addEventListener('click', () => { 
+                const name = nameInput.value.trim();
+                if (name) {
+                    user = { name: name, scores: {}, badges: [], startTime: Date.now() };
+                    saveUser();
+                    showView('mainMenu');
+                    updateMainMenu();
+                }
+            });
+            resetUserBtn.addEventListener('click', () => {
+                localStorage.removeItem('cyberQuizUser');
+                sessionStorage.removeItem('cyberQuizSession');
+                user = {};
+                showView('nameEntry');
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (isQuestionAnswered) {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < currentQuiz.questions.length) {
+                        displayQuestion();
+                        saveQuizState();
+                    }
+                    else showScore();
+                } else {
+                    handleSubmitAnswer();
+                }
+            });
+            prevBtn.addEventListener('click', () => {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    displayQuestion();
+                    saveQuizState();
+                }
+            });
+
+            closeModalBtn.addEventListener('click', () => reviewModal.classList.add('hidden'));
+            reviewModal.addEventListener('click', (e) => { if (e.target.id === 'review-modal') reviewModal.classList.add('hidden'); });
+
+            closeSummaryModalBtn.addEventListener('click', () => summaryModal.classList.add('hidden'));
+            summaryModal.addEventListener('click', (e) => { if (e.target.id === 'summary-modal') summaryModal.classList.add('hidden'); });
+
+            mainMenuBtnScore.addEventListener('click', () => {
+                clearQuizState();
+                showView('mainMenu');
+                updateMainMenu();
+            });
+            backToMenuFromQuizBtn.addEventListener('click', () => {
+                clearQuizState();
+                showView('mainMenu');
+                updateMainMenu();
+            });
+            explainBtn.addEventListener('click', () => {
+                const question = currentQuiz.questions[currentQuestionIndex];
+                explanationContent.textContent = question.explanation;
+                explanationContainer.classList.remove('hidden');
+            });
+            summaryBtn.addEventListener('click', showSummaryDashboard);
+        }
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupEventListeners();
+            if (loadUser()) {
+                const savedStateJSON = sessionStorage.getItem('cyberQuizSession');
+                if (savedStateJSON) {
+                    const savedState = JSON.parse(savedStateJSON);
+                    currentQuiz = quizzes.find(q => q.title === savedState.quizTitle);
+                    if (currentQuiz) {
+                        currentQuestionIndex = savedState.currentQuestionIndex;
+                        score = savedState.score;
+                        currentStreak = savedState.currentStreak;
+                        userAnswers = savedState.userAnswers;
+                        showView('quiz');
+                        displayQuestion();
+                        return;
+                    }
+                }
+                 showView('mainMenu');
+                 updateMainMenu();
+            } else {
+                showView('nameEntry');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -19,6 +19,17 @@
 
         .glass-effect { background: rgba(13, 30, 51, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
 
+        .card-hover-effect { 
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
+            cursor: pointer; 
+            border: 1px solid transparent;
+        }
+        .card-hover-effect:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 25px -5px rgba(0, 255, 255, 0.1), 0 10px 10px -5px rgba(0, 255, 255, 0.04);
+            border-color: #64ffda;
+        }
+
         .skill-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -27,7 +38,6 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgba(0, 255, 255, 0.1), 0 10px 10px -5px rgba(0, 255, 255, 0.04);
         }
-
         .section-title { position: relative; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.25rem; font-weight: 700; color: #64ffda; }
 
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background-color: #64ffda; border-radius: 2px; }
@@ -83,6 +93,13 @@
                     <a class="text-slate-300 hover:text-cyan-400 transition cursor-pointer flex items-center">
                         Projects <i class="fas fa-chevron-down text-xs ml-2"></i>
                     </a>
+					<!-- Invisible wrapper with padding to bridge the gap -->
+                    <div class="absolute left-0 top-full pt-2 w-max hidden group-hover:block z-50">
+                        <div class="bg-slate-800 rounded-md w-48 shadow-lg py-1">
+                            <a href="projects/professional/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-cyan-400">Professional</a>
+                            <a href="projects/personal/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-cyan-400">Personal</a>
+                        </div>
+                    </div>
                     <div class="absolute hidden group-hover:block bg-slate-800 rounded-md mt-2 w-48 shadow-lg py-1 z-50">
                         <a href="/projects/professional/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-cyan-400">Professional</a>
                         <a href="/projects/personal/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700 hover:text-cyan-400">Personal</a>
@@ -158,20 +175,26 @@
                 </div>
             </section>
 
-            <!-- Skills Section -->
-            <section id="skills" class="py-24">
-                 <h2 class="section-title">Skills & Expertise</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <!-- EXAMPLE: Add a unique data-modal-target attribute to each card you want to make clickable -->
-                <div data-modal-target="network-security-modal" class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-shield-alt fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Network Security</h3></div>
+        <section id="skills" class="py-24">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- EXAMPLE: Add a unique data-modal-target attribute to each card you want to make clickable -->
+                <div data-modal-target="network-security-modal" class="group card-hover-effect relative p-6 rounded-lg bg-slate-800 text-center">
+                    <i class="fas fa-shield-alt fa-3x text-cyan-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-slate-200">Network Security</h3>
+                    <!-- Click indicator that appears on hover -->
+                    <div class="absolute top-3 right-3 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                </div>
                     
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-door-open fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Physical Security</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-bug fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Vulnerability Management</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-fire-extinguisher fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Incident Response</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-magnifying-glass-chart fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Digital Forensics</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-file-contract fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Compliance (Cyber Essentials, ISO 27001)</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-cloud fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cloud Security (AWS, Azure)</h3></div>
-                    <div class="skill-card p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-book fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Security Training Delivery</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-door-open fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Physical Security</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-bug fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Vulnerability Management</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-fire-extinguisher fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Incident Response</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-magnifying-glass-chart fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Digital Forensics</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-file-contract fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Compliance (Cyber Essentials, ISO 27001)</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-cloud fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Cloud Security (AWS, Azure)</h3></div>
+                    <div class="card-hover-effect p-6 rounded-lg bg-slate-800 text-center"><i class="fas fa-solid fa-book fa-3x text-cyan-400 mb-4"></i><h3 class="text-xl font-bold text-slate-200">Security Training Delivery</h3></div>
                 </div>
             </section>
 
@@ -192,7 +215,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Professional Projects Tile -->
                 <a href="/projects/professional/" class="group block">
-                    <div class="project-category-card rounded-lg p-8 h-full flex flex-col justify-center items-center text-center">
+                    <div class="project-category-card card-hover-effect rounded-lg p-8 h-full flex flex-col justify-center items-center text-center">
                         <i class="fas fa-solid fa-briefcase text-5xl text-cyan-400 mb-4"></i>
                         <h3 class="text-3xl font-bold text-slate-100 mb-2">Professional Projects</h3>
                         <p class="text-slate-400">A collection of projects undertaken in a professional environment that stand out for achievement</p>
@@ -201,7 +224,7 @@
 
                 <!-- Personal Ventures Tile -->
                 <a href="/projects/personal/" class="group block">
-                    <div class="project-category-card rounded-lg p-8 h-full flex flex-col justify-center items-center text-center">
+                    <div class="project-category-card card-hover-effect rounded-lg p-8 h-full flex flex-col justify-center items-center text-center">
                         <i class="fas fa-solid fa-user-tie text-5xl text-cyan-400 mb-4"></i>
                         <h3 class="text-3xl font-bold text-slate-100 mb-2">Personal Ventures</h3>
                         <p class="text-slate-400">A showcase of personal projects, from my homelab and networking developments to development of software applications.</p>

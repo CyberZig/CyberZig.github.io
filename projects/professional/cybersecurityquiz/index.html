@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,6 +81,7 @@
             left: 50%;
             transform: translateX(-50%);
             animation: toast-in 0.5s forwards;
+            z-index: 100;
         }
         .question-image {
             height: 150px;
@@ -91,11 +92,11 @@
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="h-full">
 
-    <div id="app" class="container mx-auto p-4 md:p-8 max-w-5xl">
+    <div id="app" class="container mx-auto p-4 md:p-8 max-w-5xl w-full">
 
-        <div id="name-entry-view" class="hidden"><div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl max-w-md mx-auto text-center fade-in"><h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome!</h1><p class="text-gray-600 mb-8">Please enter your name to track your progress.</p><input type="text" id="name-input" placeholder="Enter your name..." class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"><button id="start-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 disabled:bg-gray-400">Let's Start</button></div></div>
+        <div id="name-entry-view" class="hidden"><div class="bg-white p-6 md:p-12 rounded-2xl shadow-xl max-w-md mx-auto text-center fade-in"><h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome!</h1><p class="text-gray-600 mb-8">Please enter your name to track your progress.</p><input type="text" id="name-input" placeholder="Enter your name..." class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"><button id="start-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 disabled:bg-gray-400">Let's Start</button></div></div>
         
         <div id="main-menu" class="hidden">
             <div class="flex justify-between items-start mb-6 flex-wrap gap-4">
@@ -108,44 +109,44 @@
                      <button id="summary-btn" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 text-sm">🏆 View Summary</button>
                  </div>
             </div>
-             <div class="mb-6">
+             <div class="mb-6 md:mb-8">
                 <div class="flex justify-between items-center mb-2">
                     <p class="text-sm font-medium text-gray-600">Overall Completion</p>
                     <p id="completion-text" class="text-sm font-bold text-indigo-600">0/6 Quizzes</p>
                 </div>
                 <div class="progress-bar-container"><div id="overall-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
             </div>
-             <div id="badges-container" class="mb-10 hidden">
+             <div id="badges-container" class="mb-6 md:mb-10 hidden">
                 <h3 class="text-lg font-bold text-gray-800 mb-3">Your Achievements</h3>
                 <div id="badges-list" class="flex flex-wrap gap-3"></div>
             </div>
-            <div id="quiz-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="quiz-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
 
         <div id="quiz-view" class="hidden">
-            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
-                 <div class="flex justify-between items-center mb-4">
+            <div class="bg-white p-4 md:p-8 rounded-2xl shadow-lg">
+                 <div class="flex justify-between items-start mb-4 gap-4">
                     <div>
                         <button id="back-to-menu-from-quiz" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 mb-2">← Back to Menu</button>
                         <h2 id="quiz-title" class="text-2xl md:text-3xl font-bold text-gray-900">Quiz Title</h2>
                     </div>
-                    <div id="streak-counter" class="text-lg font-bold text-orange-500 transition-transform duration-300 scale-0"></div>
+                    <div id="streak-counter" class="text-lg font-bold text-orange-500 transition-transform duration-300 scale-0 flex-shrink-0 mt-8"></div>
                 </div>
                 <p id="question-counter" class="text-sm text-gray-500 mb-4">Question 1 of 5</p>
 
                 <div class="progress-bar-container mb-6"><div id="progress-bar" class="progress-bar" style="width: 0%;"></div></div>
-                <div id="question-container" class="mb-6">
+                <div id="question-container" class="mb-4 md:mb-6">
                      <img id="question-image" src="" alt="Quiz Question Image" class="question-image hidden">
                     <p id="question-text" class="text-lg md:text-xl font-medium text-gray-800">Question text...</p>
-                    <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6"></div>
+                    <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-4"></div>
                 </div>
                 
-                <div id="explanation-container" class="hidden mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg"><p id="explanation-content" class="text-gray-700"></p></div>
+                <div id="explanation-container" class="hidden mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg"><p id="explanation-content" class="text-gray-700"></p></div>
 
-                <div class="flex justify-between items-center mt-6">
+                <div class="flex justify-between items-center mt-6 flex-wrap gap-4">
                      <button id="prev-btn" class="bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition duration-300 hidden">← Previous</button>
-                     <div class="flex items-center ml-auto">
-                        <button id="explain-btn" class="hidden bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mr-4">💡 Explain</button>
+                     <div class="flex items-center ml-auto gap-4">
+                        <button id="explain-btn" class="hidden bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition duration-300">💡 Explain</button>
                         <button id="next-btn" class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 disabled:bg-gray-400">Submit</button>
                      </div>
                 </div>
@@ -153,9 +154,9 @@
         </div>
 
         <div id="score-view" class="hidden text-center">
-             <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
-                <p id="score-text" class="text-2xl text-gray-700 mb-4">Your score: 3 out of 5</p>
+             <div class="bg-white p-6 md:p-12 rounded-2xl shadow-lg fade-in">
+                <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
+                <p id="score-text" class="text-xl md:text-2xl text-gray-700 mb-4">Your score: 3 out of 5</p>
                 <div id="score-feedback" class="text-lg text-gray-600 mb-8">Good job!</div>
                 <div class="flex justify-center gap-4 flex-wrap">
                     <button id="main-menu-btn" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition duration-300">Back to Menu</button>
@@ -169,18 +170,20 @@
     <div id="review-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
         <div class="bg-white rounded-2xl shadow-lg max-w-2xl w-full p-6 md:p-8 relative fade-in">
             <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
-            <h2 id="review-modal-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Quiz Review</h2>
-            <div id="review-modal-content" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2"></div>
+            <h2 id="review-modal-title" class="text-xl md:text-3xl font-bold text-gray-900 mb-6">Quiz Review</h2>
+            <div id="review-modal-content" class="space-y-4 max-h-[70vh] overflow-y-auto pr-2"></div>
         </div>
     </div>
 
     <div id="summary-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-lg max-w-md w-full p-6 md:p-8 relative fade-in text-center">
+        <div class="bg-white rounded-2xl shadow-lg max-w-md w-full p-6 relative fade-in text-center">
             <button id="close-summary-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
-            <h2 id="summary-modal-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Your Progress</h2>
-            <img id="summary-modal-image" src="" alt="Score Summary Image" class="w-full h-48 object-cover rounded-lg mb-4">
-            <p id="summary-modal-score" class="text-xl font-bold text-indigo-600"></p>
-            <p id="summary-modal-text" class="text-gray-600 mt-2"></p>
+            <div class="max-h-[70vh] overflow-y-auto p-4">
+                <h2 id="summary-modal-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-4"></h2>
+                <img id="summary-modal-image" src="" alt="Score Summary Image" class="w-full h-48 object-cover rounded-lg mb-4 hidden">
+                <p id="summary-modal-score" class="text-lg md:text-xl font-bold text-indigo-600"></p>
+                <p id="summary-modal-text" class="text-gray-600 mt-4"></p>
+            </div>
         </div>
     </div>
 
@@ -190,392 +193,4 @@
             { title: "Phishing Fundamentals", icon: "🎣", questions: [ { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Urgent+Text+Message", question: "You get a text: 'Your bank account is locked...'. What is the attacker's main goal?", options: ["To steal your login credentials", "To help you secure your account", "To sell you security software", "To check if your number is active"], answer: "To steal your login credentials", explanation: "Attackers use urgent messages to create panic, making you click a fake link to steal your username and password." }, { image: "https://placehold.co/600x200/fee2e2/b91c1c?text=Payment+Failed!", question: "An email from 'Netflixx Support' (two 'x's) greets you 'Dear User'. What's the biggest red flag?", options: ["The generic greeting and misspelled company name", "The request for payment information", "The urgent tone", "The subject line"], answer: "The generic greeting and misspelled company name", explanation: "Legitimate companies usually address you by name, and misspellings are a common sign of a scam." }, { image: "https://placehold.co/600x200/f3e8ff/8b5cf6?text=Gift+Card+Request", question: "Your 'boss' emails asking you to urgently buy gift cards. What is your safest next move?", options: ["Contact your boss through a different channel (e.g., phone call) to verify", "Reply to the email to confirm the amount", "Immediately buy the gift cards as requested", "Forward the email to the accounting department"], answer: "Contact your boss through a different channel (e.g., phone call) to verify", explanation: "This is a classic scam. Always verify unusual financial requests out-of-band (e.g., a call or in person), not by replying to the suspicious email." }, { image: "https://placehold.co/600x200/e0e7ff/3730a3?text=Wire+Transfer+Email", question: "A hacker emails the new CFO, pretending to be the CEO, requesting an urgent wire transfer. This targeted attack is called:", options: ["Spear Phishing", "A Brute Force Attack", "Ransomware", "A Trojan Horse"], answer: "Spear Phishing", explanation: "Spear phishing is a targeted attack on a specific individual or organization, often using information gathered from research." }, { image: "https://placehold.co/600x200/dcfce7/166534?text=Check+the+Link!", question: "A link says 'Go to Your Bank', but hovering shows a different URL. This helps you identify:", options: ["A misleading link where the destination is not what it seems", "That the email contains a virus", "The sender's physical location", "If the link is encrypted"], answer: "A misleading link where the destination is not what it seems", explanation: "Always hover over links before clicking to see the actual web address. If it looks suspicious or doesn't match the text, don't click." } ] },
             { title: "Password Security", icon: "🔒", questions: [ { image: "https://placehold.co/600x200/ede9fe/5b21b6?text=Strong+Password", question: "What is the most important characteristic of a strong password?", options: ["Length and complexity", "Using your pet's name", "Being easy to remember", "Changing it every day"], answer: "Length and complexity", explanation: "A long password with a mix of uppercase, lowercase, numbers, and symbols is much harder for attackers to guess." }, { image: "https://placehold.co/600x200/dbeafe/1e40af?text=2FA+Code", question: "What is Two-Factor Authentication (2FA)?", options: ["A second layer of security after your password", "Using two different passwords", "A type of antivirus software", "A password that is two characters long"], answer: "A second layer of security after your password", explanation: "2FA requires a second piece of information (like a code from your phone) in addition to your password, making unauthorized access much harder." }, { image: "https://placehold.co/600x200/fee2e2/991b1b?text=Reused+Passwords", question: "Is it safe to reuse passwords across multiple websites?", options: ["No, it's very risky", "Yes, if it's a strong password", "Only for unimportant websites", "Yes, it makes them easier to remember"], answer: "No, it's very risky", explanation: "If one site is breached, attackers will use your stolen password to try and log into your other accounts, like email and banking." }, { image: "https://placehold.co/600x200/f3e8ff/7e22ce?text=Password+Manager", question: "What is a password manager?", options: ["A secure application to store and generate complex passwords", "A person who remembers your passwords", "A notebook where you write passwords", "A type of computer virus"], answer: "A secure application to store and generate complex passwords", explanation: "Password managers securely store all your unique passwords and can generate strong new ones, so you only have to remember one master password." }, { image: "https://placehold.co/600x200/ffedd5/9a3412?text=Brute+Force", question: "What does 'brute force attack' mean in the context of passwords?", options: ["Trying every possible combination to guess a password", "Forgetting your password", "A very strong password", "Changing your password forcefully"], answer: "Trying every possible combination to guess a password", explanation: "A brute force attack is an automated method where software tries millions of password combinations until it finds the correct one." } ] },
             { title: "Malware Awareness", icon: "🦠", questions: [ { image: "https://placehold.co/600x200/fee2e2/ef4444?text=FILES+ENCRYPTED!", question: "You see a message: 'Your files are encrypted! To get them back, send Bitcoin'. This is:", options: ["Ransomware", "Spyware", "A Worm", "Adware"], answer: "Ransomware", explanation: "Ransomware is malware that locks your files and demands a ransom payment to unlock them." }, { image: "https://placehold.co/600x200/dcfce7/22c55e?text=Funny_Cat_Video.exe", question: "You run 'cat_video.exe'. Now all your contacts get the same file from you. This is a:", options: ["Virus", "Firewall", "Keylogger", "Phishing scam"], answer: "Virus", explanation: "A computer virus is a type of malware that attaches to a program and is designed to replicate and spread to other computers." }, { image: "https://placehold.co/600x200/fefce8/eab308?text=Slow+Computer", question: "Your PC is slow and you see ads for things you just searched for. This could be:", options: ["Spyware", "A hardware failure", "A normal system update", "Ransomware"], answer: "Spyware", explanation: "Spyware is malware designed to secretly monitor your activities, track browsing habits, and collect personal information." }, { image: "https://placehold.co/600x200/e0e7ff/4338ca?text=Free+Photo+Editor", question: "You download a 'free' app, but it secretly installs a malicious program. The free app is a:", options: ["Trojan Horse", "VPN", "Firewall", "Rootkit"], answer: "Trojan Horse", explanation: "A Trojan Horse disguises itself as a legitimate program but contains malicious code that executes when the program is run." }, { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Final+Step?", question: "Besides antivirus and strong passwords, what is the most crucial step to avoid malware?", options: ["Being cautious about what you click and download", "Never turning off your computer", "Deleting all your emails", "Using a different web browser"], answer: "Being cautious about what you click and download", explanation: "Technology helps, but human caution is the best defense. Thinking before you click a link or download a file can prevent most infections." } ] },
-            { title: "Public Wi-Fi Safety", icon: "📶", questions: [ { image: "https://placehold.co/600x200/fef9c3/ca8a04?text=Public+Wi-Fi", question: "What is the main risk of using public Wi-Fi?", options: ["Your data can be intercepted by hackers", "It is usually very slow", "It costs money", "It drains your battery"], answer: "Your data can be intercepted by hackers", explanation: "Public Wi-Fi networks are often unsecured, allowing attackers on the same network to intercept your data." }, { image: "https://placehold.co/600x200/dcfce7/15803d?text=VPN+Shield", question: "What is a VPN (Virtual Private Network)?", options: ["A tool that encrypts your internet connection", "A public Wi-Fi network", "A type of internet browser", "A physical network cable"], answer: "A tool that encrypts your internet connection", explanation: "A VPN creates a secure, encrypted 'tunnel' for your internet traffic, protecting it from eavesdroppers, especially on public Wi-Fi." }, { image: "https://placehold.co/600x200/ecfdf5/059669?text=https://", question: "Which of these indicates a secure website connection?", options: ["The URL starts with https://", "The website has lots of images", "The URL starts with http://", "The website asks for your location"], answer: "The URL starts with https://", explanation: "HTTPS (Hypertext Transfer Protocol Secure) means the connection between your browser and the website is encrypted and secure." }, { image: "https://placehold.co/600x200/fee2e2/dc2626?text=Evil+Twin", question: "What is an 'Evil Twin' attack?", options: ["A fake Wi-Fi hotspot that mimics a legitimate one", "When someone looks exactly like you", "A type of computer virus", "Two routers interfering with each other"], answer: "A fake Wi-Fi hotspot that mimics a legitimate one", explanation: "Attackers set up fake Wi-Fi hotspots with familiar names (e.g., 'CoffeeShop_FreeWiFi') to trick you into connecting so they can steal your data." }, { image: "https://placehold.co/600x200/ffedd5/c2410c?text=Sensitive+Logins", question: "When using public Wi-Fi, you should avoid...", options: ["Logging into sensitive accounts like banking", "Checking the weather", "Browsing news websites", "Watching videos"], answer: "Logging into sensitive accounts like banking", explanation: "Avoid accessing any account that requires a password, especially banking or email, as your credentials could be stolen on an unsecured network." } ] },
-            { title: "Social Engineering", icon: "👥", questions: [ { image: "https://placehold.co/600x200/fce7f3/db2777?text=Manipulation", question: "What is social engineering?", options: ["The art of manipulating people to divulge confidential information", "A type of software development", "Networking at social events", "An engineering discipline"], answer: "The art of manipulating people to divulge confidential information", explanation: "Social engineering relies on human psychology rather than technical hacking to trick people into giving up sensitive information." }, { image: "https://placehold.co/600x200/faf5ff/9333ea?text=Invented+Scenario", question: "What is 'pretexting'?", options: ["Creating an invented scenario to engage a victim", "Sending a text message before calling", "Writing the preface to a book", "A type of secure communication"], answer: "Creating an invented scenario to engage a victim", explanation: "Pretexting is when an attacker creates a believable story or pretext to build trust and manipulate their victim." }, { image: "https://placehold.co/600x200/fefce8/a16207?text=IT+Support+Call", question: "An attacker calls, pretending to be from IT support, asking for your password. This is:", options: ["Vishing", "Baiting", "Quid pro quo", "Tailgating"], answer: "Vishing", explanation: "Vishing (Voice Phishing) is a phishing attack that takes place over the phone or via voicemail." }, { image: "https://placehold.co/600x200/e0f2fe/0891b2?text=USB+Drive", question: "What is 'baiting' in the context of social engineering?", options: ["Leaving a malware-infected USB drive in a public place", "Fishing with live bait", "Arguing with someone online", "Offering someone a compliment"], answer: "Leaving a malware-infected USB drive in a public place", explanation: "Baiting relies on curiosity, tempting victims to pick up and plug in an infected device like a USB drive." }, { image: "https://placehold.co/600x200/eef2ff/4338ca?text=Skepticism", question: "How can you protect yourself from social engineering?", options: ["By being skeptical and verifying requests independently", "By never talking to strangers", "By sharing all your information to be transparent", "By having a very complex password"], answer: "By being skeptical and verifying requests independently", explanation: "The best defense is to always be skeptical of unsolicited requests and to verify them through a separate, trusted communication channel." } ] },
-            { title: "Finance Security", icon: "💰", questions: [ { image: "https://placehold.co/600x200/fffbeb/b45309?text=Fake+Invoice", question: "You get an invoice from a supplier, but the bank details are different. What to do first?", options: ["Verify the change with the supplier using a trusted phone number", "Pay the invoice to the new account to avoid delays", "Reply to the email to ask if they are sure", "Forward the email to your manager for approval"], answer: "Verify the change with the supplier using a trusted phone number", explanation: "Invoice fraud is common. Always verbally confirm changes to bank details using a known contact number, not one from the suspicious email." }, { image: "https://placehold.co/600x200/eff6ff/7c3aed?text=CEO's+Urgent+Email", question: "An email from your 'CEO' asks for a secret, urgent payment for an 'acquisition'. This scam is called:", options: ["Business Email Compromise (BEC)", "Ransomware", "Denial-of-Service", "Spyware"], answer: "Business Email Compromise (BEC)", explanation: "BEC attacks impersonate executives to trick employees into making unauthorized financial transactions." }, { image: "https://placehold.co/600x200/f0fdf4/16a34a?text=Accounting+Login", question: "What is the MOST critical security measure for your company's accounting software?", options: ["Multi-Factor Authentication (MFA) for all users", "A very long password for the main admin", "Changing passwords every 30 days", "Accessing it only from the office"], answer: "Multi-Factor Authentication (MFA) for all users", explanation: "MFA provides the strongest protection, as even if a password is stolen, the attacker cannot log in without the second factor (e.g., a phone code)." }, { image: "https://placehold.co/600x200/f1f5f9/475569?text=Excel+Macros", question: "An email attachment '.xlsm' asks you to 'Enable Macros'. This is a common way to deliver:", options: ["Malware hidden in the macro script", "A legitimate, updated spreadsheet", "A password-protected file", "A read-only document"], answer: "Malware hidden in the macro script", explanation: "Macros are scripts that can automate tasks, but attackers use them to run malicious code. Never enable macros from an untrusted source." }, { image: "https://placehold.co/600x200/fff1f2/e11d48?text=Payroll+Change", question: "You get an email from a colleague to change their direct deposit info. What's the safest action?", options: ["Confirm the request with the colleague in person or via video call", "Make the change immediately to ensure they get paid on time", "Reply to the email to get written confirmation", "Ask your manager if the request is legitimate"], answer: "Confirm the request with the colleague in person or via video call", explanation: "Payroll fraud is a common goal of account takeovers. Always verify such sensitive requests through a secure, separate channel." } ] }
-        ];
-
-        const badges = {
-            "Phishing Phenom": { icon: "🎣", description: "Perfect score on Phishing" },
-            "Password Pro": { icon: "🔒", description: "Perfect score on Passwords" },
-            "Malware Master": { icon: "🦠", description: "Perfect score on Malware" },
-            "Wi-Fi Warrior": { icon: "📶", description: "Perfect score on Wi-Fi Safety" },
-            "Social Sleuth": { icon: "👥", description: "Perfect score on Social Engineering" },
-            "Finance Fortress": { icon: "💰", description: "Perfect score on Finance Security" },
-            "On a Roll!": { icon: "🔥", description: "5-answer streak" },
-            "Cybersecurity Champion": { icon: "🏆", description: "Complete all quizzes" },
-            "Perfectionist": { icon: "⭐", description: "Perfect score on all quizzes" },
-        };
-
-        // === DOM Elements ===
-        const allViews = { loading: document.getElementById('loading-view'), nameEntry: document.getElementById('name-entry-view'), mainMenu: document.getElementById('main-menu'), quiz: document.getElementById('quiz-view'), score: document.getElementById('score-view') };
-        const nameInput = document.getElementById('name-input'), startBtn = document.getElementById('start-btn');
-        const welcomeMessage = document.getElementById('welcome-message'), resetUserBtn = document.getElementById('reset-user-btn');
-        const totalScoreEl = document.getElementById('total-score'), overallProgressBar = document.getElementById('overall-progress-bar'), completionText = document.getElementById('completion-text');
-        const badgesContainer = document.getElementById('badges-container'), badgesList = document.getElementById('badges-list');
-        const quizList = document.getElementById('quiz-list');
-        const quizTitle = document.getElementById('quiz-title'), streakCounter = document.getElementById('streak-counter'), questionCounter = document.getElementById('question-counter');
-        const progressBar = document.getElementById('progress-bar'), questionImage = document.getElementById('question-image'), questionText = document.getElementById('question-text'), optionsContainer = document.getElementById('options-container'), nextBtn = document.getElementById('next-btn'), prevBtn = document.getElementById('prev-btn');
-        const scoreText = document.getElementById('score-text'), scoreFeedback = document.getElementById('score-feedback'), mainMenuBtnScore = document.getElementById('main-menu-btn');
-        const explainBtn = document.getElementById('explain-btn'), explanationContainer = document.getElementById('explanation-container'), explanationContent = document.getElementById('explanation-content');
-        const toast = document.getElementById('toast'), toastText = document.getElementById('toast-text');
-        const summaryBtn = document.getElementById('summary-btn');
-        const backToMenuFromQuizBtn = document.getElementById('back-to-menu-from-quiz');
-        const reviewModal = document.getElementById('review-modal'), reviewModalTitle = document.getElementById('review-modal-title'), reviewModalContent = document.getElementById('review-modal-content'), closeModalBtn = document.getElementById('close-modal-btn');
-        const summaryModal = document.getElementById('summary-modal'), summaryModalTitle = document.getElementById('summary-modal-title'), summaryModalImage = document.getElementById('summary-modal-image'), summaryModalScore = document.getElementById('summary-modal-score'), summaryModalText = document.getElementById('summary-modal-text'), closeSummaryModalBtn = document.getElementById('close-summary-modal-btn');
-
-
-        // === App State ===
-        let user = {}, currentQuiz = null, currentQuestionIndex = 0, score = 0, selectedOption = null;
-        let isQuestionAnswered = false, currentStreak = 0, userAnswers = [];
-
-        // === Storage Functions ===
-        function loadUser() {
-            const savedUser = localStorage.getItem('cyberQuizUser');
-            if (savedUser) {
-                user = JSON.parse(savedUser);
-                return true;
-            }
-            return false;
-        }
-        function saveUser() {
-            localStorage.setItem('cyberQuizUser', JSON.stringify(user));
-        }
-        function saveQuizState() {
-            if (!currentQuiz) return;
-            const quizState = { quizTitle: currentQuiz.title, currentQuestionIndex, score, currentStreak, userAnswers };
-            sessionStorage.setItem('cyberQuizSession', JSON.stringify(quizState));
-        }
-        function clearQuizState() {
-            sessionStorage.removeItem('cyberQuizSession');
-        }
-
-        // === Gamification Functions ===
-        function awardBadge(badgeName) {
-            if (!user.badges) user.badges = [];
-            if (user.badges.includes(badgeName)) return;
-            user.badges.push(badgeName);
-            saveUser();
-            showBadgeNotification(badgeName);
-        }
-        function showBadgeNotification(badgeName) {
-            const badge = badges[badgeName];
-            if (!badge) return;
-            toastText.innerHTML = `🏆 Badge Unlocked: <strong>${badgeName}</strong>`;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 4000);
-        }
-
-        // === App Logic ===
-        function showView(viewName) { 
-            Object.values(allViews).forEach(v => v && v.classList.add('hidden')); 
-            if(allViews[viewName]) allViews[viewName].classList.remove('hidden'); 
-        }
-        
-        function updateMainMenu() {
-            welcomeMessage.textContent = `Welcome, ${user.name}!`;
-            quizList.innerHTML = quizzes.map(q => {
-                const quizData = user.scores ? user.scores[q.title] : null;
-                const bestScore = quizData ? quizData.score : 0;
-                const isCompleted = !!quizData;
-                return `<div class="quiz-card bg-white p-6 rounded-xl shadow-md cursor-pointer flex flex-col justify-between" data-quiz-title="${q.title}"><div><div class="text-4xl mb-4">${q.icon}</div><h3 class="text-xl font-bold text-gray-800 mb-2">${q.title}</h3></div><div class="mt-4 pt-4 border-t border-gray-200">${isCompleted ? `<p class="text-sm font-semibold text-gray-700">Best Score: <span class="text-indigo-600">${bestScore}/${q.questions.length}</span></p>`:`<p class="text-sm font-medium text-gray-500">Not attempted yet</p>`}</div></div>`
-            }).join('');
-            
-            document.querySelectorAll('.quiz-card').forEach(c => c.addEventListener('click', e => {
-                const clickedQuizTitle = e.currentTarget.dataset.quizTitle;
-                const selectedQuiz = quizzes.find(q => q.title === clickedQuizTitle);
-                const completedQuizData = user.scores ? user.scores[clickedQuizTitle] : null;
-                if(completedQuizData) {
-                    showReviewModal(selectedQuiz, completedQuizData.answers);
-                } else {
-                    startQuiz(selectedQuiz);
-                }
-            }));
-
-            const scores = user.scores || {};
-            const completedCount = Object.keys(scores).length;
-            overallProgressBar.style.width = `${(completedCount / quizzes.length) * 100}%`;
-            completionText.textContent = `${completedCount}/${quizzes.length} Quizzes`;
-            totalScoreEl.textContent = Object.values(scores).reduce((s, c) => s + (c.score || 0), 0);
-
-            if (user.badges && user.badges.length > 0) {
-                badgesContainer.classList.remove('hidden');
-                badgesList.innerHTML = user.badges.map(bName => `<div class="badge"><span class="icon">${badges[bName]?.icon || '🏅'}</span> ${bName}</div>`).join('');
-            } else {
-                badgesContainer.classList.add('hidden');
-            }
-        }
-        
-        function startQuiz(quiz) {
-            currentQuiz = quiz;
-            currentQuestionIndex = 0;
-            score = 0;
-            currentStreak = 0;
-            userAnswers = [];
-            saveQuizState();
-            showView('quiz');
-            allViews.quiz.classList.add('fade-in');
-            quizTitle.textContent = currentQuiz.title;
-            displayQuestion();
-        }
-
-        function displayQuestion() {
-            selectedOption = null;
-            explanationContainer.classList.add('hidden');
-            explainBtn.classList.add('hidden');
-            
-            if (currentQuestionIndex < userAnswers.length) { // Reviewing a question
-                isQuestionAnswered = true;
-                const answeredData = userAnswers[currentQuestionIndex];
-                selectedOption = answeredData.userAnswer;
-                
-                nextBtn.textContent = 'Next →';
-                nextBtn.disabled = false;
-                explainBtn.classList.remove('hidden');
-            } else { // New question
-                isQuestionAnswered = false;
-                nextBtn.textContent = 'Submit';
-                nextBtn.disabled = true;
-            }
-
-            prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
-
-            const question = currentQuiz.questions[currentQuestionIndex];
-            
-            if (question.image) {
-                questionImage.src = question.image;
-                questionImage.classList.remove('hidden');
-            } else {
-                questionImage.classList.add('hidden');
-            }
-
-            questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuiz.questions.length}`;
-            questionText.textContent = question.question;
-            progressBar.style.width = `${(currentQuestionIndex / currentQuiz.questions.length) * 100}%`;
-            streakCounter.textContent = currentStreak > 1 ? `🔥 ${currentStreak}` : '';
-            streakCounter.classList.toggle('scale-0', currentStreak < 2);
-            optionsContainer.innerHTML = [...question.options].map(o => `<button class="option-btn w-full text-left p-4 rounded-lg bg-gray-100 hover:bg-gray-200">${o}</button>`).join('');
-            
-            optionsContainer.querySelectorAll('.option-btn').forEach(b => {
-                if(isQuestionAnswered) {
-                    b.disabled = true;
-                    const answeredData = userAnswers[currentQuestionIndex];
-                    if (b.textContent === answeredData.correctAnswer) b.classList.add('correct');
-                    else if (b.textContent === answeredData.userAnswer) b.classList.add('incorrect');
-                } else {
-                    b.addEventListener('click', () => selectOption(b, b.textContent));
-                }
-            });
-        }
-        
-        function selectOption(button, option) {
-            if (isQuestionAnswered) return;
-            selectedOption = option;
-            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            nextBtn.disabled = false;
-        }
-
-        function handleSubmitAnswer() {
-            if (!selectedOption) return;
-            isQuestionAnswered = true;
-            
-            const question = currentQuiz.questions[currentQuestionIndex];
-            const isCorrect = selectedOption === question.answer;
-
-            if (isCorrect) {
-                score++;
-                currentStreak++;
-                if (currentStreak === 5) awardBadge("On a Roll!");
-            } else {
-                currentStreak = 0;
-            }
-            streakCounter.textContent = currentStreak > 1 ? `🔥 ${currentStreak}` : '';
-            streakCounter.classList.toggle('scale-0', currentStreak < 2);
-
-            userAnswers.push({ question: question.question, userAnswer: selectedOption, correctAnswer: question.answer, isCorrect: isCorrect });
-            
-            optionsContainer.querySelectorAll('.option-btn').forEach(btn => {
-                btn.disabled = true;
-                if (btn.textContent === question.answer) btn.classList.add('correct');
-                else if (btn.textContent === selectedOption) btn.classList.add('incorrect');
-            });
-            
-            explainBtn.classList.remove('hidden');
-            nextBtn.textContent = 'Next →';
-            saveQuizState();
-        }
-
-        function showScore() {
-            showView('score');
-            clearQuizState();
-            
-            const currentBest = (user.scores && user.scores[currentQuiz.title]?.score) || 0;
-            if (score >= currentBest) {
-                 user.scores[currentQuiz.title] = { score: score, answers: userAnswers };
-                 saveUser();
-            }
-
-            if (score === currentQuiz.questions.length) {
-                const badgeName = Object.keys(badges).find(key => badges[key].description.includes(currentQuiz.title));
-                if (badgeName) awardBadge(badgeName);
-            }
-            if (user.scores && Object.keys(user.scores).length === quizzes.length) {
-                awardBadge("Cybersecurity Champion");
-                const allPerfect = quizzes.every(q => (user.scores[q.title]?.score || 0) === q.questions.length);
-                if(allPerfect) awardBadge("Perfectionist");
-            }
-            
-            scoreText.textContent = `Your score: ${score} out of ${currentQuiz.questions.length}`;
-            scoreFeedback.textContent = (score/currentQuiz.questions.length) >= 0.8 ? "Excellent Work!" : (score/currentQuiz.questions.length) >= 0.5 ? "Good effort!" : "Keep learning!";
-        }
-        
-        function showReviewModal(quiz, answers) {
-            reviewModalTitle.textContent = `Review: ${quiz.title}`;
-            reviewModalContent.innerHTML = answers.map(ans => {
-                const icon = ans.isCorrect ? '✅' : '❌';
-                const bgColor = ans.isCorrect ? 'bg-green-50' : 'bg-red-50';
-                const borderColor = ans.isCorrect ? 'border-green-200' : 'border-red-200';
-                return `<div class="p-3 rounded-lg border ${bgColor} ${borderColor}"><p class="font-medium text-gray-800">${ans.question}</p><p class="text-sm mt-1">Your answer: <span class="font-semibold">${ans.userAnswer}</span> ${icon}</p>${!ans.isCorrect ? `<p class="text-sm text-green-700">Correct answer: <span class="font-semibold">${ans.correctAnswer}</span></p>` : ''}</div>`;
-            }).join('');
-            reviewModal.classList.remove('hidden');
-        }
-
-        function showSummaryDashboard() {
-            const scores = user.scores || {};
-            const completedQuizzes = Object.keys(scores);
-
-            if (completedQuizzes.length === 0) {
-                summaryModalTitle.textContent = "No Quizzes Completed!";
-                summaryModalImage.src = "https://placehold.co/400x300/e5e7eb/71717a?text=❓";
-                summaryModalScore.textContent = "Complete a quiz to see your summary.";
-                summaryModalText.textContent = "";
-                summaryModal.classList.remove('hidden');
-                return;
-            }
-
-            let totalUserScore = 0;
-            let maxPossibleScore = 0;
-
-            completedQuizzes.forEach(quizTitle => {
-                const quizData = scores[quizTitle];
-                totalUserScore += quizData.score;
-                const quiz = quizzes.find(q => q.title === quizTitle);
-                if (quiz) {
-                    maxPossibleScore += quiz.questions.length;
-                }
-            });
-
-            const percentage = maxPossibleScore > 0 ? (totalUserScore / maxPossibleScore) * 100 : 0;
-
-            let animal = {};
-            if (percentage === 100) {
-                animal = { name: "Lion", image: "https://placehold.co/400x300/f59e0b/ffffff?text=🦁", message: "King of the Cybersecurity Jungle!" };
-            } else if (percentage >= 80) {
-                animal = { name: "Wolf", image: "https://placehold.co/400x300/6b7280/ffffff?text=🐺", message: "A formidable pack leader!" };
-            } else if (percentage >= 60) {
-                animal = { name: "Fox", image: "https://placehold.co/400x300/f97316/ffffff?text=🦊", message: "Quick, clever, and cunning!" };
-            } else if (percentage >= 40) {
-                animal = { name: "Dog", image: "https://placehold.co/400x300/84cc16/ffffff?text=🐶", message: "A loyal and reliable defender!" };
-            } else if (percentage >= 20) {
-                animal = { name: "Cat", image: "https://placehold.co/400x300/3b82f6/ffffff?text=🐱", message: "Curious and learning the ropes!" };
-            } else if (percentage > 0) {
-                animal = { name: "Rabbit", image: "https://placehold.co/400x300/a855f7/ffffff?text=🐰", message: "Quick to learn, but still cautious!" };
-            } else {
-                animal = { name: "Mouse", image: "https://placehold.co/400x300/78716c/ffffff?text=🐭", message: "Even the smallest creature can learn to roar!" };
-            }
-
-            summaryModalTitle.textContent = `You're a ${animal.name}!`;
-            summaryModalImage.src = animal.image;
-            summaryModalScore.textContent = `Overall Score: ${totalUserScore} / ${maxPossibleScore} (${Math.round(percentage)}%)`;
-            summaryModalText.textContent = animal.message;
-
-            summaryModal.classList.remove('hidden');
-        }
-
-        function setupEventListeners() {
-            startBtn.addEventListener('click', () => { 
-                const name = nameInput.value.trim();
-                if (name) {
-                    user = { name: name, scores: {}, badges: [] };
-                    saveUser();
-                    showView('mainMenu');
-                    updateMainMenu();
-                }
-            });
-            resetUserBtn.addEventListener('click', () => {
-                localStorage.removeItem('cyberQuizUser');
-                sessionStorage.removeItem('cyberQuizSession');
-                user = {};
-                showView('nameEntry');
-            });
-            
-            nextBtn.addEventListener('click', () => {
-                if (isQuestionAnswered) {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < currentQuiz.questions.length) {
-                        displayQuestion();
-                        saveQuizState();
-                    }
-                    else showScore();
-                } else {
-                    handleSubmitAnswer();
-                }
-            });
-            prevBtn.addEventListener('click', () => {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    displayQuestion();
-                    saveQuizState();
-                }
-            });
-
-            closeModalBtn.addEventListener('click', () => reviewModal.classList.add('hidden'));
-            reviewModal.addEventListener('click', (e) => { if (e.target.id === 'review-modal') reviewModal.classList.add('hidden'); });
-
-            closeSummaryModalBtn.addEventListener('click', () => summaryModal.classList.add('hidden'));
-            summaryModal.addEventListener('click', (e) => { if (e.target.id === 'summary-modal') summaryModal.classList.add('hidden'); });
-
-            mainMenuBtnScore.addEventListener('click', () => {
-                clearQuizState();
-                showView('mainMenu');
-            });
-            backToMenuFromQuizBtn.addEventListener('click', () => {
-                clearQuizState();
-                showView('mainMenu');
-            });
-            explainBtn.addEventListener('click', () => {
-                const question = currentQuiz.questions[currentQuestionIndex];
-                explanationContent.textContent = question.explanation;
-                explanationContainer.classList.remove('hidden');
-            });
-            summaryBtn.addEventListener('click', showSummaryDashboard);
-        }
-
-        // --- Initial Load ---
-        document.addEventListener('DOMContentLoaded', () => {
-            setupEventListeners();
-            if (loadUser()) {
-                const savedStateJSON = sessionStorage.getItem('cyberQuizSession');
-                if (savedStateJSON) {
-                    const savedState = JSON.parse(savedStateJSON);
-                    currentQuiz = quizzes.find(q => q.title === savedState.quizTitle);
-                    if (currentQuiz) {
-                        currentQuestionIndex = savedState.currentQuestionIndex;
-                        score = savedState.score;
-                        currentStreak = savedState.currentStreak;
-                        userAnswers = savedState.userAnswers;
-                        showView('quiz');
-                        displayQuestion();
-                        return;
-                    }
-                }
-                 showView('mainMenu');
-                 updateMainMenu();
-            } else {
-                showView('nameEntry');
-            }
-        });
-    </script>
-</body>
-</html>
+            { title: "Public Wi-Fi Safety", icon: "📶", questions: [ { image: "https://placehold.co/600x200/fef9c3/ca8a04?text=Public+Wi-Fi", question: "What is the main risk of using public Wi-Fi?", options: ["Your data can be intercepted by hackers", "It is usually very slow", "It costs money", "It drains your battery"], answer: "Your data can be intercepted by hackers", explanation: "Public Wi-Fi networks are often unsecured, allowing attackers on the same network to intercept your data." }, { image: "https://placehold.co/600x200/dcfce7/15803d?text=VPN+Shield", question: "What is a VPN (Virtual Private Network)?", options: ["A tool that encrypts your internet connection", "A public Wi-Fi network", "A type of internet browser", "A physical network cable"], answer: "A tool that encrypts your internet connection", explanation: "A VPN creates a secure, encrypted 'tunnel' for your internet traffic, protecting it from eavesdroppers, especially on public Wi-Fi." }, { image: "https://placehold.co/600x200/ecfdf5/059669?text=https://", question: "Which of these indicates a secure website connection?", options: ["The URL starts with https://", "The website has lots of images", "The URL starts with http://", "The website asks for your location"], answer: "The URL starts with https://", explanation: "HTTPS (Hypertext Transfer Protocol Secure) means the connection between your browser and the website is encrypted and secure." }, { image: "https://placehold.co/600x200/fee2e2/dc2626?text=Evil+Twin", question: "What is an 'Evil Twin' attack?", options: ["A fake Wi-Fi hotspot that mimics a legitimate one", "When someone looks exactly like you", "A type of computer virus", "Two routers interfering with each other"], answer: "A fake Wi-Fi hotspot that mimics a legitimate one", explanation: "Attackers set up fake Wi-Fi hotspots with familiar names (e.g., 'CoffeeShop_FreeWiFi') to trick you into connecting so they can steal your data." }, { image: "https://placehold.co/600x200/ffedd5/c2410c?text=Sensitive+Logins", question: "When using public Wi-Fi, you should avoid...", options: ["Logging into sensitive accounts like banking", "Checking the weather", "Browsing news

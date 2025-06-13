@@ -16,17 +16,22 @@
         .section-title { position: relative; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.25rem; font-weight: 700; color: #64ffda; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background-color: #64ffda; border-radius: 2px; }
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
-        .project-image-container {
-            transition: background-color 0.3s ease;
+        
+        .project-card {
+            background-color: #112240;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
-        .project-image-container:hover {
-            background-color: rgba(99, 255, 218, 0.1);
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
         }
-        .project-image-container img {
-            transition: opacity 0.3s ease;
-        }
-        .project-image-container:hover img {
-            opacity: 0.3;
+        .project-card-image {
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -86,66 +91,66 @@
     </header>
 
     <main class="container mx-auto px-6 lg:px-20 pt-32 pb-24">
-        <section id="personal-projects-list">
+        <section id="professional-projects-list">
             <h2 class="section-title">Professional Projects</h2>
             <p class="text-slate-400 text-lg mb-16 max-w-3xl">
-                Here is a showcase of the projects that I have ran throughout my career
+                Below is a selection of significant projects I have contributed to in a professional capacity. Due to confidentiality, detail has been restricted.
             </p>
-            
-            <div class="space-y-20">
-                
 
-                <!-- Project 1 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card">
+                    <a href="/projects/professional/cybersecurityquiz/">
+                        <img src="/images/imagecyberquiz.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x338/112240/64ffda?text=Cybersecurity+Quiz';" alt="Abstract cybersecurity quiz" class="project-card-image">
+                    </a>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-cyan-400 text-sm font-medium">Information Security Lead @ Resonate Group Ltd</p>
+                        <h3 class="text-xl font-bold text-slate-100 mt-1 mb-3 project-title">
+                            <a href="/projects/professional/cybersecurityquiz/" class="hover:text-cyan-400 transition-colors">Cyber Security Staff Training</a>
+                        </h3>
+                        <p class="text-slate-400 text-sm flex-grow">I created a web app to use as part of a security focussed company day I ran, where all users throughout the day came to test their skills and see if they could become a cyber hero!</p>
+                        <div class="mt-4 text-xs text-slate-500 font-medium">Completed: May 2025</div>
+                        <ul class="flex flex-wrap gap-2 mt-4 text-xs text-slate-300">
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">HTML</li>
+							<li class="bg-slate-700 py-1 px-3 rounded-full">Cybersecurity Training</li>
+							<li class="bg-slate-700 py-1 px-3 rounded-full">Overwelming Engagement</li>
 
-                    <div class="md:col-span-7">
-                        <p class="text-cyan-400 text-sm font-medium mb-1">June 2025</p>
-                        <h3 class="text-2xl font-bold text-slate-100 mb-4 hover:text-cyan-400 transition"><a href="/projects/professional/cybersecurityquiz/">Cyber Security Quiz</a></h3>
-                        <div class="bg-slate-800 p-6 rounded-md shadow-lg">
-                            <p class="text-slate-400">I created an app to use for by employer at the time, as part of a company day where all users throughout the day came to test their skills and see if they could become a cyber hero!</p>
-                        </div>
-                        <ul class="flex flex-wrap gap-3 mt-4 text-sm text-slate-300">
                         </ul>
-                         <div class="mt-4 flex space-x-4">
-                            <a href="/projects/professional/cybersecurityquiz/" class="text-slate-400 hover:text-cyan-400 transition text-2xl" aria-label="External Link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
                     </div>
-					<div class="md:col-span-5 md:order-last relative">
+                </div>
 
-                    </div>
-                <div class="md:col-span-5 relative">
-                         <a href="/projects/professional/cybersecurityquiz/" class="project-image-container block bg-cyan-900/50 rounded-md">
-                             <img src="/images/imagecyberquiz.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/112240/64ffda?text=Test+Your+Cyber+Skills+Here';" alt="Abstract image of code on a screen" class="w-full h-full object-cover rounded-md">
-                         </a>
-                    </div>
-                </div>
-                </div>
-				
-                <!-- Project 2 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                    <div class="md:col-span-7">
-                        <p class="text-cyan-400 text-sm font-medium mb-1">Date/Other info</p>
-                        <h3 class="text-2xl font-bold text-slate-100 mb-4 hover:text-cyan-400 transition"><a href="#">Homelab...</a></h3>
-                        <div class="bg-slate-800 p-6 rounded-md shadow-lg">
-                            <p class="text-slate-400">An into into the homelab projects</p>
-                        </div>
-                        <ul class="flex flex-wrap gap-3 mt-4 text-sm text-slate-300">
-                            <li>Immich</li>
-                            <li>Pi-hole</li>
-                            <li>Vaultwarden</li>
-                            <li>Outline</li>
+                <!-- Project Card 2 -->
+         <!--       <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2834&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x338/112240/64ffda?text=Cloud+Security';" alt="Abstract image representing cloud infrastructure" class="project-card-image">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-cyan-400 text-sm font-medium">Cloud Security Specialist @ CyberDefend Inc.</p>
+                        <h3 class="text-xl font-bold text-slate-100 mt-1 mb-3">Cloud Security Posture Management</h3>
+                        <p class="text-slate-400 text-sm flex-grow">Developed a CSPM program for a multi-cloud (AWS & Azure) environment. Scripted automated compliance checks and remediated critical misconfigurations, reducing cloud vulnerabilities by 95%.</p>
+                         <div class="mt-4 text-xs text-slate-500 font-medium">Completed: August 2022</div>
+                        <ul class="flex flex-wrap gap-2 mt-4 text-xs text-slate-300">
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">AWS Security Hub</li>
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">Azure</li>
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">Terraform</li>
                         </ul>
-                        <div class="mt-4 flex space-x-4">
-                            <a href="#" class="text-slate-400 hover:text-cyan-400 transition text-2xl" aria-label="GitHub Link"><i class="fab fa-github"></i></a>
-                            <a href="#" class="text-slate-400 hover:text-cyan-400 transition text-2xl" aria-label="External Link"><i class="fas fa-external-link-alt"></i></a>
-                        </div>
                     </div>
-                <div class="md:col-span-5 relative">
-                         <a href="#" class="project-image-container block bg-cyan-900/50 rounded-md">
-                             <img src="https://placehold.co/600x400/112240/64ffda?text=Project+Image" onerror="this.onerror=null;this.src='https://placehold.co/600x400/112240/64ffda?text=Project+Image';" alt="Abstract image of code on a screen" class="w-full h-full object-cover rounded-md">
-                         </a>
+                </div>  -->
+
+                <!-- Project Card 3 -->
+         <!--       <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1544890225-2fde0e66ea9c?q=80&w=2832&auto=format&fit=crop" onerror="this.onerror=null;this.src='https://placehold.co/600x338/112240/64ffda?text=Penetration+Test';" alt="Abstract image representing code and vulnerabilities" class="project-card-image">
+                     <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-cyan-400 text-sm font-medium">Penetration Tester @ SecureTech Solutions</p>
+                        <h3 class="text-xl font-bold text-slate-100 mt-1 mb-3">Red Team Simulation</h3>
+                        <p class="text-slate-400 text-sm flex-grow">Conducted internal and external penetration tests simulating a real-world adversary. My responsibilities included reconnaissance, exploitation, and privilege escalation.</p>
+                         <div class="mt-4 text-xs text-slate-500 font-medium">Completed: January 2022</div>
+                        <ul class="flex flex-wrap gap-2 mt-4 text-xs text-slate-300">
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">Metasploit</li>
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">Burp Suite</li>
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">Nmap</li>
+                            <li class="bg-slate-700 py-1 px-3 rounded-full">OWASP Top 10</li>
+                        </ul>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </section>

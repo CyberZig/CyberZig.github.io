@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Detail - David Eaton</title>
+    <title>Cyber Quiz - David Eaton</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
 <!-- Header -->
         <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect" id="header">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold text-white">DE.</a>
+                <a href="../../../" class="text-2xl font-bold text-white">DE.</a>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
                     <a href="#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
@@ -135,15 +135,13 @@
                 <div class="lg:col-span-8 xl:col-span-9">
                     <!-- Tab Navigation -->
                     <div class="border-b border-slate-700 mb-6">
-                        <div class="overflow-x-auto">
-                            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
-                                <button data-tab-target="#overview" class="tab-button active shrink-0 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg">Overview</button>
-                                <button data-tab-target="#challenge" class="tab-button shrink-0 whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">The Challenge</button>
-                                <button data-tab-target="#solution" class="tab-button shrink-0 whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">Solution</button>
-                                <button data-tab-target="#results" class="tab-button shrink-0 whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">Results</button>
-                            <!--    <button data-tab-target="#gallery" class="tab-button shrink-0 whitespace-nowrap py-4 px-1 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">Gallery</button> -->
-                            </nav>
-                        </div>
+                        <nav class="-mb-px flex flex-wrap" aria-label="Tabs">
+                            <button data-tab-target="#overview" class="tab-button active shrink-0 whitespace-nowrap py-4 px-3 border-b-2 font-medium text-lg">Overview</button>
+                            <button data-tab-target="#challenge" class="tab-button shrink-0 whitespace-nowrap py-4 px-3 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">The Challenge</button>
+                            <button data-tab-target="#solution" class="tab-button shrink-0 whitespace-nowrap py-4 px-3 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">Solution</button>
+                            <button data-tab-target="#results" class="tab-button shrink-0 whitespace-nowrap py-4 px-3 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">Results</button>
+                            <!-- <button data-tab-target="#gallery" class="tab-button shrink-0 whitespace-nowrap py-4 px-3 border-b-2 border-transparent font-medium text-lg text-slate-400 hover:text-slate-200">Gallery</button> -->
+                        </nav>
                     </div>
 
                     <!-- Tab Content Panels -->
@@ -211,17 +209,20 @@
             tab.addEventListener('click', () => {
                 const target = document.querySelector(tab.dataset.tabTarget);
 
+                // Hide all tab content
                 tabContents.forEach(tc => {
                     tc.classList.remove('active');
                 });
+                // Show the target tab content
                 target.classList.add('active');
 
+                // Update tab button styles
                 tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.classList.add('text-slate-400', 'hover:text-slate-200');
+                    t.classList.remove('active', 'text-cyan-400');
+                    t.classList.add('text-slate-400', 'hover:text-slate-200', 'border-transparent');
                 });
-                tab.classList.add('active');
-                tab.classList.remove('text-slate-400', 'hover:text-slate-200');
+                tab.classList.add('active', 'text-cyan-400');
+                tab.classList.remove('text-slate-400', 'hover:text-slate-200', 'border-transparent');
             });
         });
 
@@ -235,4 +236,3 @@
     </script>
 </body>
 </html>
-

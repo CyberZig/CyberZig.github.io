@@ -59,7 +59,7 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        /* Premium cards matching homepage */
+        /* Premium cards matching homepage with exact fluid lift interaction */
         .executive-panel {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 15, 30, 0.95) 100%);
             border: 1px solid rgba(59, 130, 246, 0.08);
@@ -67,29 +67,15 @@
             box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.6);
         }
         .executive-panel:hover {
-            transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.25);
         }
-        /* Clean under-titles in rich corporate blue */
-        .section-title {
-            position: relative;
-            padding-bottom: 0.75rem;
-            margin-bottom: 2.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.025em;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: #3b82f6;
-            border-radius: 9999px;
+        /* Gradient titles matching homepage styles */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
@@ -107,18 +93,19 @@
                 <a href="/#qualifications" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">Qualifications</a>
                 <a href="/experience/" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">Experience</a>
                 <div class="relative group">
-                    <a class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition cursor-pointer flex items-center">
+                    <a class="text-xs font-semibold uppercase tracking-wider text-blue-400 transition cursor-pointer flex items-center">
                         Projects <i class="fas fa-chevron-down text-[10px] ml-1.5 text-blue-400"></i>
                     </a>
                     <div class="absolute left-0 top-full pt-2 w-max hidden group-hover:block z-50">
                         <div class="bg-[#0b1329] rounded-lg w-48 shadow-2xl py-1.5 border border-white/5">
-                            <a href="/projects/professional/" class="block px-4 py-2 text-xs text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition">Professional Projects</a>
+                            <a href="/projects/professional/" class="block px-4 py-2 text-xs text-blue-400 bg-blue-500/5 transition">Professional Projects</a>
                             <a href="/projects/personal/" class="block px-4 py-2 text-xs text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition">Personal Ventures</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="/contact/" class="hidden md:block text-xs font-bold uppercase tracking-wider border border-blue-500/30 hover:border-blue-400 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 py-2.5 px-5 rounded-lg transition duration-300">Get In Touch</a>
+            <!-- Unified Active Get In Touch Button -->
+            <a href="/contact/" class="hidden md:block text-xs font-bold uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-5 rounded-lg transition duration-300 shadow-lg shadow-blue-600/20">Get In Touch</a>
             <button id="mobile-menu-button" class="md:hidden text-blue-400 focus:outline-none"><i class="fas fa-bars fa-xl"></i></button>
         </nav>
 
@@ -128,12 +115,12 @@
             <a href="/#qualifications" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">Qualifications</a>
             <a href="/experience/" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">Experience</a>
             <div>
-                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center text-xs font-semibold tracking-wider uppercase hover:text-blue-400">
+                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center text-xs font-semibold tracking-wider uppercase text-blue-400">
                     <span>Projects</span>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300 rotate-180"></i>
                 </button>
-                <div id="mobile-projects-submenu" class="hidden pl-4 mt-2 space-y-2 border-l border-white/5">
-                    <a href="/projects/professional/" class="block text-xs text-slate-400 hover:text-blue-400 mobile-nav-link">Professional Projects</a>
+                <div id="mobile-projects-submenu" class="pl-4 mt-2 space-y-2 border-l border-white/5">
+                    <a href="/projects/professional/" class="block text-xs text-blue-400 mobile-nav-link">Professional Projects</a>
                     <a href="/projects/personal/" class="block text-xs text-slate-400 hover:text-blue-400 mobile-nav-link">Personal Ventures</a>
                 </div>
             </div>
@@ -142,9 +129,9 @@
     </header>
 
     <main class="container mx-auto px-6 lg:px-20 pt-32 pb-24 relative z-10">
-        <section>
-            <h2 class="section-title">Professional Projects</h2>
-            <p class="text-slate-300 text-base max-w-3xl mb-12 leading-relaxed">
+        <section class="py-12">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight gradient-text mb-4">Professional Projects</h2>
+            <p class="text-slate-400 text-sm md:text-base max-w-3xl mb-12 leading-relaxed">
                 Below is a selection of significant projects I have contributed to in a professional capacity. Due to confidentiality, detail has been restricted.
             </p>
 
@@ -156,16 +143,16 @@
                         <div class="flex-1">
                             <p class="text-blue-400 text-[10px] font-bold uppercase tracking-wider mb-2">Information Security Lead @ Resonate Group Ltd</p>
                             <h3 class="text-xl font-bold text-slate-100 mb-3">Cyber Security Staff Training</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
                                 I created a web app to use as part of a security focussed company day I ran, where all users throughout the day came to test their skills and see if they could become a cyber hero!
                             </p>
                         </div>
                         <div>
                             <p class="text-slate-500 text-xs mb-3"><i class="far fa-calendar-alt mr-1"></i>Completed: May 2025</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">HTML</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Cybersecurity Training</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Overwhelming Engagement</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">HTML</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Cybersecurity Training</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Overwhelming Engagement</span>
                             </div>
                         </div>
                     </div>

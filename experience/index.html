@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,178 +9,182 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a192f;
-            color: #ccd6f6;
+            background-color: #030712;
+            color: #d1d5db;
         }
-
-        .glass-effect { background: rgba(13, 30, 51, 0.65); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-
-        .section-title { position: relative; padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2.25rem; font-weight: 700; color: #06b6d4; }
-        .section-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 4px; background-color: #06b6d4; border-radius: 2px; }
-
-        /* Interactive Tech-Mesh & Aurora Backing (Matches Homepage) */
-        .aurora-wrapper {
+        /* Sophisticated Executive Blue Backlit Glow & Micro-Texture Overlay */
+        .executive-bg {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background-color: #0a192f;
-            background-image: 
-                radial-gradient(rgba(6, 182, 212, 0.15) 1.2px, transparent 0),
-                radial-gradient(rgba(29, 78, 216, 0.1) 1.2px, transparent 0);
-            background-size: 48px 48px;
-            background-position: 0 0, 24px 24px;
+            background-color: #030712;
+            background-image:
+                radial-gradient(rgba(255, 255, 255, 0.012) 1.5px, transparent 0),
+                radial-gradient(rgba(59, 130, 246, 0.01) 1.5px, transparent 0);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
             overflow: hidden;
         }
-        .aurora-glow-1 {
+        .executive-bg::before {
+            content: '';
             position: absolute;
-            width: 75vw;
-            height: 75vw;
-            max-width: 1000px;
-            max-height: 1000px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(10, 25, 47, 0) 70%);
-            top: -15%;
-            left: -15%;
-            border-radius: 50%;
-            animation: drift 25s infinite alternate ease-in-out;
-        }
-        .aurora-glow-2 {
-            position: absolute;
-            width: 85vw;
-            height: 85vw;
+            width: 80vw;
+            height: 80vw;
             max-width: 1200px;
-            max-height: 1200px;
-            background: radial-gradient(circle, rgba(29, 78, 216, 0.1) 0%, rgba(10, 25, 47, 0) 70%);
-            bottom: -15%;
-            right: -15%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(29, 78, 216, 0.03) 50%, rgba(3, 7, 18, 0) 70%);
+            top: -20%;
+            right: -10%;
             border-radius: 50%;
-            animation: drift 30s infinite alternate-reverse ease-in-out;
+            pointer-events: none;
         }
-        .aurora-glow-3 {
+        .executive-bg::after {
+            content: '';
             position: absolute;
             width: 60vw;
             height: 60vw;
-            max-width: 800px;
-            max-height: 800px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, rgba(10, 25, 47, 0) 70%);
-            top: 40%;
-            right: 15%;
+            max-width: 900px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.04) 0%, rgba(37, 99, 235, 0.01) 40%, rgba(3, 7, 18, 0) 60%);
+            bottom: -10%;
+            left: -10%;
             border-radius: 50%;
-            animation: drift-slow 40s infinite alternate ease-in-out;
+            pointer-events: none;
         }
-        @keyframes drift {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(4%, 6%) scale(1.08); }
+        /* High-end executive header glass blur */
+        .glass-hud {
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        @keyframes drift-slow {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-3%, -5%) scale(1.05); }
+        /* Premium cards matching homepage */
+        .executive-panel {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 15, 30, 0.95) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.6);
         }
-
-        .experience-card {
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .executive-panel:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.2);
+        }
+        /* Clean under-titles in rich corporate blue */
+        .section-title {
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.025em;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: #3b82f6;
+            border-radius: 9999px;
         }
     </style>
 </head>
-
 <body class="antialiased">
-    <div class="aurora-wrapper">
-        <div class="aurora-glow-1"></div>
-        <div class="aurora-glow-2"></div>
-        <div class="aurora-glow-3"></div>
-    </div>
+    <div class="executive-bg"></div>
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect" id="header">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-hud" id="header">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../" class="text-2xl font-bold text-white">DE.</a>
+            <div class="flex items-center space-x-3">
+                <a href="../" class="text-xl font-bold tracking-tight text-white hover:text-blue-400 transition duration-300">DAVID EATON</a>
+            </div>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="../#about" class="text-slate-300 hover:text-cyan-400 transition">About</a>
-                <a href="../#skills" class="text-slate-300 hover:text-cyan-400 transition">Skills</a>
-                <a href="../#qualifications" class="text-slate-300 hover:text-cyan-400 transition">Qualifications</a>
-                <a href="#" class="text-cyan-400 font-bold">Experience</a>
-                <!-- Projects Dropdown -->
+                <a href="../#about" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">About</a>
+                <a href="../#skills" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">Skills</a>
+                <a href="../#qualifications" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">Qualifications</a>
+                <a href="#" class="text-xs font-semibold uppercase tracking-wider text-blue-400 transition">Experience</a>
                 <div class="relative group">
-                    <a class="text-slate-300 hover:text-cyan-400 transition cursor-pointer flex items-center">
-                        Projects <i class="fas fa-chevron-down text-xs ml-2"></i>
+                    <a class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition cursor-pointer flex items-center">
+                        Projects <i class="fas fa-chevron-down text-[10px] ml-1.5 text-blue-400"></i>
                     </a>
                     <div class="absolute left-0 top-full pt-2 w-max hidden group-hover:block z-50">
-                        <div class="bg-[#112240] rounded-md w-48 shadow-lg py-1 border border-slate-700/50">
-                            <a href="../projects/professional/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700/50 hover:text-cyan-400">Professional</a>
-                            <a href="../projects/personal/" class="block px-4 py-2 text-sm text-slate-300 hover:bg-slate-700/50 hover:text-cyan-400">Personal</a>
+                        <div class="bg-[#0b1329] rounded-lg w-48 shadow-2xl py-1.5 border border-white/5">
+                            <a href="../projects/professional/" class="block px-4 py-2 text-xs text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition">Professional Projects</a>
+                            <a href="../projects/personal/" class="block px-4 py-2 text-xs text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition">Personal Ventures</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="../contact/" class="hidden md:block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg transition">Get In Touch</a>
-            <button id="mobile-menu-button" class="md:hidden text-white"><i class="fas fa-bars fa-2x"></i></button>
+            <a href="../contact/" class="hidden md:block text-xs font-bold uppercase tracking-wider border border-blue-500/30 hover:border-blue-400 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 py-2.5 px-5 rounded-lg transition duration-300">Get In Touch</a>
+            <button id="mobile-menu-button" class="md:hidden text-blue-400 focus:outline-none"><i class="fas fa-bars fa-xl"></i></button>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <a href="../#about" class="block py-2 px-4 text-sm hover:bg-[#112240] mobile-nav-link">About</a>
-            <a href="../#skills" class="block py-2 px-4 text-sm hover:bg-[#112240] mobile-nav-link">Skills</a>
-            <a href="../#qualifications" class="block py-2 px-4 text-sm hover:bg-[#112240] mobile-nav-link">Qualifications</a>
-            <a href="#" class="block py-2 px-4 text-sm bg-cyan-500/10 text-cyan-400">Experience</a>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 px-6 py-4 bg-[#080d1a] space-y-4 shadow-2xl">
+            <a href="../#about" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">About</a>
+            <a href="../#skills" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">Skills</a>
+            <a href="../#qualifications" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">Qualifications</a>
+            <a href="#" class="block text-xs font-semibold tracking-wider uppercase text-blue-400">Experience</a>
             <div>
-                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center py-2 px-4 text-sm hover:bg-[#112240]">
+                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center text-xs font-semibold tracking-wider uppercase hover:text-blue-400">
                     <span>Projects</span>
                     <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
                 </button>
-                <div id="mobile-projects-submenu" class="hidden pl-4">
-                    <a href="../projects/professional/" class="block py-2 px-4 text-sm hover:bg-[#112240] mobile-nav-link">Professional</a>
-                    <a href="../projects/personal/" class="block py-2 px-4 text-sm hover:bg-[#112240] mobile-nav-link">Personal</a>
+                <div id="mobile-projects-submenu" class="hidden pl-4 mt-2 space-y-2 border-l border-white/5">
+                    <a href="../projects/professional/" class="block text-xs text-slate-400 hover:text-blue-400 mobile-nav-link">Professional Projects</a>
+                    <a href="../projects/personal/" class="block text-xs text-slate-400 hover:text-blue-400 mobile-nav-link">Personal Ventures</a>
                 </div>
             </div>
-            <a href="../contact/" class="w-full text-left block py-2 px-4 text-sm hover:bg-[#112240]">Get In Touch</a>
+            <a href="../contact/" class="block text-xs font-bold text-blue-400 uppercase pt-2">Get In Touch</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 lg:px-20 pt-32 pb-24 relative z-10">
         <section id="experience" class="py-12 md:py-24">
             <h2 class="section-title">Professional Experience</h2>
-            
-            <div class="relative border-l-2 border-cyan-500/40 ml-4 md:ml-6 mt-12 space-y-12">
-                
+
+            <div class="relative border-l-2 border-blue-500/30 ml-4 md:ml-6 mt-12 space-y-12">
+
                 <!-- Job 1 -->
                 <div class="relative pl-8 md:pl-10">
-                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 bg-cyan-500 rounded-full border-4 border-[#0a192f] shadow-lg shadow-cyan-500/50"></div>
-                    
-                    <div class="experience-card bg-[#112240]/95 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-xl">
-                        <span class="inline-block bg-cyan-500/10 text-cyan-400 text-xs font-semibold px-2.5 py-1 rounded-md mb-3">CURRENT ROLE</span>
+                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 bg-blue-500 rounded-full border-4 border-[#030712] shadow-lg shadow-blue-500/50"></div>
+
+                    <div class="executive-panel p-6 md:p-8 rounded-xl">
+                        <span class="inline-block bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md mb-3">Current Role</span>
                         <h3 class="text-2xl font-bold text-slate-100">Information Security Lead</h3>
-                        <p class="text-lg text-cyan-400 font-medium mb-4">Resonate Group Ltd | Aug 2022 - Present</p>
-                        
-                        <div class="text-slate-300 space-y-4 mb-6 leading-relaxed">
+                        <p class="text-base text-blue-400 font-medium mb-4">Resonate Group Ltd | Aug 2022 - Present</p>
+
+                        <div class="text-slate-300 space-y-4 mb-6 leading-relaxed text-sm">
                             <p>My role at Resonate is Information Security Lead. I report directly to the CIO and work closely with the Head of Technical Operations to drive compliance and a security mindset across the business.</p>
                             <p>My core operations include:</p>
                         </div>
-                        
-                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-slate-300">
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Maintaining ISO27001 compliance standards</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Managing Cyber Essentials Plus audit cycles</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Advising CIO and CTO on organizational risks</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Upgrading security controls over IT infrastructure</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Supporting product security postures for OT systems</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Directing enterprise risk registers & policies</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Assessing emerging threats via threat intel streams</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Organizing internal & external audit campaigns</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Developing comprehensive security training for staff</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Auditing third-party supply chain risks</li>
+
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-slate-300 text-sm">
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Maintaining ISO27001 compliance standards</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Managing Cyber Essentials Plus audit cycles</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Advising CIO and CTO on organizational risks</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Upgrading security controls over IT infrastructure</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Supporting product security postures for OT systems</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Directing enterprise risk registers & policies</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Assessing emerging threats via threat intel streams</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Organizing internal & external audit campaigns</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Developing comprehensive security training for staff</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Auditing third-party supply chain risks</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Job 2 -->
                 <div class="relative pl-8 md:pl-10">
-                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 bg-cyan-500/60 rounded-full border-4 border-[#0a192f] shadow-lg"></div>
-                    
-                    <div class="experience-card bg-[#112240]/95 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-xl">
+                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 bg-blue-500/60 rounded-full border-4 border-[#030712] shadow-lg"></div>
+
+                    <div class="executive-panel p-6 md:p-8 rounded-xl">
                         <h3 class="text-2xl font-bold text-slate-100">Information Security Analyst</h3>
-                        <p class="text-lg text-cyan-400 font-medium mb-4">Acorn Insurance & Financial Services Ltd | Nov 2021 - Aug 2022</p>
-                        
-                        <div class="text-slate-300 space-y-4 leading-relaxed">
+                        <p class="text-base text-blue-400 font-medium mb-4">Acorn Insurance & Financial Services Ltd | Nov 2021 - Aug 2022</p>
+
+                        <div class="text-slate-300 space-y-4 leading-relaxed text-sm">
                             <p>I previously worked as an Information Security Analyst for Acorn Insurance. I worked as part of the InfoSec team in communication with the IT and Infrastructure teams daily.</p>
                             <p>My core responsibilities included reviewing new and existing supplier due diligence on a regular basis to ensure suppliers maintain a baseline for Acorn Insurance risk appetite, reviewing and implementing new systems alongside the relevant teams in relation to information security, and regularly updating policy documentation upon review.</p>
                             <p>I was responsible for researching and evaluating emerging cyber security threats and how to manage and mitigate them. Reviewing alerts on a number of critical systems is a daily task to ensure unauthorised or suspicious activity is investigated and resolved immediately to ensure the integrity of Acorn Insurance systems.</p>
@@ -192,40 +195,39 @@
 
                 <!-- Job 3 -->
                 <div class="relative pl-8 md:pl-10">
-                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 bg-cyan-500/60 rounded-full border-4 border-[#0a192f] shadow-lg"></div>
-                    
-                    <div class="experience-card bg-[#112240]/95 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-xl">
+                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 bg-blue-500/60 rounded-full border-4 border-[#030712] shadow-lg"></div>
+
+                    <div class="executive-panel p-6 md:p-8 rounded-xl">
                         <h3 class="text-2xl font-bold text-slate-100">Network Engineer</h3>
-                        <p class="text-lg text-cyan-400 font-medium mb-4">Safetynet Solutions Ltd | Sep 2016 - Nov 2021</p>
-                        
-                        <div class="text-slate-300 space-y-4 mb-6 leading-relaxed">
+                        <p class="text-base text-blue-400 font-medium mb-4">Safetynet Solutions Ltd | Sep 2016 - Nov 2021</p>
+
+                        <div class="text-slate-300 space-y-4 mb-6 leading-relaxed text-sm">
                             <p>Safetynet Solutions is a SME with 50 – 100 employees across 2 offices that supplies in-house Visitor Management solutions to customers from the education system to tenanted buildings across several countries.</p>
                             <p>My role developed massively over the course of 5 years starting from helpdesk support technician to Network Engineer, which laid a robust foundation for my specialisation in information security.</p>
                             <p>Key focus areas included:</p>
                         </div>
-                        
-                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-slate-300">
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Responsible for internal IT and infrastructure security</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Providing 3rd-line customer support resolution channels</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Maintaining support desk SLA compliance guidelines</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Supporting software teams on complex software builds</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Carrying out remote system installs for clients</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>On-premise deployments of server and network units</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Maintaining SQL Server instances & cloud storage targets</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Managing core corporate SaaS and telecommunication assets</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Maintaining Cyber Essentials alignments across divisions</li>
-                            <li class="flex items-start"><i class="fas fa-check text-cyan-500 mt-1 mr-3 text-sm flex-shrink-0"></i>Evaluating upstream suppliers against control frameworks</li>
+
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-slate-300 text-sm">
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Responsible for internal IT and infrastructure security</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Providing 3rd-line customer support resolution channels</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Maintaining support desk SLA compliance guidelines</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Supporting software teams on complex software builds</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Carrying out remote system installs for clients</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>On-premise deployments of server and network units</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Maintaining SQL Server instances & cloud storage targets</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Managing core corporate SaaS and telecommunication assets</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Maintaining Cyber Essentials alignments across divisions</li>
+                            <li class="flex items-start"><i class="fas fa-check text-blue-400 mt-0.5 mr-3 text-xs flex-shrink-0"></i>Evaluating upstream suppliers against control frameworks</li>
                         </ul>
                     </div>
                 </div>
-
             </div>
         </section>
     </main>
 
-    <footer class="text-center py-6 text-slate-500 text-sm relative z-10">
+    <footer class="text-center py-10 text-slate-500 text-xs border-t border-white/5 mt-12 relative z-10">
         <p>Designed & Built by David Eaton</p>
-        <p>&copy; 2025. All rights reserved.</p>
+        <p class="mt-1">&copy; 2026. All rights reserved.</p>
     </footer>
 
     <script>
@@ -234,12 +236,10 @@
         const mobileProjectsButton = document.getElementById('mobile-projects-button');
         const mobileProjectsSubmenu = document.getElementById('mobile-projects-submenu');
 
-        // Toggle main mobile menu
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Toggle projects submenu
         mobileProjectsButton.addEventListener('click', (e) => {
             e.stopPropagation();
             mobileProjectsSubmenu.classList.toggle('hidden');
@@ -247,7 +247,6 @@
             icon.classList.toggle('rotate-180');
         });
 
-        // Hide main menu when a link is clicked
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');

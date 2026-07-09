@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -67,29 +67,14 @@
             box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.6);
         }
         .executive-panel:hover {
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.15);
         }
-        /* Clean under-titles in rich corporate blue */
-        .section-title {
-            position: relative;
-            padding-bottom: 0.75rem;
-            margin-bottom: 2.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.025em;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            background-color: #3b82f6;
-            border-radius: 9999px;
+        /* Gradient titles matching homepage styles */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
@@ -118,7 +103,8 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="hidden md:block text-xs font-bold uppercase tracking-wider border border-blue-500/30 hover:border-blue-400 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 py-2.5 px-5 rounded-lg transition duration-300">Get In Touch</a>
+            <!-- Synced Homepage 'Active State' Get In Touch Style Button -->
+            <a href="#" class="hidden md:block text-xs font-bold uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-5 rounded-lg transition duration-300 shadow-lg shadow-blue-600/20">Get In Touch</a>
             <button id="mobile-menu-button" class="md:hidden text-blue-400 focus:outline-none"><i class="fas fa-bars fa-xl"></i></button>
         </nav>
 
@@ -143,9 +129,9 @@
 
     <main class="min-h-screen flex flex-col items-center justify-center p-6 pt-32 pb-24 relative z-10">
         <div class="w-full max-w-2xl">
-            <div class="text-center">
-                 <h2 class="section-title inline-block">Contact Me</h2>
-                 <p class="text-slate-300 text-base max-w-2xl mx-auto mb-12 leading-relaxed">
+            <div class="text-center mb-10">
+                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight gradient-text mb-4">Contact Me</h2>
+                 <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
                     Have a question or want to work together? Fill out the form below, and I'll get back to you as soon as possible.
                 </p>
             </div>
@@ -156,16 +142,16 @@
                     <!-- Honeypot Field for Bot Protection -->
                     <input type="text" name="_gotcha" style="display:none">
                     <div>
-                        <label for="name" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Full Name</label>
-                        <input type="text" name="name" id="name" required class="w-full bg-[#030712] border border-white/10 rounded-lg py-3 px-4 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/50 transition duration-200 text-sm">
+                        <label for="name" class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Full Name</label>
+                        <input type="text" name="name" id="name" required class="w-full bg-[#030712]/60 border border-white/10 rounded-lg py-3 px-4 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition duration-200 text-sm">
                     </div>
                     <div>
-                        <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Email Address</label>
-                        <input type="email" name="email" id="email" required class="w-full bg-[#030712] border border-white/10 rounded-lg py-3 px-4 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/50 transition duration-200 text-sm">
+                        <label for="email" class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Email Address</label>
+                        <input type="email" name="email" id="email" required class="w-full bg-[#030712]/60 border border-white/10 rounded-lg py-3 px-4 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition duration-200 text-sm">
                     </div>
                     <div>
-                        <label for="message" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Message</label>
-                        <textarea name="message" id="message" rows="6" required class="w-full bg-[#030712] border border-white/10 rounded-lg py-3 px-4 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/50 transition duration-200 text-sm"></textarea>
+                        <label for="message" class="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Message</label>
+                        <textarea name="message" id="message" rows="6" required class="w-full bg-[#030712]/60 border border-white/10 rounded-lg py-3 px-4 text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 focus:border-blue-500/50 transition duration-200 text-sm"></textarea>
                     </div>
                     <div>
                         <button type="submit" class="w-full text-xs font-bold uppercase tracking-wider border border-blue-500/30 hover:border-blue-400 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 py-3.5 px-6 rounded-lg transition duration-300">
@@ -176,11 +162,11 @@
             </div>
 
             <div class="mt-12 text-center">
-                 <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Or connect with me:</p>
+                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Or connect with me</p>
                  <div class="flex justify-center space-x-6 mt-4">
-                    <a href="https://github.com/CyberZig" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 text-2xl transition transform hover:-translate-y-1"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/david-eaton-9833aa140/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 text-2xl transition transform hover:-translate-y-1"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://x.com/davidziggyeaton" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 text-2xl transition transform hover:-translate-y-1"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://github.com/CyberZig" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 text-xl transition transform hover:-translate-y-1 duration-300"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/david-eaton-9833aa140/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 text-xl transition transform hover:-translate-y-1 duration-300"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://x.com/davidziggyeaton" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-blue-400 text-xl transition transform hover:-translate-y-1 duration-300"><i class="fab fa-x-twitter"></i></a>
                 </div>
             </div>
         </div>

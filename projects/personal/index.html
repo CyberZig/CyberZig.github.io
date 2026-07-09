@@ -16,6 +16,7 @@
             background-color: #030712;
             color: #d1d5db;
         }
+        /* Sophisticated Executive Blue Backlit Glow & Micro-Texture Overlay */
         .executive-bg {
             position: fixed;
             inset: 0;
@@ -52,11 +53,13 @@
             border-radius: 50%;
             pointer-events: none;
         }
+        /* High-end executive header glass blur */
         .glass-hud {
             background: rgba(3, 7, 18, 0.75);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
+        /* Premium cards matching homepage with restored translate interaction */
         .executive-panel {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(10, 15, 30, 0.95) 100%);
             border: 1px solid rgba(59, 130, 246, 0.08);
@@ -64,28 +67,15 @@
             box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.6);
         }
         .executive-panel:hover {
-            transform: translateY(-4px);
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.25);
         }
-        .section-title {
-            position: relative;
-            padding-bottom: 0.75rem;
-            margin-bottom: 2.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.025em;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: #3b82f6;
-            border-radius: 9999px;
+        /* Gradient titles matching homepage styles */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
@@ -103,18 +93,18 @@
                 <a href="/#qualifications" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">Qualifications</a>
                 <a href="/experience/" class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition">Experience</a>
                 <div class="relative group">
-                    <a class="text-xs font-semibold uppercase tracking-wider text-slate-300 hover:text-blue-400 transition cursor-pointer flex items-center">
+                    <a class="text-xs font-semibold uppercase tracking-wider text-blue-400 transition cursor-pointer flex items-center">
                         Projects <i class="fas fa-chevron-down text-[10px] ml-1.5 text-blue-400"></i>
                     </a>
                     <div class="absolute left-0 top-full pt-2 w-max hidden group-hover:block z-50">
                         <div class="bg-[#0b1329] rounded-lg w-48 shadow-2xl py-1.5 border border-white/5">
                             <a href="/projects/professional/" class="block px-4 py-2 text-xs text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition">Professional Projects</a>
-                            <a href="/projects/personal/" class="block px-4 py-2 text-xs text-slate-300 hover:bg-blue-500/10 hover:text-blue-400 transition">Personal Ventures</a>
+                            <a href="/projects/personal/" class="block px-4 py-2 text-xs text-blue-400 bg-blue-500/5 transition">Personal Ventures</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="/contact/" class="hidden md:block text-xs font-bold uppercase tracking-wider border border-blue-500/30 hover:border-blue-400 bg-blue-500/5 hover:bg-blue-500/10 text-blue-400 py-2.5 px-5 rounded-lg transition duration-300">Get In Touch</a>
+            <a href="/contact/" class="hidden md:block text-xs font-bold uppercase tracking-wider bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-5 rounded-lg transition duration-300 shadow-lg shadow-blue-600/20">Get In Touch</a>
             <button id="mobile-menu-button" class="md:hidden text-blue-400 focus:outline-none"><i class="fas fa-bars fa-xl"></i></button>
         </nav>
 
@@ -124,13 +114,13 @@
             <a href="/#qualifications" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">Qualifications</a>
             <a href="/experience/" class="block text-xs font-semibold tracking-wider uppercase hover:text-blue-400 mobile-nav-link">Experience</a>
             <div>
-                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center text-xs font-semibold tracking-wider uppercase hover:text-blue-400">
+                <button id="mobile-projects-button" class="w-full text-left flex justify-between items-center text-xs font-semibold tracking-wider uppercase text-blue-400">
                     <span>Projects</span>
-                    <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                    <i class="fas fa-chevron-down text-xs transition-transform duration-300 rotate-180"></i>
                 </button>
-                <div id="mobile-projects-submenu" class="hidden pl-4 mt-2 space-y-2 border-l border-white/5">
+                <div id="mobile-projects-submenu" class="pl-4 mt-2 space-y-2 border-l border-white/5">
                     <a href="/projects/professional/" class="block text-xs text-slate-400 hover:text-blue-400 mobile-nav-link">Professional Projects</a>
-                    <a href="/projects/personal/" class="block text-xs text-slate-400 hover:text-blue-400 mobile-nav-link">Personal Ventures</a>
+                    <a href="/projects/personal/" class="block text-xs text-blue-400 mobile-nav-link">Personal Ventures</a>
                 </div>
             </div>
             <a href="/contact/" class="block text-xs font-bold text-blue-400 uppercase pt-2">Get In Touch</a>
@@ -138,15 +128,13 @@
     </header>
 
     <main class="container mx-auto px-6 lg:px-20 pt-32 pb-24 relative z-10">
-        <section>
-            <h2 class="section-title">Personal Ventures - WIP</h2>
-            <p class="text-slate-300 text-base max-w-3xl mb-12 leading-relaxed">
+        <section class="py-12">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight gradient-text mb-4">Personal Ventures - WIP</h2>
+            <p class="text-slate-400 text-sm md:text-base max-w-3xl mb-12 leading-relaxed">
                 A showcase of personal projects, from my homelab and networking developments to development of software applications. This page is a work in progress and is not yet complete.
             </p>
 
-            <!-- 3 columns on large screens, 2 on medium, 1 on mobile -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Personal Project Card 1 -->
                 <a href="https://davidziggyeaton.co.uk" target="_blank" rel="noopener noreferrer" class="block">
                     <div class="executive-panel p-6 rounded-xl flex flex-col h-full">
                         <div class="flex-1">
@@ -154,22 +142,21 @@
                                 <i class="fas fa-server fa-xl"></i>
                             </div>
                             <h3 class="text-xl font-bold text-slate-100 mb-2">Homelab Journey</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
                                 Documenting my homelab setup, from network infrastructure and server builds to virtualisation and security testing environments.
                             </p>
                         </div>
                         <div>
                             <p class="text-slate-500 text-xs mb-3"><i class="far fa-calendar-alt mr-1"></i>Ongoing</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Homelab</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Networking</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Virtualisation</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Homelab</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Networking</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Virtualisation</span>
                             </div>
                         </div>
                     </div>
                 </a>
 
-                <!-- Personal Project Card 2 -->
                 <a href="https://davidziggyeaton.co.uk" target="_blank" rel="noopener noreferrer" class="block">
                     <div class="executive-panel p-6 rounded-xl flex flex-col h-full">
                         <div class="flex-1">
@@ -177,22 +164,21 @@
                                 <i class="fas fa-blog fa-xl"></i>
                             </div>
                             <h3 class="text-xl font-bold text-slate-100 mb-2">Security Blog</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
                                 A collection of security-focused write-ups, covering threat analysis, tool walkthroughs, and insights from my experience in the field.
                             </p>
                         </div>
                         <div>
                             <p class="text-slate-500 text-xs mb-3"><i class="far fa-calendar-alt mr-1"></i>Ongoing</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Blog</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Cybersecurity</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Write-ups</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Blog</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Cybersecurity</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Write-ups</span>
                             </div>
                         </div>
                     </div>
                 </a>
 
-                <!-- Personal Project Card 3 -->
                 <a href="https://davidziggyeaton.co.uk" target="_blank" rel="noopener noreferrer" class="block">
                     <div class="executive-panel p-6 rounded-xl flex flex-col h-full">
                         <div class="flex-1">
@@ -200,16 +186,16 @@
                                 <i class="fas fa-code fa-xl"></i>
                             </div>
                             <h3 class="text-xl font-bold text-slate-100 mb-2">Software Projects</h3>
-                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">
                                 Personal software development projects, including web applications, automation tools, and other coding ventures.
                             </p>
                         </div>
                         <div>
                             <p class="text-slate-500 text-xs mb-3"><i class="far fa-calendar-alt mr-1"></i>Ongoing</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Development</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Web Apps</span>
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">Automation</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Development</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Web Apps</span>
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/10">Automation</span>
                             </div>
                         </div>
                     </div>

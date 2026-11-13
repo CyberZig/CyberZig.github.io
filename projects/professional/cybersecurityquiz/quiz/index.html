@@ -1,575 +1,1026 @@
-<!DOCTYPE html>
-<html lang="en" class="h-full">
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Quiz Hub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .quiz-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .quiz-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .option-btn {
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-        .option-btn:hover:not(:disabled) {
-            transform: scale(1.02);
-        }
-        .option-btn.selected {
-            background-color: #4f46e5; /* indigo-600 */
-            color: white;
-            box-shadow: 0 0 0 2px #4f46e5;
-        }
-        .option-btn.correct {
-            background-color: #22c55e;
-            color: white;
-        }
-        .option-btn.incorrect {
-            background-color: #ef4444;
-            color: white;
-        }
-        .progress-bar-container {
-            height: 10px;
-            background-color: #e5e7eb;
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            background-color: #4f46e5; /* indigo-600 */
-            transition: width 0.5s ease-in-out;
-            border-radius: 9999px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: #e0e7ff; /* indigo-100 */
-            color: #3730a3; /* indigo-800 */
-            padding: 4px 12px;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            border: 1px solid #c7d2fe; /* indigo-300 */
-        }
-        .badge .icon {
-            margin-right: 6px;
-        }
-        @keyframes toast-in {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        #toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: toast-in 0.5s forwards;
-            z-index: 100;
-        }
-        .question-image {
-            height: 150px;
-            width: 100%;
-            object-fit: cover;
-            border-radius: 1rem;
-            margin-bottom: 1.5rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InfoSec Training &amp; Awareness Academy</title>
+<script>
+(function(){var t=null;try{t=localStorage.getItem('infosecAcademy.theme')}catch(e){}if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark')})();
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']}}}};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;padding:1.5rem}
+.card-hover{transition:transform .2s,box-shadow .2s}
+.card-hover:hover{transform:translateY(-3px);box-shadow:0 12px 24px -8px rgba(15,23,42,.18)}
+.bar{transition:width .5s ease,background-color .4s}
+.fade-in{animation:fi .35s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pop{animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.bounce{animation:bob 2.4s ease-in-out infinite;display:inline-block}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:.75rem;padding:.65rem 1.1rem;font-weight:600;font-size:.9375rem;transition:all .18s;cursor:pointer}
+.btn-sm{padding:.4rem .75rem;font-size:.8rem}
+.btn-primary{background:#4f46e5;color:#fff;box-shadow:0 4px 14px -4px rgba(79,70,229,.6)}
+.btn-primary:hover{background:#4338ca}
+.btn-ghost{background:#fff;color:#334155;border:1px solid #cbd5e1}
+.btn-ghost:hover{background:#f8fafc}
+.btn-dark{background:#0f172a;color:#fff}
+.btn-dark:hover{background:#1e293b}
+.kbd{display:grid;place-items:center;width:1.75rem;height:1.75rem;border-radius:.5rem;background:#f1f5f9;font-size:.75rem;font-weight:700;color:#475569;flex-shrink:0}
+.opt{transition:all .18s;cursor:pointer}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html.dark body{background:#0b1120;color:#e2e8f0}
+html.dark .bg-slate-50{background:#0b1120}
+html.dark .bg-white,html.dark .card{background:#121b2e}
+html.dark .card,html.dark .border-slate-200,html.dark .border-slate-100{border-color:#24314d}
+html.dark .site-header{background:rgba(11,17,32,.92);border-color:#1e2a42}
+html.dark .bg-slate-100{background:#1a2440}
+html.dark .bg-slate-200{background:#263552}
+html.dark .bg-slate-900{background:#18233b}
+html.dark .text-slate-900,html.dark .text-slate-800{color:#f1f5f9}
+html.dark .text-slate-700{color:#cbd5e1}
+html.dark .text-slate-600{color:#a3b1c6}
+html.dark .text-slate-500{color:#8b9ab0}
+html.dark .text-slate-400{color:#67758c}
+html.dark .btn-ghost{background:#121b2e;color:#e2e8f0;border-color:#33425f}
+html.dark .btn-dark{background:#e2e8f0;color:#0b1120}
+html.dark .kbd{background:#1a2440;color:#cbd5e1}
+html.dark input{background:#0b1120;color:#e2e8f0;border-color:#33425f}
+html.dark .bg-indigo-50{background:#1e1b4b}html.dark .bg-indigo-100{background:#2b2766}
+html.dark .bg-emerald-50{background:#0b2e1f}html.dark .bg-emerald-100{background:#134229}
+html.dark .bg-rose-50{background:#3b1421}html.dark .bg-rose-100{background:#4a1a2a}
+html.dark .bg-amber-50{background:#3a2a08}html.dark .bg-amber-100{background:#4a3610}
+html.dark .bg-sky-50{background:#0c2a3f}html.dark .bg-sky-100{background:#0f3450}
+html.dark .bg-teal-100{background:#103f3c}html.dark .bg-violet-100{background:#3a2160}
+html.dark .bg-orange-100{background:#4d2a10}
+html.dark .text-indigo-600,html.dark .text-indigo-700,html.dark .text-sky-700,html.dark .text-sky-600{color:#a5b4fc}
+html.dark .text-emerald-600,html.dark .text-emerald-700,html.dark .text-emerald-800{color:#6ee7b7}
+html.dark .text-rose-700{color:#fda4af}
+html.dark .text-amber-700,html.dark .text-amber-800{color:#fcd34d}
+html.dark .text-teal-700{color:#5eead4}
+html.dark .text-violet-700{color:#c4b5fd}
+html.dark .text-orange-700{color:#fdba74}
+html.dark .border-rose-200{border-color:#6b2a3d}
+html.dark .border-emerald-200{border-color:#1f5b3d}
+html.dark .border-amber-300{border-color:#7a5a12}
+</style>
 </head>
-<body class="h-full">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
 
-    <div id="app" class="container mx-auto p-4 md:p-8 max-w-5xl w-full">
+<header class="site-header sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <button onclick="go('dashboard')" class="flex items-center gap-3 text-left shrink-0">
+      <span class="grid place-items-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-sky-500 text-white text-xl shadow">🛡️</span>
+      <span><span class="block font-extrabold leading-tight">InfoSec Academy</span><span class="block text-xs text-slate-500">Training &amp; Awareness</span></span>
+    </button>
+    <div id="hdr-right" class="flex items-center gap-2 flex-wrap justify-end"></div>
+  </div>
+</header>
 
-        <div id="name-entry-view" class="hidden"><div class="bg-white p-6 md:p-12 rounded-2xl shadow-xl max-w-md mx-auto text-center fade-in"><h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome!</h1><p class="text-gray-600 mb-8">Please enter your name to track your progress.</p><input type="text" id="name-input" placeholder="Enter your name..." class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"><button id="start-btn" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 disabled:bg-gray-400">Let's Start</button></div></div>
-        
-        <div id="main-menu" class="hidden">
-            <div class="flex justify-between items-start mb-6 flex-wrap gap-4">
-                 <div>
-                    <h1 id="welcome-message" class="text-2xl md:text-3xl font-bold text-gray-900">Welcome!</h1>
-                    <button id="reset-user-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Reset Progress</button>
-                 </div>
-                 <div class="w-full md:w-auto text-right space-y-2">
-                    <p class="text-lg font-semibold text-gray-800">Total Score: <span id="total-score" class="text-indigo-600">0</span></p>
-                    <p id="timer-display" class="text-sm text-gray-600">Total Time: <span id="timer">00:00:00</span></p>
-                    <button id="summary-btn" class="text-white font-bold py-2 px-4 rounded-lg transition duration-300 text-sm bg-gray-400 cursor-not-allowed" disabled>🏆 View Score</button>
-                 </div>
-            </div>
-            <div class="text-center mb-8">
-                <p class="text-lg font-semibold text-gray-800">Ready to become a <span class="font-bold text-indigo-600">Cyber Hero</span>? Test your skills below!</p>
-            </div>
-             <div class="mb-6 md:mb-8">
-                <div class="flex justify-between items-center mb-2">
-                    <p class="text-sm font-medium text-gray-600">Overall Completion</p>
-                    <p id="completion-text" class="text-sm font-bold text-indigo-600">0/7 Quizzes</p>
-                </div>
-                <div class="progress-bar-container"><div id="overall-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
-            </div>
-             <div id="badges-container" class="mb-6 md:mb-10 hidden">
-                <h3 class="text-lg font-bold text-gray-800 mb-3">Your Achievements</h3>
-                <div id="badges-list" class="flex flex-wrap gap-3"></div>
-            </div>
-            <div id="quiz-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </div>
+<main id="app" class="max-w-6xl mx-auto px-4 py-8"></main>
 
-        <div id="quiz-view" class="hidden">
-            <div class="bg-white p-4 md:p-8 rounded-2xl shadow-lg">
-                 <div class="flex justify-between items-start mb-4 gap-4">
-                    <div>
-                        <button id="back-to-menu-from-quiz" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 mb-2">← Back to Menu</button>
-                        <h2 id="quiz-title" class="text-2xl md:text-3xl font-bold text-gray-900">Quiz Title</h2>
-                    </div>
-                    <div id="streak-counter" class="text-lg font-bold text-orange-500 transition-transform duration-300 scale-0 flex-shrink-0 mt-8"></div>
-                </div>
-                <p id="question-counter" class="text-sm text-gray-500 mb-4">Question 1 of 5</p>
+<footer class="max-w-6xl mx-auto px-4 pb-10 text-center text-xs text-slate-400">
+  Progress is stored only in this browser. Never enter real passwords or sensitive data into this training app.
+</footer>
 
-                <div class="progress-bar-container mb-6"><div id="progress-bar" class="progress-bar" style="width: 0%;"></div></div>
-                <div id="question-container" class="mb-4 md:mb-6">
-                     <img id="question-image" src="" alt="Quiz Question Image" class="question-image hidden">
-                    <p id="question-text" class="text-lg md:text-xl font-medium text-gray-800">Question text...</p>
-                    <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mt-4"></div>
-                </div>
-                
-                <div id="explanation-container" class="hidden mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg"><p id="explanation-content" class="text-gray-700"></p></div>
+<div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onclick="if(event.target===this)closeModal()">
+  <div class="fade-in bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[88vh] flex flex-col">
+    <div class="flex justify-end p-3 pb-0"><button onclick="closeModal()" aria-label="Close" class="w-9 h-9 rounded-full hover:bg-slate-100 text-slate-500 text-xl leading-none">×</button></div>
+    <div id="modal-body" class="overflow-y-auto px-6 pb-6"></div>
+  </div>
+</div>
 
-                <div class="flex justify-between items-center mt-6 flex-wrap gap-4">
-                     <button id="prev-btn" class="bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition duration-300 hidden">← Previous</button>
-                     <div class="flex items-center ml-auto gap-4">
-                        <button id="explain-btn" class="hidden bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition duration-300">💡 Explain</button>
-                        <button id="next-btn" class="bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-700 transition duration-300 disabled:bg-gray-400">Submit</button>
-                     </div>
-                </div>
-            </div>
-        </div>
+<div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] translate-y-24 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-xl text-sm font-medium pointer-events-none max-w-[90vw] text-center"></div>
 
-        <div id="score-view" class="hidden text-center">
-             <div class="bg-white p-6 md:p-12 rounded-2xl shadow-lg fade-in">
-                <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">Quiz Complete!</h2>
-                <p id="score-text" class="text-xl md:text-2xl text-gray-700 mb-4">Your score: 3 out of 5</p>
-                <div id="score-feedback" class="text-lg text-gray-600 mb-8">Good job!</div>
-                <div class="flex justify-center gap-4 flex-wrap">
-                    <button id="main-menu-btn" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition duration-300">Back to Menu</button>
-                </div>
-            </div>
-        </div>
+<script>
+/* ================= CONFIG ================= */
+const STORE_KEY='infosecAcademy.v3', THEME_KEY='infosecAcademy.theme';
+const QUIZ_SEC=60, EXAM_SEC=40, POINTS=10, STREAK_BONUS=5, PAGES=5;
+
+const PAL={
+ sky:{tile:'bg-sky-100',text:'text-sky-700',bar:'bg-sky-500',btn:'bg-sky-600 hover:bg-sky-700',border:'hover:border-sky-300'},
+ indigo:{tile:'bg-indigo-100',text:'text-indigo-700',bar:'bg-indigo-500',btn:'bg-indigo-600 hover:bg-indigo-700',border:'hover:border-indigo-300'},
+ rose:{tile:'bg-rose-100',text:'text-rose-700',bar:'bg-rose-500',btn:'bg-rose-600 hover:bg-rose-700',border:'hover:border-rose-300'},
+ teal:{tile:'bg-teal-100',text:'text-teal-700',bar:'bg-teal-500',btn:'bg-teal-600 hover:bg-teal-700',border:'hover:border-teal-300'},
+ violet:{tile:'bg-violet-100',text:'text-violet-700',bar:'bg-violet-500',btn:'bg-violet-600 hover:bg-violet-700',border:'hover:border-violet-300'},
+ emerald:{tile:'bg-emerald-100',text:'text-emerald-700',bar:'bg-emerald-500',btn:'bg-emerald-600 hover:bg-emerald-700',border:'hover:border-emerald-300'},
+ orange:{tile:'bg-orange-100',text:'text-orange-700',bar:'bg-orange-500',btn:'bg-orange-600 hover:bg-orange-700',border:'hover:border-orange-300'}
+};
+const CALLOUT={
+ rose:{box:'border-rose-500 bg-rose-50',title:'text-rose-700',icon:'⚠️'},
+ amber:{box:'border-amber-500 bg-amber-50',title:'text-amber-800',icon:'💡'},
+ sky:{box:'border-sky-500 bg-sky-50',title:'text-sky-700',icon:'ℹ️'},
+ emerald:{box:'border-emerald-500 bg-emerald-50',title:'text-emerald-700',icon:'✅'}
+};
+// Hidden badge: never mentioned in the UI until a perfect 30/30 is achieved
+const HERO={id:'cyber_hero',icon:'🦸',name:'Cyber Hero'};
+
+/* ================= TRAINING CONTENT ================= */
+const MODULES=[
+{id:'phishing',icon:'🎣',title:'Phishing',color:'sky',
+ summary:'Deceptive messages that trick people into revealing information, paying fake invoices or installing malware.',
+ badge:{id:'phishing',icon:'🎣',name:'Phish Hunter'},
+ pages:[
+  {t:'What is phishing and why does it matter?',lead:'Phishing is a type of social engineering in which a criminal poses as a trusted person or organisation to trick you into clicking a link, opening a file, sharing a password or approving a payment.',
+   pts:['Most ransomware and account takeover incidents start with a deceptive message.','Phishing gets past firewalls because a person takes the final action.','One successful click can give an attacker access to email, files and payroll.','Attackers rely on urgency, fear, curiosity and authority.'],
+   call:['rose','Why it is the most critical threat','It is cheap to launch at scale, works in every sector and needs only one person to make a mistake.']},
+  {t:'Types of phishing',lead:'The channel changes, but the tactic is always the same: pretend to be someone you trust.',
+   ex:[['Email phishing','Bulk emails pretending to be a bank, streaming service, HMRC or a delivery company, linking to a fake login page.'],
+       ['Smishing (SMS phishing)','Texts that create urgency and push you to tap a link, such as a fake “redelivery fee”.'],
+       ['Vishing (voice phishing)','Calls from someone claiming to be your bank’s fraud team or the police, demanding immediate action.'],
+       ['Quishing (QR code phishing)','Malicious QR codes on emails, posters or parking meters that lead to fake payment pages.'],
+       ['Social media and messaging','Messages from hacked accounts, fake job offers or friend requests on WhatsApp or LinkedIn.']],
+   call:['amber','Remember','A legitimate organisation will never ask you to share a one-time code, password or PIN.']},
+  {t:'Targeted phishing',lead:'Targeted attacks research the victim first, using real names, job titles, projects and suppliers.',
+   ex:[['Spear phishing','A personalised attack aimed at one person or a small group, often referring to a real project or client.'],
+       ['Whaling','Spear phishing aimed at senior executives, such as a fake legal letter marked urgent and confidential.'],
+       ['Business email compromise (BEC)','Impersonating a senior leader or supplier to redirect payments, often from a lookalike domain.'],
+       ['Clone phishing','A genuine earlier email is copied, altered and resent with a malicious link or attachment.']],
+   call:['amber','Warning signs','Mismatched sender domains, unusual requests, and pressure to keep things secret or skip approval steps.']},
+  {t:'Phishing by the numbers',lead:'Phishing consistently ranks among the most reported and most costly threats in the UK.',
+   stats:[['84%','of UK businesses that identified a breach or attack in 2024 said phishing was one of the attack types (DSIT Cyber Security Breaches Survey)'],
+          ['£1.17bn','total losses from fraud in the UK in 2024, many starting with a scam message or call (UK Finance)'],
+          ['7726','the number to forward suspicious texts to, alongside the NCSC’s Suspicious Email Reporting Service']],
+   call:['rose','Note on figures','Figures are approximate and drawn from UK government, regulator and industry reports. Check the latest editions before quoting them.']}
+ ],
+ practices:['Slow down. Urgency and threats are the biggest red flags.','Check the real sender address and hover over links before clicking.','Go to websites by typing the address or using a saved bookmark.','Verify unexpected requests using a number you already hold.','Forward suspicious texts to 7726 and suspicious emails to report@phishing.gov.uk.'],
+ quiz:[
+  {q:'An email says your account will be suspended in 24 hours unless you click a link. What should you do?',o:['Click the link and log in quickly','Report it, then visit the official site by typing the address yourself','Reply asking whether it is genuine','Forward it to colleagues to check'],a:1,x:'Manufactured urgency is a classic tactic. Report the message and navigate independently.'},
+  {q:'Which channel is used in smishing?',o:['Voice calls','SMS and text messages','Printed letters','Video conferencing'],a:1,x:'Smishing uses texts that push victims to tap a link or call a number.'},
+  {q:'What makes spear phishing different from mass phishing?',o:['It only uses phone calls','It is personalised using research about a specific target','It always contains malware','It is sent only at night'],a:1,x:'Spear phishing uses real names, roles and projects, which makes it far more convincing.'},
+  {q:'A caller claiming to be from your bank asks you to read out a one-time code. What is this?',o:['Vishing','Whaling','Clone phishing','Pharming'],a:0,x:'Vishing is voice phishing. Legitimate banks never ask for one-time codes over the phone.'},
+  {q:'What is the best defence against clone phishing?',o:['Ignore all emails from colleagues','Verify unexpected resends or changes through a separate channel','Enable macros in attachments','Delete your sent items folder'],a:1,x:'Clone phishing copies genuine messages, so verify changes through a second, trusted channel.'}
+ ]},
+{id:'passwords',icon:'🔑',title:'Passwords',color:'indigo',
+ summary:'Strong, unique passwords and multi-factor authentication are your first line of defence for every account.',
+ badge:{id:'passwords',icon:'🔐',name:'Digital Locksmith'},
+ pages:[
+  {t:'What makes a password strong?',lead:'Attackers rarely break passwords by brute force. They guess common choices, reuse leaked passwords or trick you into typing them into a fake page.',
+   pts:['Length beats complexity. Three or four random words beat a short password full of symbols.','Predictable patterns such as Password1! are among the first guesses attackers try.','A unique password for each account limits the damage when one site is breached.','Never share your passwords, not even with IT staff.'],
+   call:['sky','Think like an attacker','Attackers start with leaked password lists and personal details from social media, such as pet names and birth years.']},
+  {t:'Types of password attacks',lead:'Knowing how passwords are attacked explains why the rules matter.',
+   ex:[['Brute force','Systematically trying every combination. Short passwords fall quickly to modern hardware.'],
+       ['Dictionary attack','Trying common words and passwords already seen in past data breaches.'],
+       ['Credential stuffing','Reusing username and password pairs leaked from one site to log in to other services.'],
+       ['Password spraying','Trying one common password across many accounts to avoid triggering lockouts.']]},
+  {t:'Multi-factor authentication and password managers',lead:'Modern protection combines a strong password with a second factor and a tool that manages everything.',
+   ex:[['Multi-factor authentication (MFA)','Requires a second factor such as a code, device or fingerprint, so a stolen password alone is not enough.'],
+       ['Authenticator apps and security keys','Stronger than SMS codes, which can be intercepted through SIM-swap fraud.'],
+       ['Password managers','Generate and store unique passwords, and autofill them only on the matching website.'],
+       ['Passkeys','Sign-in tied to your device and confirmed by fingerprint, face or PIN. Resistant to phishing.']],
+   call:['sky','Avoid these habits','Do not store passwords in notes, spreadsheets or on paper near your device.']},
+  {t:'Password and sign-in statistics',lead:'Stolen and weak credentials are among the most common ways attackers get into accounts.',
+   stats:[['99.9%','of account compromise attacks are blocked by multi-factor authentication, according to Microsoft’s published research'],
+          ['3 words','NCSC guidance suggests three random words as a strong, memorable password for many accounts'],
+          ['Email first','Protect your email first, because it can be used to reset the passwords for your other accounts']],
+   call:['rose','One leak, many losses','A password leaked from a small website can unlock your bank and work accounts if you reuse it.']}
+ ],
+ practices:['Use three or four random words for every important account.','Use a password manager so every site has a unique password.','Turn on MFA everywhere it is offered, preferring app codes, passkeys or security keys.','Never share passwords or enter one after arriving from a link in a message.','Change a password straight away if a service you use reports a breach.'],
+ quiz:[
+  {q:'Which is the strongest password choice?',o:['Password123!','Summer2024','copper-lantern-orbit-maple','Your date of birth'],a:2,x:'Long random passphrases are far harder to crack than short or personal passwords.'},
+  {q:'Why is password reuse dangerous?',o:['It makes passwords harder to remember','A breach on one site can expose the same login elsewhere through credential stuffing','It slows the login process','It disables MFA'],a:1,x:'Attackers automatically test leaked username and password pairs across many services.'},
+  {q:'Which MFA method is most resistant to phishing?',o:['SMS code','Email code','Hardware security key or passkey','Security questions'],a:2,x:'Hardware keys and passkeys are bound to the genuine website, so they fail on lookalike sites.'},
+  {q:'What is password spraying?',o:['Trying one common password across many accounts','Sending spam to many inboxes','Copying a password from a sticky note','Resetting passwords in bulk'],a:0,x:'It tests one common password against many accounts to avoid triggering lockouts.'},
+  {q:'What is the main benefit of a password manager’s autofill?',o:['It fills passwords on any site','It fills credentials only on the site they were saved for, which helps resist lookalike sites','It shares passwords with your team','It removes the need for MFA'],a:1,x:'If autofill does not appear on a site, check the address carefully before entering anything.'}
+ ]},
+{id:'malware',icon:'🦠',title:'Malware',color:'rose',
+ summary:'Malicious software such as ransomware, spyware and trojans damages systems and steals data.',
+ badge:{id:'malware',icon:'🩺',name:'Malware Medic'},
+ pages:[
+  {t:'What is malware?',lead:'Malware is any software designed to damage, disrupt, spy on or gain unauthorised access to a device or network. It arrives through emails, downloads, USB drives, unpatched software and fake updates.',
+   pts:['Malware is usually delivered by people: someone clicks, opens or installs something.','Modern malware can stay hidden for weeks, quietly collecting passwords.','Once inside a network, attackers move sideways to reach data and backups.','Keeping software updated on every device is a shared responsibility.'],
+   call:['rose','Why it matters','One infected laptop can encrypt shared drives, expose customer data and disrupt operations for days.']},
+  {t:'Types of malware',lead:'Each type of malware has a different goal, so each leaves different warning signs.',
+   ex:[['Ransomware','Encrypts files and demands payment. Many groups also steal data first and threaten to publish it.'],
+       ['Trojans','Disguise themselves as legitimate software, games or documents while secretly installing a backdoor.'],
+       ['Spyware and infostealers','Record keystrokes and screens, and steal saved passwords and session cookies.'],
+       ['Cryptominers','Use your device’s processing power to mine cryptocurrency, often making it slow and hot.']]},
+  {t:'How malware gets in',lead:'Malware usually arrives through a route that looks ordinary. Knowing these routes helps you pause at the right moment.',
+   ex:[['Malicious macros','Office files that run scripts once “Enable Content” is clicked. Keep macros off for unknown senders.'],
+       ['Drive-by downloads','Visiting a compromised website, or an advert on one, can install malware without a click.'],
+       ['Pirated software','Cracked software and key generators are a common way to bundle malware with a “free” program.'],
+       ['Fake updates','Pop-ups or emails posing as browser or system updates that download a harmful file.']],
+   call:['amber','Layered defence','Patching, endpoint protection, least privilege and offline backups work best together.']},
+  {t:'Real-world malware impact',lead:'Malware incidents are among the most disruptive cyber events in the UK, and recovery is often slower than the attack itself.',
+   stats:[['June 2024','A ransomware attack on pathology provider Synnovis disrupted NHS hospitals across south London, cancelling thousands of appointments'],
+          ['£1.9bn','estimated economic cost to the UK of the 2025 Jaguar Land Rover cyber attack, which halted production for weeks (Cyber Monitoring Centre estimate)'],
+          ['3-2-1','backup rule: three copies, on two media types, with one copy offline or away from your network']],
+   call:['rose','Real-world impact','Recovery depends on tested, isolated backups. Without them, organisations can face weeks of disruption.']}
+ ],
+ practices:['Keep operating systems, browsers and applications patched and up to date.','Keep macros disabled in documents from unknown senders.','Only install software from official app stores or verified vendor websites.','Maintain tested, offline or immutable backups following the 3-2-1 rule.','If a device behaves strangely or files are locked, disconnect it and report it immediately.'],
+ quiz:[
+  {q:'What is the primary goal of ransomware?',o:['Speed up your device','Encrypt files and demand payment for their recovery','Display adverts','Clean the system registry'],a:1,x:'Ransomware locks data through encryption and extorts victims for the decryption key.'},
+  {q:'How are malicious macros usually activated?',o:['Opening a PDF','Clicking Enable Content in an untrusted Office file','Restarting the computer','Printing the document'],a:1,x:'Macros run when the user enables content, so untrusted documents should stay locked down.'},
+  {q:'What is the best defence against the impact of ransomware?',o:['Antivirus software alone','Tested, offline or immutable backups combined with timely patching','Disabling updates','Turning off the firewall'],a:1,x:'Good backups let you restore without paying, and patching closes the entry points.'},
+  {q:'What is a trojan?',o:['Malware disguised as legitimate software','A type of firewall','A backup file format','A password manager'],a:0,x:'Trojans rely on deception, appearing useful while secretly doing harm.'},
+  {q:'Your device is slow and the fan runs constantly while idle. What might this indicate?',o:['Normal behaviour after an update','A possible cryptominer','Improved battery performance','A faulty keyboard'],a:1,x:'Unexplained high processor use with nothing open can indicate cryptomining malware.'}
+ ]},
+{id:'wifi',icon:'📶',title:'Public Wi-Fi',color:'teal',
+ summary:'Public networks in cafés, airports and hotels can be monitored or spoofed. Protect your traffic before you connect.',
+ badge:{id:'wifi',icon:'📡',name:'Network Ranger'},
+ pages:[
+  {t:'Why public Wi-Fi is risky',lead:'Public Wi-Fi is convenient but shared with strangers. Anyone on the same network can attempt to observe or manipulate unprotected traffic, and fake hotspots can look legitimate.',
+   pts:['Open networks may have no encryption between your device and the access point.','Attackers can run man-in-the-middle attacks to intercept or alter traffic.','Devices that auto-connect to known networks can silently join a rogue hotspot.','If file sharing is on, other people on the network may see your device.'],
+   call:['sky','Golden rule','Treat every public network as untrusted, even when it asks for a password.']},
+  {t:'Common Wi-Fi threats',lead:'Most public Wi-Fi attacks exploit trust in a familiar network name or an unencrypted connection.',
+   ex:[['Evil twin','A rogue hotspot copies a legitimate network name so devices connect automatically.'],
+       ['Man-in-the-middle (MITM)','An attacker sits between you and the internet, reading or changing traffic.'],
+       ['Session hijacking','Stealing a session cookie to access an account without knowing the password.'],
+       ['Captive portal phishing','Fake Wi-Fi sign-in pages that ask for email or social media details before you get online.']]},
+  {t:'Protecting yourself on public Wi-Fi',lead:'A few deliberate steps make public networks far safer to use.',
+   ex:[['VPN (virtual private network)','Encrypts all traffic from your device to a trusted endpoint. Many organisations provide a work VPN.'],
+       ['HTTPS','Encrypts data between your browser and the website. Check the padlock and the domain, as fake sites can use HTTPS too.'],
+       ['Public network profile','On Windows and macOS, a Public profile blocks network discovery and file sharing.'],
+       ['Mobile hotspot','Using your phone’s mobile data is often safer than an unknown café network for sensitive work.']],
+   call:['amber','Remember','HTTPS protects the content of your traffic, but it does not stop fake websites. Always check the domain too.']},
+  {t:'Public Wi-Fi by the numbers',lead:'Encryption has improved greatly, but rogue hotspots remain a practical way to capture logins.',
+   stats:[['90%+','of web pages loaded in Google Chrome worldwide are now encrypted with HTTPS (Google Transparency Report)'],
+          ['Auto-join','is the setting that lets a device silently join a rogue network. Turn it off for open networks'],
+          ['Mobile data','NCSC guidance suggests using a VPN or mobile data for sensitive activity on public networks']],
+   call:['rose','Real-world impact','Rogue hotspots have been used at conferences, airports and hotels to capture login details from many visitors at once.']}
+ ],
+ practices:['Use a reputable VPN, or your phone’s hotspot, on any network you do not control.','Confirm the exact network name with staff before connecting.','Turn off auto-connect for open networks and forget networks you no longer use.','Set new networks to Public so file sharing is disabled.','Avoid banking on open networks unless you are using a VPN.'],
+ quiz:[
+  {q:'What is an evil twin attack?',o:['A fast VPN service','A fake hotspot that copies a legitimate network name','A router firmware update','A shared printer exploit'],a:1,x:'The attacker copies a familiar network name so devices connect and route traffic through them.'},
+  {q:'What does a VPN primarily do on public Wi-Fi?',o:['Speeds up downloads only','Encrypts traffic between your device and the VPN endpoint','Blocks all malware automatically','Removes the need for HTTPS'],a:1,x:'A VPN encrypts your traffic so others on the network cannot read it. It does not stop every threat.'},
+  {q:'Which is the strongest sign a website connection is encrypted?',o:['The URL begins with http://','A valid padlock, https:// and the correct domain','Pop-up windows appear','A yellow banner appears'],a:1,x:'The padlock and https:// show encryption, but also confirm the domain.'},
+  {q:'Why should you turn off auto-connect for open networks?',o:['It drains the battery','Your device may silently join a rogue hotspot','It disables Bluetooth','It slows Wi-Fi speed'],a:1,x:'Auto-connect can join an attacker’s network with the same name without you noticing.'},
+  {q:'Which network profile suits an unfamiliar café network?',o:['Home','Public','Work domain','Guest sharing'],a:1,x:'The Public profile blocks network discovery and file sharing, limiting exposure.'}
+ ]},
+{id:'social',icon:'🎭',title:'Social Engineering',color:'violet',
+ summary:'Social engineering manipulates people rather than systems. Human trust is often the easiest route into a secure environment.',
+ badge:{id:'social',icon:'🧠',name:'Human Firewall'},
+ pages:[
+  {t:'What is social engineering?',lead:'Social engineering manipulates people into bypassing security. Instead of hacking systems, attackers exploit trust, helpfulness, fear and authority.',
+   pts:['People are often the easiest entry point, especially when busy or under pressure.','Attackers research targets through social media, company websites and public records.','Strong processes fail if people bypass them under pressure.','A convincing story is usually the attacker’s main tool.'],
+   call:['sky','The core principle','Verify before you trust, especially when someone asks for money, access or information.']},
+  {t:'Common social engineering techniques',lead:'These are the most common in-person and remote manipulation techniques.',
+   ex:[['Pretexting','Inventing a believable scenario, such as posing as an auditor, to obtain information or access.'],
+       ['Baiting','Offering something tempting, such as a free download or a USB stick, to trigger curiosity.'],
+       ['Tailgating','Following an authorised person into a secure area without badging in yourself.'],
+       ['Quid pro quo','Offering help in exchange for information or access, such as a fake IT fix.']]},
+  {t:'Psychological tricks attackers use',lead:'Attackers rely on predictable human reactions. Recognising the trick is the first step to resisting it.',
+   ex:[['Authority','People comply with senior or official figures, especially when they are in a hurry.'],
+       ['Urgency and scarcity','Deadlines stop careful thinking and push people to act straight away.'],
+       ['Liking and rapport','Attackers build friendship over weeks before making a request.'],
+       ['Fear and intimidation','Threats of legal, financial or job consequences push people into rash decisions.']],
+   call:['amber','Pause and verify','When you notice pressure, stop, step away from the request and verify it through a known channel.']},
+  {t:'Social engineering by the numbers',lead:'The human element features in a large share of breaches, and attackers are using AI to make impersonation more convincing.',
+   stats:[['£300m','estimated hit to operating profit from the 2025 Marks & Spencer cyber attack, which reportedly began with staff being impersonated to a helpdesk'],
+          ['2 in 3','breaches in Verizon’s global Data Breach Investigations Report involve the human element'],
+          ['AI','the NCSC has warned that AI will make phishing and impersonation more convincing and harder to spot']],
+   call:['rose','Real-world impact','Helpdesk impersonation is a frequent route to account takeover. Attackers call pretending to be an employee who has lost access.']}
+ ],
+ practices:['Verify unusual requests through a known, independent channel.','Never share one-time codes, passwords or recovery details with anyone.','Challenge unfamiliar people in restricted areas and follow badge policy.','Never plug in unknown removable media.','Limit what you publish about your role, travel and internal processes.'],
+ quiz:[
+  {q:'A caller claiming to be from IT asks you to read out your MFA code. What should you do?',o:['Read it out to help them','Decline and verify through the official helpdesk','Read it slowly so they can write it down','Ask them to call back tomorrow'],a:1,x:'MFA codes are for you alone. Genuine IT staff never need your one-time code.'},
+  {q:'What is pretexting?',o:['Creating a fabricated scenario to gain trust or information','Testing passwords with automated tools','Picking physical locks','Encrypting files for ransom'],a:0,x:'Pretexting builds a believable false identity or situation to manipulate the target.'},
+  {q:'What is tailgating?',o:['Following an authorised person into a secure area without badging in','Sending bulk emails','Forwarding chain letters','Sharing a Wi-Fi password with visitors'],a:0,x:'Tailgating exploits politeness. Challenge unfamiliar people and direct them to reception.'},
+  {q:'Which of these is an example of baiting?',o:['A labelled USB drive left in a lobby','A monthly newsletter','A calendar invitation from HR','A system update notice'],a:0,x:'Baiting relies on curiosity. Unknown USB devices can contain malware that runs automatically.'},
+  {q:'Which lever pushes people to act without thinking?',o:['Urgency','Peer review','Policy reading','Audit logging'],a:0,x:'Urgency stops careful checking. When a request demands immediate action, verify first.'}
+ ]},
+{id:'finance',icon:'💳',title:'Finance Security',color:'emerald',
+ summary:'Financial fraud relies on urgency, impersonation and trust. Simple verification steps stop most losses.',
+ badge:{id:'finance',icon:'💰',name:'Fraud Guardian'},
+ pages:[
+  {t:'Why financial fraud targets people and organisations',lead:'Criminals go where the money moves. Most fraud succeeds not by hacking systems but by persuading a person to change a bank detail, approve a payment or share a code.',
+   pts:['Payment instructions arriving by email are a major fraud route.','Individuals face card fraud, account takeover and investment scams.','Money sent by bank transfer is often very hard to recover once it has gone.','Simple verification controls stop most attempts.'],
+   call:['emerald','Golden rule','Any request to move money or change payment details must be verified through a separate, trusted channel.']},
+  {t:'Common finance scams',lead:'Most payment fraud follows one of a small number of patterns.',
+   ex:[['Business email compromise (BEC)','Impersonating executives or suppliers to redirect funds, often using a domain that differs by one letter.'],
+       ['Invoice fraud','Fake invoices, or genuine invoices with changed payment details, usually marked urgent.'],
+       ['CEO and gift card fraud','Urgent requests from apparent leaders to buy gift cards and send the codes.'],
+       ['Payroll diversion','Fake emails asking staff to update their salary account details through a link.']]},
+  {t:'Account, card and payment protection',lead:'Layered controls make fraud much harder to commit and easier to catch early.',
+   ex:[['Dual approval','Two authorised people must approve payments above a set threshold.'],
+       ['Bank detail change protocol','Verify changes by calling a number from your records, never the one in the request.'],
+       ['Transaction alerts','Turn on real-time alerts so unusual payments are flagged quickly.'],
+       ['Card safety','Never share your PIN, CVV or one-time codes. Use a virtual card for online shopping.']],
+   call:['rose','Speed matters','Report suspected fraud to your bank straight away, and to your IT or security team.']},
+  {t:'Finance fraud by the numbers',lead:'Financial fraud losses in the UK run into billions of pounds each year.',
+   stats:[['£1.17bn','total losses from fraud in the UK in 2024, according to UK Finance'],
+          ['£85,000','maximum reimbursement per claim for victims of authorised push payment scams under UK rules introduced in October 2024'],
+          ['Minutes','for money to leave a UK bank account. Report immediately to give the best chance of stopping a payment']],
+   call:['amber','Real-world example','Many BEC losses come from one fraudulent payment that looked routine and arrived from a familiar name.']}
+ ],
+ practices:['Verify any bank detail change by calling a number you already hold.','Require dual approval for payments above an agreed threshold.','Never buy gift cards or send codes because of an email or message request.','Enable transaction alerts and review statements regularly.','Report suspected fraud immediately to your bank and your finance and IT teams.'],
+ quiz:[
+  {q:'What is business email compromise (BEC)?',o:['A fake lottery notification','Impersonating an executive or supplier to redirect a payment','A printer malfunction scam','A phone-only gift card fraud'],a:1,x:'BEC is a targeted impersonation fraud that aims to redirect legitimate payments.'},
+  {q:'A supplier emails to change their bank details. What is the first step?',o:['Update the details immediately','Verify by calling a number from your existing records','Reply in the same email thread','Wait until the next payment run'],a:1,x:'Bank detail changes are a prime fraud route, so verify using a channel you already trust.'},
+  {q:'An email appears to come from the CEO urgently asking you to buy gift cards. What should you do?',o:['Buy them and send the codes immediately','Treat it as fraud and verify through a second channel','Buy one card to test the request','Send a photo of the card for confirmation'],a:1,x:'Executives do not request gift card codes by email. Verify by phone or in person.'},
+  {q:'Which control best reduces the risk of payment fraud?',o:['Dual approval for high-value payments','Sharing PINs with the bank','Saving card details on every website','Writing PINs on the card'],a:0,x:'Two independent approvals make it much harder for one fraudulent instruction to succeed.'},
+  {q:'Why are invoice fraud emails so effective?',o:['They use urgency and secrecy to pressure quick payment','They are always sent by post','They are digitally signed by the supplier','They use very long contracts'],a:0,x:'Pressure to pay quickly, combined with a request for secrecy, is the hallmark of invoice fraud.'}
+ ]},
+{id:'url',icon:'🔗',title:'Spot the URL',color:'orange',
+ summary:'Learn to read a web address in seconds. The real domain is the part directly before the first slash after the domain.',
+ badge:{id:'url',icon:'🔍',name:'Link Detective'},
+ pages:[
+  {t:'Why the web address matters',lead:'The important part of a web address is often hidden in plain sight. Attackers exploit the way people skim: they see a familiar brand name and assume the link is genuine.',
+   pts:['The registered domain is the only part that identifies the owner. A brand name can appear anywhere else.','Read the address from right to left, starting at the first single slash after the domain.','Lookalike characters, extra words and subdomains are common tricks.','A padlock shows encryption, not trustworthiness.'],
+   call:['amber','Important','A convincing logo and https:// are not proof of identity. Attackers can get both.']},
+  {t:'Anatomy of a URL',lead:'Take this example apart: https://login.paypal.com.secure-check.net/signin',
+   ex:[['Protocol','https:// means the connection is encrypted. It does not prove the site is genuine.'],
+       ['Subdomain','login and paypal.com are only subdomain labels. They do not make the site PayPal’s.'],
+       ['Registered domain','The name you own plus the top-level domain. Here it is secure-check.net.'],
+       ['Path','Everything after the first slash. It can contain any words and does not change who owns the site.']]},
+  {t:'Common lookalike tricks',lead:'Attackers use a small set of techniques repeatedly. Learn to spot them, then test yourself in the lab below.',
+   ex:[['Typosquatting','Deliberate misspellings of brand names, such as amazn.com or rnicrosoft.com, where “rn” imitates “m”.'],
+       ['Character swaps','A zero in place of an “o”, a one in place of an “l”, or a capital I in place of a lowercase l.'],
+       ['Brand in a subdomain','The brand name is placed before an unrelated domain, such as apple.com.id-verify.top.'],
+       ['Extra words','Words such as “secure”, “login” or “verify” added to a domain, as in accounts-google-secure-login.com.']],
+   lab:true},
+  {t:'Lookalike domains by the numbers',lead:'Lookalike domains are cheap and quick to register, so they are a common part of phishing campaigns across the UK and Europe.',
+   stats:[['Minutes','to register a convincing lookalike domain and set up a copied login page'],
+          ['Top route','ENISA’s threat landscape reports consistently list phishing among the leading initial attack routes across the EU'],
+          ['1 slash','marks where the registered domain ends. Everything after it is only a path']],
+   call:['rose','Real-world impact','Phishing kits copy login pages exactly, so the address bar is often the only reliable clue.']}
+ ],
+ practices:['Read the domain right to left. The registered domain is just before the first slash.','Check for https:// and correctly spelled brand names before entering any details.','Use bookmarks or typed addresses for important sites, not links in messages.','Expand shortened links with a preview tool before clicking.','Be suspicious of extra words such as “secure”, “verify” or “update” in a domain.'],
+ quiz:[
+  {q:'In https://login.microsoft.com.account-verify.ru/signin, what is the registered domain?',o:['microsoft.com','login.microsoft.com','account-verify.ru','signin'],a:2,x:'The registered domain is account-verify.ru. The Microsoft name is only a subdomain label.'},
+  {q:'Which URL is most likely a fake Amazon page?',o:['https://www.amazon.co.uk','https://www.amaz0n-support.com/verify','https://smile.amazon.co.uk','https://amazon.co.uk/orders'],a:1,x:'The zero replaces the letter “o”, and “support” and “verify” are classic phishing cues.'},
+  {q:'What does typosquatting mean?',o:['Deliberately misspelling a brand name in a domain','Encrypting a website','Shortening a URL','Using a VPN'],a:0,x:'Typosquatting registers near-miss spellings of brands, hoping people will not notice.'},
+  {q:'What is the main risk of shortened links such as bit.ly?',o:['They are always malicious','They hide the true destination until clicked','They cannot use HTTPS','They block antivirus software'],a:1,x:'You cannot judge a short link by sight, so expand or preview it before opening.'},
+  {q:'Which URL is the most trustworthy?',o:['https://hsbc-secure-login.com','https://www.hsbc.co.uk/online-banking','http://hsbc.co.uk.login.net','https://hsbc.co-uk.verify.com'],a:1,x:'hsbc.co.uk is the registered domain and uses HTTPS. The other options are impersonations.'}
+ ]}
+];
+
+const URL_LAB=[
+ {url:'https://www.gov.uk/browse/driving',safe:true,why:'Official UK government domain. The path after the slash is just a page.'},
+ {url:'https://hmrc.gov.uk.account-check.co/refund',safe:false,why:'“gov.uk” is only a subdomain label. The registered domain is account-check.co.'},
+ {url:'https://www.nhs.uk/',safe:true,why:'Official NHS domain, served over encrypted HTTPS.'},
+ {url:'https://www.lloydsbank-secure-login.com',safe:false,why:'Extra words are added to a bank name, and the domain is not the bank’s own.'},
+ {url:'http://portal.yourbank-login.net',safe:false,why:'No encryption (http) and a lookalike domain.'},
+ {url:'https://github.com/login',safe:true,why:'Official GitHub domain with encrypted HTTPS.'}
+];
+
+/* ================= FINAL ASSESSMENT (30 questions, all different from module quizzes) ================= */
+const EXAM=[
+ {t:'Phishing',q:'A text says a delivery fee is due and links to a payment page. What is the best response?',o:['Tap the link and pay','Check the delivery company through its official app or website','Reply STOP to the sender','Forward it to family to check'],a:1,x:'Smishing uses links to harvest details. Check the status through official channels.'},
+ {t:'Phishing',q:'What is whaling?',o:['Phishing aimed at senior executives and high-value targets','Mass spam sent at random','Malware hidden inside games','Phishing sent only through QR codes'],a:0,x:'Whaling is spear phishing aimed at senior executives or other high-value individuals.'},
+ {t:'Phishing',q:'Which channel is used in vishing?',o:['Voice calls','Printed flyers','Bluetooth pairing','Email attachments only'],a:0,x:'Vishing is voice phishing, where attackers pressure victims by phone.'},
+ {t:'Phishing',q:'A QR code on a parking meter opens a card payment page you did not expect. What is this called?',o:['Quishing','Pharming','Whitelisting','Patching'],a:0,x:'Quishing is phishing that uses QR codes to lead victims to malicious sites.'},
+ {t:'Passwords',q:'What is the strongest approach for an important account?',o:['Reuse your strongest password everywhere','A unique long passphrase with MFA enabled','Add a number to your birthday password','Store passwords in a shared spreadsheet'],a:1,x:'A unique long passphrase with a second factor is the strongest practical protection.'},
+ {t:'Passwords',q:'What is credential stuffing?',o:['Automated reuse of leaked username and password pairs across many sites','Writing passwords on paper','Cracking a hashed password file','Stealing a phone SIM'],a:0,x:'Credential stuffing automates reuse of leaked credentials, which is why unique passwords matter.'},
+ {t:'Passwords',q:'Why are SMS codes weaker than authenticator apps or passkeys?',o:['They can be intercepted through SIM-swap attacks','They take longer to arrive','They cannot be used on phones','They expire too quickly'],a:0,x:'SIM-swap fraud lets attackers take over a phone number and receive the codes.'},
+ {t:'Passwords',q:'Which MFA option is phishing-resistant because it is bound to the genuine website?',o:['Hardware security key (FIDO2)','SMS code','Email code','Security questions'],a:0,x:'FIDO2 keys verify the website’s domain, so they refuse to respond on a lookalike site.'},
+ {t:'Malware',q:'What is double extortion in a ransomware attack?',o:['Encrypting files and also threatening to publish stolen data','Charging the victim twice for decryption','Installing two antivirus tools','Infecting two devices at once'],a:0,x:'Double extortion adds data theft to encryption, so paying does not guarantee privacy.'},
+ {t:'Malware',q:'What is a trojan?',o:['Malware disguised as legitimate software','A type of backup','A firewall rule','A password manager'],a:0,x:'Trojans appear useful or harmless while performing a hidden malicious function.'},
+ {t:'Malware',q:'Why be cautious when an unexpected Office document asks you to enable content?',o:['Macros can run malicious code','It will delete the file','It slows down Word','Office will crash'],a:0,x:'Enabling macros in an untrusted document is a common way to run malware.'},
+ {t:'Malware',q:'Which backup approach best protects against ransomware?',o:['One copy on the same network as the data','Offline or immutable copies following the 3-2-1 rule','A single backup once a year','All backups in one folder'],a:1,x:'Offline or immutable copies cannot be encrypted by ransomware that reaches the live network.'},
+ {t:'Public Wi-Fi',q:'What is a man-in-the-middle attack?',o:['An attacker intercepts or alters traffic between two parties','An attacker steals a laptop','An attack carried out only through email','An attacker cracks a VPN licence'],a:0,x:'The attacker secretly relays or changes communication between two parties.'},
+ {t:'Public Wi-Fi',q:'Two networks called “Hotel_Guest” appear. What is the safest action?',o:['Connect to the stronger signal','Confirm the correct network name with reception and use a VPN','Disable the firewall','Share files to test the connection'],a:1,x:'Confirm the legitimate network name first, then add encryption with a VPN or your phone’s hotspot.'},
+ {t:'Public Wi-Fi',q:'What does a padlock icon on a website tell you?',o:['The connection is encrypted, but it does not prove the site is genuine','The site has been verified by a government','The site contains no malware','The site has been independently audited'],a:0,x:'The padlock confirms encryption only. Fake sites can use HTTPS too.'},
+ {t:'Public Wi-Fi',q:'Which network profile should a new public Wi-Fi connection use?',o:['Public','Home','Trusted','Guest sharing'],a:0,x:'The Public profile disables network discovery and file sharing on untrusted networks.'},
+ {t:'Social Engineering',q:'A colleague asks for your password over Teams to fix an urgent problem. What should you do?',o:['Share it quickly to help','Decline and verify the request with IT through a known channel','Share only the first half','Send it in a private chat'],a:1,x:'No legitimate colleague or IT team needs your password.'},
+ {t:'Social Engineering',q:'What is baiting?',o:['Offering something tempting to lure a victim into compromise','Charging a fee for security training','Sending fake job offers only','Blocking all incoming email'],a:0,x:'Baiting exploits curiosity or greed, often with a physical item such as a USB drive.'},
+ {t:'Social Engineering',q:'A stranger carrying boxes asks you to hold a secure door open. This is an example of what?',o:['Tailgating','Whaling','Pharming','Rootkitting'],a:0,x:'Tailgating means following someone into a secure area without your own authorised access.'},
+ {t:'Social Engineering',q:'Posing as an auditor to request login details is an example of what?',o:['Pretexting','Clone phishing','Port scanning','Firewall testing'],a:0,x:'Pretexting builds a believable false role to obtain information the attacker should not have.'},
+ {t:'Finance Security',q:'A supplier emails new bank details with an urgent note. What is the best response?',o:['Update the details immediately','Call a number from your existing records to verify the change','Reply in the same thread','Pay the invoice now and check later'],a:1,x:'Verify bank detail changes through a trusted contact you already hold, not the one in the email.'},
+ {t:'Finance Security',q:'What does a dual approval control involve?',o:['Two authorised people approving a high-value payment','Two bank cards for each employee','Two passwords for one account','Two copies of every backup'],a:0,x:'Dual approval requires two independent people to authorise payments above a threshold.'},
+ {t:'Finance Security',q:'Which of these should you never share with anyone, including bank staff?',o:['Your PIN and one-time codes','Your statement month','Your account type','Your branch name'],a:0,x:'Legitimate banks never need your PIN or one-time codes.'},
+ {t:'Finance Security',q:'Why is business email compromise so costly?',o:['It exploits trusted relationships to redirect legitimate payments','It only affects personal accounts','It requires physical access to the office','It always involves malware'],a:0,x:'BEC works through trust and impersonation, so payments go to the wrong account without any malware.'},
+ {t:'Spot the URL',q:'In https://support.apple.com.verify-id.top/login, what is the registered domain?',o:['apple.com','support.apple.com','verify-id.top','login'],a:2,x:'The registered domain is verify-id.top. Apple appears only as a subdomain label.'},
+ {t:'Spot the URL',q:'Which of these is a typosquatted domain?',o:['rnicrosoft.com','microsoft.com','microsoftonline.com','office.com'],a:0,x:'“rn” is used to imitate “m”, so rnicrosoft.com is a deliberate lookalike.'},
+ {t:'Spot the URL',q:'Which letter pair is often used to imitate the letter “m” in a domain?',o:['rn','vv','cl','ii'],a:0,x:'Two letters “rn” look very similar to a single “m” in many fonts.'},
+ {t:'Spot the URL',q:'Why are shortened links such as bit.ly risky?',o:['They hide where the link goes until it is clicked','They cannot use HTTPS','They are always slow to load','Browsers block them by default'],a:0,x:'You cannot see the destination of a short link, so preview it first.'},
+ {t:'Mixed',q:'Which habit is the best general defence against almost all social engineering?',o:['Verify unusual requests through an independent channel','Trust anyone with a senior job title','Ignore all email','Share less information only at work'],a:0,x:'Independent verification defeats most manipulation, whatever story the attacker tells.'},
+ {t:'Mixed',q:'You accidentally typed your password into a phishing page. What should you do immediately?',o:['Change the password, enable MFA and report the incident','Do nothing, since it was only one password','Delete your browser history only','Wait a week and see what happens'],a:0,x:'Change the password, secure the account with MFA, check for suspicious activity and report it.'}
+];
+
+/* ================= HELPERS & STATE ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=ms=>{const t=Math.ceil(ms/1000);return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')};
+const today=()=>new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'learner';
+const shuffle=arr=>{const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+// Options are shuffled each time so the correct answer never follows a pattern
+function prepQ(r){const ord=shuffle([...r.o.keys()]);return{q:r.q,topic:r.t||null,options:ord.map(i=>r.o[i]),answer:ord.indexOf(r.a),explain:r.x}}
+const ALL_BADGES=MODULES.map(m=>m.badge);
+
+const defState=()=>({user:'',progress:{},quizzes:{},badges:[],exam:null});
+function loadState(){try{const s=JSON.parse(localStorage.getItem(STORE_KEY));return s&&typeof s==='object'?{...defState(),...s}:defState()}catch(e){return defState()}}
+function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state))}catch(e){toast('Progress could not be saved.')}}
+let state=loadState();
+let view={name:state.user?'dashboard':'onboard',id:null,page:0};
+let Q=null,tickId=null,urlGame={},cardBlob=null,cardUrl=null;
+
+const totalPoints=()=>Object.values(state.quizzes).reduce((a,q)=>a+(q.bestScore||0),0)+(state.exam?state.exam.bestScore||0:0);
+const lessonsDone=()=>MODULES.filter(m=>(state.progress[m.id]??-1)>=PAGES-1).length;
+const avgQuiz=()=>{const r=Object.values(state.quizzes);return r.length?Math.round(r.reduce((a,q)=>a+q.best,0)/r.length):0};
+const badgesEarned=()=>ALL_BADGES.filter(b=>state.badges.includes(b.id)).length;
+const heroEarned=()=>state.badges.includes(HERO.id);
+const isDark=()=>document.documentElement.classList.contains('dark');
+function rankFor(p){
+ if(p>=90)return{name:'Cyber Champion',icon:'🏆',msg:'Outstanding. You think like a defender.'};
+ if(p>=75)return{name:'Security Guardian',icon:'🔒',msg:'Excellent awareness with a few details to sharpen.'};
+ if(p>=60)return{name:'Cyber Defender',icon:'⚔️',msg:'A solid foundation. Review the topics you missed.'};
+ return{name:'Security Apprentice',icon:'🌱',msg:'A good start. Revisit the training and try again.'};
+}
+function awardBadge(id){if(state.badges.includes(id))return false;state.badges.push(id);return true}
+
+/* ================= UI HELPERS ================= */
+function showModal(){const m=$('#modal');m.classList.remove('hidden');m.classList.add('flex')}
+function closeModal(){const m=$('#modal');m.classList.add('hidden');m.classList.remove('flex')}
+let toastTimer=null;
+function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.remove('translate-y-24','opacity-0');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('translate-y-24','opacity-0'),2800)}
+function toggleTheme(){const d=!isDark();document.documentElement.classList.toggle('dark',d);try{localStorage.setItem(THEME_KEY,d?'dark':'light')}catch(e){}renderHeader()}
+
+/* ================= ROUTING ================= */
+function go(name,id=null,page=0){
+ if(view.name==='quiz'&&name!=='quiz'&&Q&&!Q.done){if(!confirm('Leave this quiz? This attempt will not be saved.'))return;stopTimer();Q=null}
+ if(name==='lesson'&&(state.progress[id]??-1)<page){state.progress[id]=page;saveState()}
+ view={name,id,page};render();window.scrollTo({top:0,behavior:'smooth'});
+}
+function render(){
+ if((view.name==='quiz'||view.name==='summary')&&!Q)view={name:'dashboard',id:null,page:0};
+ if(view.name==='results'&&!state.exam)view={name:'dashboard',id:null,page:0};
+ renderHeader();
+ const v={onboard:viewOnboard,dashboard:viewDashboard,lesson:()=>viewLesson(view.id,view.page),quiz:viewQuiz,summary:viewSummary,results:viewResults};
+ $('#app').innerHTML=(v[view.name]||viewDashboard)();
+}
+function renderHeader(){
+ const r=$('#hdr-right');
+ const theme=`<button onclick="toggleTheme()" class="btn btn-ghost btn-sm">${isDark()?'☀️ Light':'🌙 Dark'}</button>`;
+ if(!state.user){r.innerHTML=theme;return}
+ const pill=state.exam
+   ?`<button onclick="go('results')" title="Open your results" class="inline-flex items-center gap-1 text-sm font-bold text-indigo-700 bg-indigo-50 hover:ring-2 hover:ring-indigo-300 rounded-full px-3 py-1 whitespace-nowrap transition">⭐ ${totalPoints()} pts <span class="text-xs font-semibold">· Results →</span></button>`
+   :`<span class="inline-flex items-center gap-1 text-sm font-bold text-indigo-700 bg-indigo-50 rounded-full px-3 py-1 whitespace-nowrap">⭐ ${totalPoints()} pts</span>`;
+ r.innerHTML=`<span class="hidden md:inline-flex items-center text-sm font-semibold text-slate-700 bg-slate-100 rounded-full px-3 py-1">👋 ${esc(state.user)}</span>${pill}${theme}<button onclick="resetProfile()" class="btn btn-ghost btn-sm">Reset Profile</button>`;
+}
+
+/* ================= ONBOARDING ================= */
+function viewOnboard(){
+ return `<section class="fade-in min-h-[70vh] grid place-items-center">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
+   <div class="text-center"><div class="text-5xl">🛡️</div>
+    <h1 class="text-2xl font-extrabold mt-3">Welcome to the InfoSec Academy</h1>
+    <p class="text-slate-500 mt-2 text-sm">Learn to spot and stop everyday cyber threats, then test your skills. Enter your name to start tracking your progress.</p></div>
+   <form onsubmit="onboard(event)" class="mt-6 space-y-4">
+    <div><label class="block text-sm font-semibold mb-1.5" for="uname">Your name</label>
+    <input id="uname" maxlength="40" autocomplete="name" placeholder="e.g. Alex Morgan" class="w-full rounded-xl border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none"></div>
+    <button type="submit" class="btn btn-primary w-full">Get Started →</button>
+   </form>
+   <p class="text-xs text-slate-400 text-center mt-4">Your name and progress are stored only in this browser.</p>
+  </div></section>`;
+}
+function onboard(e){
+ e.preventDefault();
+ const n=$('#uname').value.trim().replace(/\s+/g,' ').slice(0,40);
+ if(n.length<2){toast('Please enter at least 2 characters.');return false}
+ state.user=n;saveState();go('dashboard');return false;
+}
+
+/* ================= DASHBOARD ================= */
+const chip=(b,got)=>`<span title="${esc(b.name)}" class="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold ${got?'bg-amber-300 text-amber-950 shadow':'bg-white/10 text-indigo-100 border border-white/20'}"><span class="${got?'':'opacity-70'}">${got?b.icon:'🔒'}</span>${esc(b.name)}</span>`;
+const tile=(l,v)=>`<div class="rounded-2xl bg-white/15 px-4 py-3"><p class="text-xs uppercase tracking-wide text-indigo-100">${l}</p><p class="text-2xl font-extrabold">${v}</p></div>`;
+
+function viewDashboard(){
+ const done=lessonsDone(),pct=Math.round(done/MODULES.length*100),ex=state.exam;
+ // The hidden badge is only rendered once earned, so it is never mentioned beforehand
+ const chips=ALL_BADGES.map(b=>chip(b,state.badges.includes(b.id))).join('')+(heroEarned()?chip(HERO,true):'');
+ return `<section class="fade-in space-y-10">
+  <div class="rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-sky-500 text-white p-6 sm:p-8 shadow-lg">
+   <div class="grid md:grid-cols-3 gap-6 items-start">
+    <div class="md:col-span-2">
+     <p class="text-indigo-100 text-sm font-medium">Welcome</p>
+     <h1 class="text-3xl sm:text-4xl font-extrabold mt-1">${esc(state.user)} 👋</h1>
+     <p class="mt-2 text-indigo-100 max-w-xl">Work through each module, then test yourself with a timed quiz. Finish with the Final Assessment.</p>
+     <div class="mt-6">
+      <div class="flex justify-between text-sm font-semibold"><span>Training completion</span><span>${done}/${MODULES.length} modules</span></div>
+      <div class="mt-2 h-3 rounded-full bg-white/20 overflow-hidden"><div class="h-full rounded-full bg-white bar" style="width:${pct}%"></div></div>
+     </div>
+     <div class="mt-6 rounded-2xl bg-white/10 p-4">
+      <div class="flex justify-between text-sm font-semibold mb-3"><span>🏅 Your badges</span><span>${badgesEarned()}/${ALL_BADGES.length} earned</span></div>
+      <div class="flex flex-wrap gap-2">${chips}</div>
+     </div>
     </div>
-    
-    <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-900 text-white py-3 px-6 rounded-full shadow-lg"><p id="toast-text"></p></div>
-
-    <div id="review-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-lg max-w-2xl w-full p-6 md:p-8 relative fade-in">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
-            <h2 id="review-modal-title" class="text-xl md:text-3xl font-bold text-gray-900 mb-6">Quiz Review</h2>
-            <div id="review-modal-content" class="space-y-4 max-h-[70vh] overflow-y-auto pr-2"></div>
-        </div>
+    <div class="grid grid-cols-2 gap-3">
+     ${tile('Total points',totalPoints())}${tile('Avg. quiz score',avgQuiz()+'%')}${tile('Badges',badgesEarned()+'/'+ALL_BADGES.length)}${tile('Assessment best',ex?ex.bestPct+'%':'—')}
     </div>
+   </div>
+   ${ex?`<div class="mt-6 flex justify-end"><button onclick="openShareCard()" class="btn btn-sm" style="background:#fff;color:#4338ca">📤 Share my achievement</button></div>`:''}
+  </div>
 
-    <div id="summary-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-lg max-w-md w-full p-6 relative fade-in text-center">
-            <button id="close-summary-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
-            <div class="max-h-[70vh] overflow-y-auto p-4">
-                <h2 id="summary-modal-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-4"></h2>
-                <p id="summary-modal-score" class="text-lg md:text-xl font-bold text-indigo-600"></p>
-                <p id="summary-modal-time" class="text-md text-gray-600"></p>
-                <p id="summary-modal-text" class="text-gray-600 mt-4"></p>
-            </div>
-        </div>
+  <div>
+   <div class="mb-5"><p class="text-xs font-bold uppercase tracking-widest text-indigo-600">Training</p>
+    <h2 class="text-2xl font-extrabold">📖 Training Modules</h2>
+    <p class="text-slate-500 text-sm">Open a module to work through its pages, then take its quiz. A perfect quiz score earns that module’s badge.</p></div>
+   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">${MODULES.map(moduleCard).join('')}</div>
+  </div>
+
+  <div class="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+   <div class="absolute -right-10 -top-10 text-[160px] opacity-10 select-none">🎓</div>
+   <div class="relative grid md:grid-cols-3 gap-6 items-center">
+    <div class="md:col-span-2">
+     <p class="text-xs font-bold uppercase tracking-widest text-sky-300">Final assessment</p>
+     <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">🎓 Take the Final Assessment</h2>
+     <p class="mt-2 text-slate-300 max-w-2xl">30 questions drawn from every module, different from the module quizzes. Answers are not marked as you go. You see your full results and every answer at the end.</p>
+     <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
+      <span class="rounded-full bg-white/10 px-3 py-1">30 questions</span>
+      <span class="rounded-full bg-white/10 px-3 py-1">⏱ ${fmt(EXAM.length*EXAM_SEC*1000)} time limit</span>
+      <span class="rounded-full bg-white/10 px-3 py-1">${ex?'Attempts: '+ex.attempts:'Not attempted'}</span>
+     </div>
     </div>
+    <div class="flex md:justify-end"><button onclick="startExam()" class="btn btn-primary !py-3 w-full md:w-auto">Take the Final Assessment →</button></div>
+   </div>
+  </div>
+ </section>`;
+}
+function moduleCard(m){
+ const p=PAL[m.color],seen=Math.min((state.progress[m.id]??-1)+1,PAGES),bar=Math.round(seen/PAGES*100);
+ const r=state.quizzes[m.id],got=state.badges.includes(m.badge.id);
+ const qs=r?`<span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">Best quiz ${r.best}%</span>`:`<span class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">Quiz not taken</span>`;
+ return `<button onclick="go('lesson','${m.id}',0)" class="card-hover group text-left bg-white rounded-2xl border border-slate-200 ${p.border} p-5 shadow-sm flex flex-col h-full">
+  <div class="flex items-start justify-between gap-3"><div class="grid place-items-center w-14 h-14 rounded-2xl ${p.tile} text-3xl shrink-0">${m.icon}</div>${qs}</div>
+  <h3 class="mt-4 text-lg font-bold">${esc(m.title)}</h3>
+  <p class="mt-1.5 text-sm text-slate-600 clamp">${esc(m.summary)}</p>
+  <div class="mt-4">
+   <div class="flex justify-between text-xs font-semibold text-slate-500 mb-1.5"><span>${seen===PAGES?'Lesson complete':`Page ${seen} of ${PAGES} read`}</span><span>${bar}%</span></div>
+   <div class="h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full rounded-full ${p.bar} bar" style="width:${bar}%"></div></div>
+  </div>
+  <div class="mt-4 flex items-center justify-between gap-2 text-xs">
+   <span class="font-semibold ${got?'text-amber-700':'text-slate-400'}">${got?m.badge.icon+' '+esc(m.badge.name):'🔒 '+esc(m.badge.name)}</span>
+   <span class="font-semibold ${p.text}">Open →</span>
+  </div></button>`;
+}
 
-    <script>
-        // === Static Data ===
-        const quizzes = [
-            { title: "Phishing Fundamentals", icon: "🎣", questions: [ { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Urgent+Text+Message", question: "You get a text: 'Your bank account is locked...'. What is the attacker's main goal?", options: ["To steal your login credentials", "To help you secure your account", "To sell you security software", "To check if your number is active"], answer: "To steal your login credentials", explanation: "Attackers use urgent messages to create panic, making you click a fake link to steal your username and password." }, { image: "https://placehold.co/600x200/fee2e2/b91c1c?text=Payment+Failed!", question: "An email from 'Netflixx Support' (two 'x's) greets you 'Dear User'. What's the biggest red flag?", options: ["The generic greeting and misspelled company name", "The request for payment information", "The urgent tone", "The subject line"], answer: "The generic greeting and misspelled company name", explanation: "Legitimate companies usually address you by name, and misspellings are a common sign of a scam." }, { image: "https://placehold.co/600x200/f3e8ff/8b5cf6?text=Gift+Card+Request", question: "Your 'boss' emails asking you to urgently buy gift cards. What is your safest next move?", options: ["Contact your boss through a different channel (e.g., phone call) to verify", "Reply to the email to confirm the amount", "Immediately buy the gift cards as requested", "Forward the email to the accounting department"], answer: "Contact your boss through a different channel (e.g., phone call) to verify", explanation: "This is a classic scam. Always verify unusual financial requests out-of-band (e.g., a call or in person), not by replying to the suspicious email." }, { image: "https://placehold.co/600x200/e0e7ff/3730a3?text=Wire+Transfer+Email", question: "A hacker emails the new CFO, pretending to be the CEO, requesting an urgent wire transfer. This highly targeted attack is called:", options: ["Spear Phishing", "A Brute Force Attack", "Ransomware", "A Trojan Horse"], answer: "Spear Phishing", explanation: "Spear phishing is a targeted attack on a specific individual or organization, often using information gathered from research." }, { image: "https://placehold.co/600x200/dcfce7/166534?text=Check+the+Link!", question: "A link says 'Go to Your Bank', but hovering shows a different URL. This helps you identify:", options: ["A misleading link where the destination is not what it seems", "That the email contains a virus", "The sender's physical location", "If the link is encrypted"], answer: "A misleading link where the destination is not what it seems", explanation: "Always hover over links before clicking to see the actual web address. If it looks suspicious or doesn't match the text, don't click." } ] },
-            { title: "Password Security", icon: "🔒", questions: [ { image: "https://placehold.co/600x200/ede9fe/5b21b6?text=Strong+Password", question: "What is the most important characteristic of a strong password?", options: ["Length and complexity", "Using your pet's name", "Being easy to remember", "Changing it every day"], answer: "Length and complexity", explanation: "A long password with a mix of uppercase, lowercase, numbers, and symbols is much harder for attackers to guess." }, { image: "https://placehold.co/600x200/dbeafe/1e40af?text=2FA+Code", question: "What is Two-Factor Authentication (2FA)?", options: ["A second layer of security after your password", "Using two different passwords", "A type of antivirus software", "A password that is two characters long"], answer: "A second layer of security after your password", explanation: "2FA requires a second piece of information (like a code from your phone) in addition to your password, making unauthorized access much harder." }, { image: "https://placehold.co/600x200/fee2e2/991b1b?text=Reused+Passwords", question: "Is it safe to reuse passwords across multiple websites?", options: ["No, it's very risky", "Yes, if it's a strong password", "Only for unimportant websites", "Yes, it makes them easier to remember"], answer: "No, it's very risky", explanation: "If one site is breached, attackers will use your stolen password to try and log into your other accounts, like email and banking." }, { image: "https://placehold.co/600x200/f3e8ff/7e22ce?text=Password+Manager", question: "What is a password manager?", options: ["A secure application to store and generate complex passwords", "A person who remembers your passwords", "A notebook where you write passwords", "A type of computer virus"], answer: "A secure application to store and generate complex passwords", explanation: "Password managers securely store all your unique passwords and can generate strong new ones, so you only have to remember one master password." }, { image: "https://placehold.co/600x200/ffedd5/9a3412?text=Brute+Force", question: "What does 'brute force attack' mean in the context of passwords?", options: ["Trying every possible combination to guess a password", "Forgetting your password", "A very strong password", "Changing your password forcefully"], answer: "Trying every possible combination to guess a password", explanation: "A brute force attack is an automated method where software tries millions of password combinations until it finds the correct one." } ] },
-            { title: "Malware Awareness", icon: "🦠", questions: [ { image: "https://placehold.co/600x200/fee2e2/ef4444?text=FILES+ENCRYPTED!", question: "You see a message: 'Your files are encrypted! To get them back, send Bitcoin'. This is:", options: ["Ransomware", "Spyware", "A Worm", "Adware"], answer: "Ransomware", explanation: "Ransomware is malware that locks your files and demands a ransom payment to unlock them." }, { image: "https://placehold.co/600x200/dcfce7/22c55e?text=Funny_Cat_Video.exe", question: "You run 'cat_video.exe'. Now all your contacts get the same file from you. This is a:", options: ["Virus", "Firewall", "Keylogger", "Phishing scam"], answer: "Virus", explanation: "A computer virus is a type of malware that attaches to a program and is designed to replicate and spread to other computers." }, { image: "https://placehold.co/600x200/fefce8/eab308?text=Slow+Computer", question: "Your PC is slow and you see ads for things you just searched for. This could be:", options: ["Spyware", "A hardware failure", "A normal system update", "Ransomware"], answer: "Spyware", explanation: "Spyware is malware designed to secretly monitor your activities, track browsing habits, and collect personal information." }, { image: "https://placehold.co/600x200/e0e7ff/4338ca?text=Free+Photo+Editor", question: "You download a 'free' app, but it secretly installs a malicious program. The free app is a:", options: ["Trojan Horse", "VPN", "Firewall", "Rootkit"], answer: "Trojan Horse", explanation: "A Trojan Horse disguises itself as a legitimate program but contains malicious code that executes when the program is run." }, { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Final+Step?", question: "Besides antivirus and strong passwords, what is the most crucial step to avoid malware?", options: ["Being cautious about what you click and download", "Never turning off your computer", "Deleting all your emails", "Using a different web browser"], answer: "Being cautious about what you click and download", explanation: "Technology helps, but human caution is the best defense. Thinking before you click a link or download a file can prevent most infections." } ] },
-            { title: "Public Wi-Fi Safety", icon: "📶", questions: [ { image: "https://placehold.co/600x200/fef9c3/ca8a04?text=Public+Wi-Fi", question: "What is the main risk of using public Wi-Fi?", options: ["Your data can be intercepted by hackers", "It is usually very slow", "It costs money", "It drains your battery"], answer: "Your data can be intercepted by hackers", explanation: "Public Wi-Fi networks are often unsecured, allowing attackers on the same network to intercept your data." }, { image: "https://placehold.co/600x200/dcfce7/15803d?text=VPN+Shield", question: "What is a VPN (Virtual Private Network)?", options: ["A tool that encrypts your internet connection", "A public Wi-Fi network", "A type of internet browser", "A physical network cable"], answer: "A tool that encrypts your internet connection", explanation: "A VPN creates a secure, encrypted 'tunnel' for your internet traffic, protecting it from eavesdroppers, especially on public Wi-Fi." }, { image: "https://placehold.co/600x200/ecfdf5/059669?text=https://", question: "Which of these indicates a secure website connection?", options: ["The URL starts with https://", "The website has lots of images", "The URL starts with http://", "The website asks for your location"], answer: "The URL starts with https://", explanation: "HTTPS (Hypertext Transfer Protocol Secure) means the connection between your browser and the website is encrypted and secure." }, { image: "https://placehold.co/600x200/fee2e2/dc2626?text=Evil+Twin", question: "What is an 'Evil Twin' attack?", options: ["A fake Wi-Fi hotspot that mimics a legitimate one", "When someone looks exactly like you", "A type of computer virus", "Two routers interfering with each other"], answer: "A fake Wi-Fi hotspot that mimics a legitimate one", explanation: "Attackers set up fake Wi-Fi hotspots with familiar names (e.g., 'CoffeeShop_FreeWiFi') to trick you into connecting so they can steal your data." }, { image: "https://placehold.co/600x200/ffedd5/c2410c?text=Sensitive+Logins", question: "When using public Wi-Fi, you should avoid...", options: ["Logging into sensitive accounts like banking", "Checking the weather", "Browsing news websites", "Watching videos"], answer: "Logging into sensitive accounts like banking", explanation: "Avoid accessing any account that requires a password, especially banking or email, as your credentials could be stolen on an unsecured network." } ] },
-            { title: "Social Engineering", icon: "👥", questions: [ { image: "https://placehold.co/600x200/fce7f3/db2777?text=Manipulation", question: "What is social engineering?", options: ["The art of manipulating people to divulge confidential information", "A type of software development", "Networking at social events", "An engineering discipline"], answer: "The art of manipulating people to divulge confidential information", explanation: "Social engineering relies on human psychology rather than technical hacking to trick people into giving up sensitive information." }, { image: "https://placehold.co/600x200/faf5ff/9333ea?text=Invented+Scenario", question: "What is 'pretexting'?", options: ["Creating an invented scenario to engage a victim", "Sending a text message before calling", "Writing the preface to a book", "A type of secure communication"], answer: "Creating an invented scenario to engage a victim", explanation: "Pretexting is when an attacker creates a believable story or pretext to build trust and manipulate their victim." }, { image: "https://placehold.co/600x200/fefce8/a16207?text=IT+Support+Call", question: "An attacker calls, pretending to be from IT support, asking for your password. This is:", options: ["Vishing", "Baiting", "Quid pro quo", "Tailgating"], answer: "Vishing", explanation: "Vishing (Voice Phishing) is a phishing attack that takes place over the phone or via voicemail." }, { image: "https://placehold.co/600x200/e0f2fe/0891b2?text=USB+Drive", question: "What is 'baiting' in the context of social engineering?", options: ["Leaving a malware-infected USB drive in a public place", "Fishing with live bait", "Arguing with someone online", "Offering someone a compliment"], answer: "Leaving a malware-infected USB drive in a public place", explanation: "Baiting relies on curiosity, tempting victims to pick up and plug in an infected device like a USB drive." }, { image: "https://placehold.co/600x200/eef2ff/4338ca?text=Skepticism", question: "How can you protect yourself from social engineering?", options: ["By being skeptical and verifying requests independently", "By never talking to strangers", "By sharing all your information to be transparent", "By having a very complex password"], answer: "By being skeptical and verifying requests independently", explanation: "The best defense is to always be skeptical of unsolicited requests and to verify them through a separate, trusted communication channel." } ] },
-            { title: "Finance Security", icon: "💰", questions: [ { image: "https://placehold.co/600x200/fffbeb/b45309?text=Fake+Invoice", question: "Your accounting department receives an invoice from a known supplier, but the bank details for payment are different. What should they do first?", options: ["Verify the change with the supplier using a trusted phone number", "Pay the invoice to the new account to avoid delays", "Reply to the email to ask if they are sure", "Forward the email to your manager for approval"], answer: "Verify the change with the supplier using a trusted phone number", explanation: "Invoice fraud is common. Always verbally confirm changes to bank details using a known contact number, not one from the suspicious email." }, { image: "https://placehold.co/600x200/eff6ff/7c3aed?text=CEO's+Urgent+Email", question: "An email that appears to be from your CEO asks a junior finance employee to process a secret, urgent payment for a 'confidential acquisition'. This is a classic example of:", options: ["Business Email Compromise (BEC)", "Ransomware", "Denial-of-Service", "Spyware"], answer: "Business Email Compromise (BEC)", explanation: "BEC attacks impersonate executives to trick employees into making unauthorized financial transactions." }, { image: "https://placehold.co/600x200/f0fdf4/16a34a?text=Accounting+Login", question: "To protect your company's accounting software from unauthorized access, which of these is the MOST critical security measure?", options: ["Multi-Factor Authentication (MFA) for all users", "A very long password for the main admin", "Changing passwords every 30 days", "Accessing it only from the office"], answer: "Multi-Factor Authentication (MFA) for all users", explanation: "MFA provides the strongest protection, as even if a password is stolen, the attacker cannot log in without the second factor (e.g., a phone code)." }, { image: "https://placehold.co/600x200/f1f5f9/475569?text=Excel+Macros", question: "An employee receives an Excel file named 'Q3_Financials.xlsm'. To view the data, a prompt asks them to 'Enable Content'. This is a common trick to deliver what?", options: ["Malware hidden in the macro script", "A legitimate, updated spreadsheet", "A password-protected file", "A read-only document"], answer: "Malware hidden in the macro script", explanation: "Macros are scripts that can automate tasks, but attackers use them to run malicious code. Never enable macros from an untrusted source." }, { image: "https://placehold.co/600x200/fff1f2/e11d48?text=Payroll+Change", question: "A HR employee receives an email from a coworker asking to change their direct deposit bank account. What is the safest action before making the change?", options: ["Confirm the request with the colleague in person or via video call", "Make the change immediately to ensure they get paid on time", "Reply to the email to get written confirmation", "Ask your manager if the request is legitimate"], answer: "Confirm the request with the colleague in person or via video call", explanation: "Payroll fraud is a common goal of account takeovers. Always verify such sensitive requests through a secure, separate channel like a call or in-person chat." } ] },
-            { title: "Spot the URL", icon: "🔗", questions: [ { image: "https://placehold.co/600x200/dbeafe/2563eb?text=Amazon+Login", question: "You need to log in to your Amazon account. Which URL is the correct one?", options: ["amazon.co.uk", "amzn.co-uk.com", "amazon.login.com", "amazon-support.net"], answer: "amazon.co.uk", explanation: "Always look for the official domain name (`amazon.co.uk` or `amazon.com`). Scammers often add extra words or use different endings like `.net` or `.login.com` to trick you." }, { image: "https://placehold.co/600x200/bfdbfe/1d4ed8?text=PayPal+Login", question: "You need to send money via PayPal. Which of these is the official website?", options: ["paypal.com", "pay-pal.com", "paypal.net", "paypal-login.org"], answer: "paypal.com", explanation: "The official PayPal domain is `paypal.com`. Scammers use hyphens or different domain endings (`.net`, `.org`) to create convincing fakes." }, { image: "https://placehold.co/600x200/e0e7ff/3730a3?text=GOV.UK", question: "You need to check your tax information. Which is the only legitimate UK government website?", options: ["gov.uk", "gov-uk.com", "uk-government.org", "gov.co.uk"], answer: "gov.uk", explanation: "The official UK Government website always ends in `gov.uk`. Any other variation, like `.com` or `.co.uk`, is not official and should not be trusted." }, { image: "https://placehold.co/600x200/f3f4f6/111827?text=Apple+ID", question: "An alert says your Apple ID is locked. Which is the safe URL to use?", options: ["apple.com", "apple-support.com", "icloud-login.net", "apple.co"], answer: "apple.com", explanation: "Apple's official domain is `apple.com`. Be wary of subdomains that look official but are on a different root domain, like `apple-support.com`." }, { image: "https://placehold.co/600x200/cffafe/0e7490?text=Microsoft+365", question: "You need to log in to your Microsoft 365 account. Which URL is correct?", options: ["microsoft.com", "micosoft.com", "microsoft-office.net", "office365-login.com"], answer: "microsoft.com", explanation: "Look out for subtle misspellings like `micosoft.com` (missing the 'r'). This is a very common trick used by attackers to catch you off guard." } ] }
-        ];
+/* ================= LESSONS ================= */
+const callout=c=>{const t=CALLOUT[c[0]]||CALLOUT.sky;return `<div class="rounded-2xl border-l-4 ${t.box} p-5 shadow-sm"><p class="font-bold ${t.title}">${t.icon} ${esc(c[1])}</p><p class="mt-2 leading-relaxed">${esc(c[2])}</p></div>`};
 
-        const badges = {
-            "Phishing Phenom": { icon: "🎣", description: "Perfect score on Phishing" },
-            "Digital Locksmith": { icon: "🔑", description: "Perfect score on Password Security" },
-            "Malware Master": { icon: "🦠", description: "Perfect score on Malware" },
-            "Coffee Shop Commando": { icon: "☕", description: "Perfect score on Public Wi-Fi Safety" },
-            "Social Sleuth": { icon: "👥", description: "Perfect score on Social Engineering" },
-            "Finance Fortress": { icon: "💰", description: "Perfect score on Finance Security" },
-            "URL Eagle-Eye": { icon: "🔗", description: "Perfect score on Spot the URL" },
-            "Cybersecurity Champion": { icon: "🏆", description: "Complete all quizzes" },
-            "Perfectionist": { icon: "⭐", description: "Perfect score on all quizzes" },
-        };
+function viewLesson(id,p){
+ const m=MODULES.find(x=>x.id===id),idx=MODULES.indexOf(m),pal=PAL[m.color],last=p===PAGES-1,pg=last?null:m.pages[p];
+ const dots=[0,1,2,3,4].map(i=>`<button onclick="go('lesson','${m.id}',${i})" aria-label="Page ${i+1}" class="h-2.5 rounded-full transition-all ${i===p?'w-8 '+pal.bar:(i<p?'w-2.5 '+pal.bar+' opacity-50':'w-2.5 bg-slate-300')}"></button>`).join('');
+ const skip=p===0?`<button onclick="startQuiz('${m.id}')" class="btn btn-ghost btn-sm">🎯 Skip to quiz</button>`:'';
+ let body;
+ if(!last){
+  body=`<p class="text-xs font-bold uppercase tracking-widest ${pal.text}">${esc(m.title)} · Page ${p+1} of ${PAGES-1}</p>
+  <h1 class="text-3xl sm:text-4xl font-extrabold mt-2 leading-tight">${esc(pg.t)}</h1>
+  <p class="text-lg text-slate-600 mt-4 leading-relaxed">${esc(pg.lead)}</p>
+  ${pg.pts?`<ul class="mt-6 space-y-3">${pg.pts.map(x=>`<li class="flex gap-3"><span class="mt-2.5 w-2 h-2 rounded-full shrink-0 ${pal.bar}"></span><span class="leading-relaxed">${esc(x)}</span></li>`).join('')}</ul>`:''}
+  ${pg.ex?`<div class="mt-8 grid sm:grid-cols-2 gap-4">${pg.ex.map(([n,b])=>`<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><h3 class="font-bold ${pal.text}">${esc(n)}</h3><p class="text-sm mt-1.5 leading-relaxed">${esc(b)}</p></div>`).join('')}</div>`:''}
+  ${pg.stats?`<div class="mt-8 grid sm:grid-cols-3 gap-4">${pg.stats.map(([v,l])=>`<div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm"><p class="text-2xl font-extrabold ${pal.text}">${esc(v)}</p><p class="text-sm mt-2 leading-relaxed">${esc(l)}</p></div>`).join('')}</div>`:''}
+  ${pg.call?`<div class="mt-8">${callout(pg.call)}</div>`:''}
+  ${pg.lab?`<div class="mt-8">${urlLab()}</div>`:''}`;
+ } else {
+  body=`<p class="text-xs font-bold uppercase tracking-widest ${pal.text}">${esc(m.title)} · Best practices</p>
+  <h1 class="text-3xl sm:text-4xl font-extrabold mt-2 leading-tight">Security best practices</h1>
+  <p class="text-lg text-slate-600 mt-4 leading-relaxed">Apply these habits every day. They are the difference between recognising a threat and stopping it.</p>
+  <ul class="mt-6 space-y-3">${m.practices.map(x=>`<li class="flex gap-3 rounded-xl bg-white border border-slate-200 p-4"><span class="text-emerald-600 font-bold">✔</span><span class="leading-relaxed">${esc(x)}</span></li>`).join('')}</ul>
+  <div class="mt-8 rounded-3xl bg-slate-900 text-white p-6 sm:p-8 shadow-xl">
+   <h2 class="text-2xl font-extrabold">Ready to test your skills?</h2>
+   <p class="text-slate-300 mt-2">${m.quiz.length} questions based on this module, timed, with instant feedback after each answer. Answer all ${m.quiz.length} correctly within the time limit to earn the <strong class="text-amber-300">${esc(m.badge.name)}</strong> badge.</p>
+   <div class="mt-5 flex flex-wrap items-center gap-4">
+    <button onclick="startQuiz('${m.id}')" class="btn ${pal.btn} !py-3 text-white">🎯 Ready to test your skills</button>
+    <span class="text-sm text-slate-400">⏱ ${fmt(m.quiz.length*QUIZ_SEC*1000)} limit</span>
+   </div>
+  </div>`;
+ }
+ const prev=p>0?`<button onclick="go('lesson','${m.id}',${p-1})" class="btn btn-ghost">← Previous</button>`:`<button onclick="go('dashboard')" class="btn btn-ghost">← Dashboard</button>`;
+ const nm=MODULES[idx+1];
+ const nxt=!last?`<button onclick="go('lesson','${m.id}',${p+1})" class="btn btn-dark">Next →</button>`
+   :(nm?`<button onclick="go('lesson','${nm.id}',0)" class="btn btn-ghost">Next module: ${esc(nm.title)} →</button>`:`<button onclick="go('dashboard')" class="btn btn-dark">Back to dashboard</button>`);
+ return `<section class="fade-in">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+   <button onclick="go('dashboard')" class="text-sm font-semibold text-indigo-600">← All modules</button>
+   <div class="flex items-center gap-3 flex-wrap">${skip}<div class="flex items-center gap-2">${dots}</div></div>
+  </div>
+  <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm">
+   <div class="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+    <div class="grid place-items-center w-12 h-12 rounded-xl ${pal.tile} text-2xl">${m.icon}</div>
+    <div><p class="text-sm font-semibold text-slate-500">Module ${idx+1} of ${MODULES.length}</p><p class="font-bold">${esc(m.title)} Training</p></div>
+   </div>
+   ${body}
+  </div>
+  <div class="flex justify-between gap-3 mt-8">${prev}${nxt}</div>
+ </section>`;
+}
+function urlLab(){
+ return `<div class="card"><h2 class="text-lg font-bold mb-1">🔍 Interactive lab: classify these links</h2>
+  <p class="text-sm text-slate-500 mb-4">Decide whether each link looks safe or suspicious, then check your reasoning.</p>
+  <div class="space-y-3">${URL_LAB.map((x,i)=>{
+   const g=urlGame[i];
+   const res=g===undefined?'':`<p class="mt-3 text-sm font-medium ${g===x.safe?'text-emerald-700':'text-rose-700'}">${g===x.safe?'✅ Correct!':'❌ Not quite.'} <span class="font-normal">${esc(x.why)}</span></p>`;
+   return `<div class="rounded-xl border border-slate-200 p-4"><code class="block break-all text-sm bg-slate-100 rounded-lg px-3 py-2">${esc(x.url)}</code>
+    <div class="mt-3 flex flex-wrap gap-2">
+     <button onclick="guessUrl(${i},true)" class="btn btn-ghost btn-sm">✅ Looks safe</button>
+     <button onclick="guessUrl(${i},false)" class="btn btn-ghost btn-sm">⚠️ Suspicious</button>
+    </div>${res}</div>`;}).join('')}</div></div>`;
+}
+function guessUrl(i,safe){urlGame[i]=safe;render()}
 
-        // === DOM Elements ===
-        const allViews = { nameEntry: document.getElementById('name-entry-view'), mainMenu: document.getElementById('main-menu'), quiz: document.getElementById('quiz-view'), score: document.getElementById('score-view') };
-        const nameInput = document.getElementById('name-input'), startBtn = document.getElementById('start-btn');
-        const welcomeMessage = document.getElementById('welcome-message'), resetUserBtn = document.getElementById('reset-user-btn');
-        const totalScoreEl = document.getElementById('total-score'), overallProgressBar = document.getElementById('overall-progress-bar'), completionText = document.getElementById('completion-text'), timerDisplay = document.getElementById('timer-display'), timerEl = document.getElementById('timer');
-        const badgesContainer = document.getElementById('badges-container'), badgesList = document.getElementById('badges-list');
-        const quizList = document.getElementById('quiz-list');
-        const quizTitle = document.getElementById('quiz-title'), streakCounter = document.getElementById('streak-counter'), questionCounter = document.getElementById('question-counter');
-        const progressBar = document.getElementById('progress-bar'), questionImage = document.getElementById('question-image'), questionText = document.getElementById('question-text'), optionsContainer = document.getElementById('options-container'), nextBtn = document.getElementById('next-btn'), prevBtn = document.getElementById('prev-btn');
-        const scoreText = document.getElementById('score-text'), scoreFeedback = document.getElementById('score-feedback'), mainMenuBtnScore = document.getElementById('main-menu-btn');
-        const explainBtn = document.getElementById('explain-btn'), explanationContainer = document.getElementById('explanation-container'), explanationContent = document.getElementById('explanation-content');
-        const toast = document.getElementById('toast'), toastText = document.getElementById('toast-text');
-        const summaryBtn = document.getElementById('summary-btn');
-        const backToMenuFromQuizBtn = document.getElementById('back-to-menu-from-quiz');
-        const reviewModal = document.getElementById('review-modal'), reviewModalTitle = document.getElementById('review-modal-title'), reviewModalContent = document.getElementById('review-modal-content'), closeModalBtn = document.getElementById('close-modal-btn');
-        const summaryModal = document.getElementById('summary-modal'), summaryModalTitle = document.getElementById('summary-modal-title'), summaryModalScore = document.getElementById('summary-modal-score'), summaryModalText = document.getElementById('summary-modal-text'), summaryModalTime = document.getElementById('summary-modal-time'), closeSummaryModalBtn = document.getElementById('close-summary-modal-btn');
+/* ================= QUIZ & ASSESSMENT ENGINE =================
+   module: instant feedback after each answer.
+   exam:   no feedback until the end; Previous/Next allowed; full review at the end. */
+function startQuiz(id){
+ const m=MODULES.find(x=>x.id===id);if(!m)return;
+ beginSession({kind:'module',id:m.id,title:m.title+' Quiz',icon:m.icon,qs:m.quiz.map(prepQ),totalMs:m.quiz.length*QUIZ_SEC*1000});
+}
+function startExam(){
+ beginSession({kind:'exam',id:'exam',title:'Final Assessment',icon:'🎓',qs:shuffle(EXAM).map(prepQ),totalMs:EXAM.length*EXAM_SEC*1000});
+}
+function beginSession(o){
+ stopTimer();
+ Q={...o,idx:0,score:0,streak:0,bestStreak:0,answers:new Array(o.qs.length).fill(null),selected:-1,submitted:false,done:false,startTime:Date.now(),result:null};
+ view={name:'quiz',id:o.id,page:0};render();window.scrollTo({top:0,behavior:'smooth'});startTimer();
+}
+const remainingMs=()=>Math.max(0,Q.totalMs-(Date.now()-Q.startTime));
+function startTimer(){stopTimer();tickId=setInterval(tick,250);tick()}
+function stopTimer(){if(tickId)clearInterval(tickId);tickId=null}
+function tick(){if(!Q||Q.done)return;const r=remainingMs();updateTimer(r);if(r<=0)finishQuiz(true)}
+const clockCls=p=>`font-mono text-3xl font-extrabold tabular-nums ${p>20?'':'text-rose-600'}`;
+const barCls=p=>`h-full rounded-full bar ${p>50?'bg-emerald-500':p>20?'bg-amber-500':'bg-rose-500 animate-pulse'}`;
+function updateTimer(r){
+ const c=$('#clock'),b=$('#tbar');if(!c||!b)return;
+ const p=r/Q.totalMs*100;c.textContent=fmt(r);c.className=clockCls(p);b.style.width=p+'%';b.className=barCls(p);
+}
+function optCls(i){
+ const q=Q.qs[Q.idx],base='opt flex items-center gap-4 text-left rounded-xl border-2 px-5 py-4 font-medium';
+ if(Q.kind==='module'&&Q.submitted){
+  if(i===q.answer)return `${base} border-emerald-500 bg-emerald-50 text-emerald-900`;
+  if(i===Q.selected)return `${base} border-rose-500 bg-rose-50 text-rose-900`;
+  return `${base} border-slate-200 opacity-70`;
+ }
+ if(i===Q.selected)return `${base} border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200 text-indigo-900`;
+ return `${base} border-slate-200 bg-white hover:border-indigo-300`;
+}
+function viewQuiz(){
+ const n=Q.qs.length,exam=Q.kind==='exam',q=Q.qs[Q.idx],rem=remainingMs(),pct=rem/Q.totalMs*100;
+ const correct=Q.answers.filter(a=>a&&a.correct).length;
+ const prog=Math.round((Q.idx+(Q.submitted?1:0))/n*100),last=Q.idx===n-1;
+ const fb=(!exam&&Q.submitted)?Q.answers[Q.idx]:null;
+ const stats=exam
+  ?`<div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Marking</p><p class="text-xl font-extrabold mt-2">At the end</p><p class="text-xs text-slate-500 mt-1">No feedback until you finish</p></div>`
+  :`<div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Points</p><p class="text-3xl font-extrabold mt-1">${Q.score}</p><p class="text-xs text-slate-500 mt-1">${correct} correct so far</p></div>
+    <div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Streak</p><p class="text-3xl font-extrabold mt-1">🔥 ${Q.streak}</p><p class="text-xs text-slate-500 mt-1">Best run: ${Q.bestStreak}</p></div>`;
+ const footer=exam
+  ?`${Q.idx>0?`<button onclick="prev()" class="btn btn-ghost">← Previous</button>`:'<span></span>'}<button onclick="next()" class="btn btn-dark">${last?'Finish assessment 🏁':'Next question →'}</button>`
+  :(Q.submitted
+     ?`<button onclick="next()" class="btn btn-dark">${last?'See results 🏁':'Next question →'}</button>`
+     :`<button onclick="submitAnswer()" class="btn btn-primary">Submit answer</button>`);
+ return `<section class="fade-in">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+   <button onclick="go('dashboard')" class="text-sm font-semibold text-slate-600">← Exit</button>
+   <p class="text-sm font-semibold text-slate-500">${Q.icon} ${esc(Q.title)}${exam?' · Answers are marked at the end':''}</p>
+  </div>
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+   <div class="card col-span-2 lg:col-span-1">
+    <p class="text-xs uppercase font-bold tracking-wide text-slate-500">Time remaining</p>
+    <p id="clock" class="${clockCls(pct)}">${fmt(rem)}</p>
+    <div class="mt-3 h-2 rounded-full bg-slate-200 overflow-hidden"><div id="tbar" class="${barCls(pct)}" style="width:${pct}%"></div></div>
+   </div>
+   ${stats}
+   <div class="card">
+    <p class="text-xs uppercase font-bold tracking-wide text-slate-500">Progress</p>
+    <p class="text-3xl font-extrabold mt-1">${Q.idx+1}<span class="text-slate-400 text-xl">/${n}</span></p>
+    <div class="mt-3 h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full rounded-full bg-indigo-500 bar" style="width:${prog}%"></div></div>
+   </div>
+  </div>
+  <div class="card mt-6 sm:p-8 fade-in" id="qcard">
+   <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">Question ${Q.idx+1} of ${n}${q.topic?' · '+esc(q.topic):''}</p>
+   <h2 class="text-xl sm:text-2xl font-bold mt-2 leading-snug">${esc(q.q)}</h2>
+   <div id="opts" class="mt-6 grid gap-3">
+    ${q.options.map((o,i)=>`<button type="button" aria-checked="${Q.selected===i}" onclick="pick(${i})" class="${optCls(i)}" ${(!exam&&Q.submitted)?'disabled':''}><span class="kbd">${i+1}</span><span>${esc(o)}</span></button>`).join('')}
+   </div>
+   ${fb?feedbackHtml(fb,q):''}
+   <div class="mt-8 flex flex-wrap gap-3 justify-between items-center">
+    <p class="text-xs text-slate-400 hidden sm:block">Keys: 1–4 to choose · Enter to ${exam?'go to the next question':'submit or continue'}</p>
+    <div class="flex gap-3 ml-auto">${footer}</div>
+   </div>
+  </div>
+ </section>`;
+}
+function feedbackHtml(a,q){
+ return `<div class="mt-6 rounded-xl border p-5 fade-in ${a.correct?'bg-emerald-50 border-emerald-200':'bg-rose-50 border-rose-200'}">
+  <p class="font-bold ${a.correct?'text-emerald-700':'text-rose-700'}">${a.correct?`✅ Correct! +${a.pts} pts${a.pts>POINTS?' (streak bonus 🔥)':''}`:(a.selected<0?'⏰ No answer':'❌ Not quite')}</p>
+  ${!a.correct?`<p class="mt-1 text-sm">Correct answer: <strong class="text-emerald-700">${esc(q.options[q.answer])}</strong></p>`:''}
+  <p class="mt-2 leading-relaxed"><strong>💡 Explanation:</strong> ${esc(q.explain)}</p></div>`;
+}
+function pick(i){
+ if(!Q||Q.done||(Q.kind==='module'&&Q.submitted))return;
+ Q.selected=i;
+ document.querySelectorAll('#opts button').forEach((b,j)=>{b.className=optCls(j);b.setAttribute('aria-checked',String(j===i))});
+}
+// Stores the current answer. Module points are calculated here; exam points are calculated at the end.
+function commitAnswer(){
+ const q=Q.qs[Q.idx],correct=Q.selected>=0&&Q.selected===q.answer;
+ let pts=0;
+ if(Q.kind==='module'){
+  if(correct){Q.streak++;Q.bestStreak=Math.max(Q.bestStreak,Q.streak);pts=POINTS+(Q.streak>=3?STREAK_BONUS:0);Q.score+=pts}
+  else Q.streak=0;
+ }
+ Q.answers[Q.idx]={selected:Q.selected,correct,pts};
+}
+function submitAnswer(){
+ if(!Q||Q.done||Q.kind!=='module'||Q.submitted)return;
+ if(Q.selected<0){toast('Choose an answer first.');$('#qcard')?.classList.add('shake');setTimeout(()=>$('#qcard')?.classList.remove('shake'),400);return}
+ commitAnswer();Q.submitted=true;render();
+}
+function prev(){
+ if(!Q||Q.kind!=='exam'||Q.idx===0)return;
+ commitAnswer();Q.idx--;Q.selected=Q.answers[Q.idx]?Q.answers[Q.idx].selected:-1;render();
+}
+function next(){
+ if(!Q||Q.done)return;
+ if(Q.kind==='module'&&!Q.submitted)return;
+ if(Q.kind==='exam')commitAnswer();
+ if(Q.idx<Q.qs.length-1){
+  Q.idx++;Q.selected=Q.kind==='exam'&&Q.answers[Q.idx]?Q.answers[Q.idx].selected:-1;Q.submitted=false;render();return;
+ }
+ if(Q.kind==='exam'){
+  const skipped=Q.answers.filter(a=>!a||a.selected<0).length;
+  if(skipped>0&&!confirm(`You have ${skipped} unanswered question${skipped>1?'s':''}. Finish the assessment now?`))return;
+ }
+ finishQuiz(false);
+}
+function finishQuiz(timedOut){
+ if(!Q||Q.done)return;
+ stopTimer();
+ const rem=remainingMs();Q.done=true;
+ const n=Q.qs.length;
+ if(Q.kind==='exam')commitAnswer();
+ for(let i=0;i<n;i++)if(!Q.answers[i])Q.answers[i]={selected:-1,correct:false,pts:0};
+ if(Q.kind==='exam')Q.score=Q.answers.filter(a=>a.correct).length*POINTS;
+ const correct=Q.answers.filter(a=>a.correct).length;
+ const pct=Math.round(correct/n*100),perfect=!timedOut&&correct===n;
+ const timeUsedMs=Q.totalMs-rem;
+ const items=Q.qs.map((q,i)=>({q:q.q,options:q.options,answer:q.answer,explain:q.explain,sel:Q.answers[i].selected,correct:Q.answers[i].correct}));
+ const earned=[];
+ const entry=(prevHist)=>({attempt:prevHist.length+1,pct,correct,n,points:Q.score,timeUsedMs,timedOut,date:today()});
+ if(Q.kind==='module'){
+  const mod=MODULES.find(m=>m.id===Q.id);
+  const prev=state.quizzes[Q.id]||{best:0,bestScore:0,history:[]};
+  const history=[...(prev.history||[]),entry(prev.history||[])];
+  state.quizzes[Q.id]={best:Math.max(prev.best,pct),bestScore:Math.max(prev.bestScore,Q.score),attempts:history.length,history};
+  if(perfect&&awardBadge(mod.badge.id))earned.push(mod.badge);
+ } else {
+  const prev=state.exam||{bestPct:0,bestScore:0,history:[]};
+  const history=[...(prev.history||[]),entry(prev.history||[])];
+  state.exam={bestPct:Math.max(prev.bestPct,pct),bestScore:Math.max(prev.bestScore,Q.score),attempts:history.length,history,review:items};
+  if(perfect&&awardBadge(HERO.id))earned.push(HERO);
+ }
+ saveState();
+ const history=Q.kind==='module'?state.quizzes[Q.id].history:state.exam.history;
+ Q.result={pct,correct,n,timedOut,perfect,rank:rankFor(pct),timeUsedMs,remainingMs:rem,earned,history,attempts:history.length,items};
+ view={name:'summary',id:Q.id,page:0};render();window.scrollTo({top:0,behavior:'smooth'});
+ if(timedOut)toast("⏰ Time's up! Unanswered questions were counted as incorrect.");
+ else if(earned.length&&earned[0].id!==HERO.id)toast('🏅 New badge unlocked: '+earned[0].name);
+}
 
+function historyTable(history){
+ if(!history||!history.length)return '';
+ const latest=history[history.length-1].attempt;
+ const rows=[...history].reverse().map(h=>`<tr class="${h.attempt===latest?'font-bold bg-indigo-50/60':''} border-t border-slate-100">
+  <td class="py-2.5 pr-4">${h.attempt}${h.attempt===latest?' <span class="text-xs text-indigo-600">(latest)</span>':''}</td>
+  <td class="py-2.5 pr-4">${esc(h.date)}</td>
+  <td class="py-2.5 pr-4">${h.correct}/${h.n} (${h.pct}%)</td>
+  <td class="py-2.5 pr-4 font-mono">${fmt(h.timeUsedMs)}</td>
+  <td class="py-2.5">${h.points} pts${h.timedOut?' <span class="text-xs text-amber-700">· timed out</span>':''}</td></tr>`).join('');
+ return `<div class="card mt-6 overflow-x-auto"><h2 class="text-lg font-bold mb-3">🗂️ Your attempts</h2>
+  <table class="w-full text-sm text-left"><thead class="text-xs uppercase tracking-wide text-slate-500"><tr>
+  <th class="pb-2 pr-4">Attempt</th><th class="pb-2 pr-4">Date</th><th class="pb-2 pr-4">Score</th><th class="pb-2 pr-4">Time taken</th><th class="pb-2">Points</th></tr></thead>
+  <tbody>${rows}</tbody></table></div>`;
+}
 
-        // === App State ===
-        let user = {}, currentQuiz = null, currentQuestionIndex = 0, score = 0, selectedOption = null;
-        let isQuestionAnswered = false, currentStreak = 0, userAnswers = [], timerInterval;
+function viewSummary(){
+ const r=Q.result,isExam=Q.kind==='exam',mod=MODULES.find(m=>m.id===Q.id);
+ const idx=mod?MODULES.indexOf(mod):-1,nm=idx>=0?MODULES[idx+1]:null,C=439.8;
+ const surprise=isExam&&r.perfect?`<div class="mt-6 rounded-3xl bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 text-amber-950 p-6 shadow-xl text-center pop">
+   <p class="text-sm font-extrabold uppercase tracking-widest">🎁 Surprise!</p>
+   <p class="text-3xl font-extrabold mt-1">${HERO.icon} You are a Cyber Hero</p>
+   <p class="mt-2 font-medium">A perfect 30 out of 30. Your Cyber Hero badge is now on your dashboard, and you can share it there.</p></div>`:'';
+ let badgeBlock;
+ if(r.earned.length)badgeBlock=`<div class="flex flex-wrap gap-3">${r.earned.map(b=>`<span class="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-300 px-4 py-2 font-semibold text-amber-800 pop">${b.icon} ${esc(b.name)} unlocked</span>`).join('')}</div>`;
+ else if(isExam)badgeBlock=`<p class="text-slate-500">Every attempt is saved. Review your answers, then retake the assessment to improve your score.</p>`;
+ else if(r.perfect)badgeBlock=`<p class="text-slate-500">You have already earned the ${mod.badge.icon} ${esc(mod.badge.name)} badge.</p>`;
+ else badgeBlock=`<p class="text-slate-500">Score ${Q.qs.length}/${Q.qs.length} within the time limit to earn the ${mod.badge.icon} ${esc(mod.badge.name)} badge.</p>`;
+ return `<section class="fade-in max-w-4xl mx-auto">
+  <div class="text-center">
+   <div class="text-6xl bounce">${r.rank.icon}</div>
+   <p class="mt-3 text-sm font-bold uppercase tracking-widest text-indigo-600">${r.timedOut?"⏰ Time's up · results saved":(isExam?'Final Assessment complete':'Quiz complete')}</p>
+   <h1 class="text-4xl font-extrabold mt-1">${r.rank.name}</h1>
+   <p class="text-slate-600 mt-2">${esc(state.user)}, ${r.rank.msg}</p>
+  </div>
+  ${surprise}
+  <div class="mt-8 grid md:grid-cols-3 gap-6">
+   <div class="card flex items-center justify-center">
+    <div class="relative w-44 h-44">
+     <svg viewBox="0 0 160 160" class="w-full h-full -rotate-90">
+      <circle cx="80" cy="80" r="70" stroke="#e2e8f0" stroke-width="12" fill="none"/>
+      <circle cx="80" cy="80" r="70" stroke="#4f46e5" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-r.pct/100)}" class="bar"/>
+     </svg>
+     <div class="absolute inset-0 grid place-items-center text-center"><div><p class="text-4xl font-extrabold">${r.pct}%</p><p class="text-xs text-slate-500">accuracy</p></div></div>
+    </div>
+   </div>
+   <div class="md:col-span-2 grid grid-cols-2 gap-4">
+    ${[['Points',Q.score+' pts'],['Correct',`${r.correct} / ${r.n}`],['Best streak',isExam?'—':'🔥 '+Q.bestStreak],['Time used',fmt(r.timeUsedMs)],['Time remaining',fmt(r.remainingMs)],['Attempts',r.attempts]]
+      .map(([l,v])=>`<div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">${l}</p><p class="text-2xl font-extrabold mt-1">${v}</p></div>`).join('')}
+   </div>
+  </div>
+  <div class="card mt-6"><h2 class="text-lg font-bold mb-3">🏅 Badge status</h2>${badgeBlock}</div>
+  ${historyTable(r.history)}
+  <div class="mt-8 flex flex-wrap gap-3 justify-center">
+   <button onclick="openReview(Q.result.items,Q.title)" class="btn btn-primary">📋 Review questions &amp; answers</button>
+   ${mod?`<button onclick="go('lesson','${mod.id}',0)" class="btn btn-ghost">📖 Review lesson</button>`:''}
+   <button onclick="${isExam?'startExam()':`startQuiz('${Q.id}')`}" class="btn btn-ghost">🔁 ${isExam?'Retake Final Assessment':'Retake '+esc(mod.title)+' quiz'}</button>
+   ${nm?`<button onclick="startQuiz('${nm.id}')" class="btn btn-ghost">Next: ${esc(nm.title)} quiz →</button>`:''}
+   <button onclick="go('dashboard')" class="btn btn-dark">🏠 Dashboard</button>
+  </div>
+ </section>`;
+}
 
-        // === Storage Functions ===
-        function loadUser() { const savedUser = localStorage.getItem('cyberQuizUser'); if (savedUser) { user = JSON.parse(savedUser); return true; } return false; }
-        function saveUser() { localStorage.setItem('cyberQuizUser', JSON.stringify(user)); }
-        function saveQuizState() { if (!currentQuiz) return; const quizState = { quizTitle: currentQuiz.title, currentQuestionIndex, score, currentStreak, userAnswers }; sessionStorage.setItem('cyberQuizSession', JSON.stringify(quizState)); }
-        function clearQuizState() { sessionStorage.removeItem('cyberQuizSession'); }
+/* ================= RESULTS PAGE (opened from the points pill) ================= */
+function viewResults(){
+ const ex=state.exam;
+ const rows=MODULES.map(m=>{
+  const r=state.quizzes[m.id],h=(r&&r.history)||[],last=h[h.length-1],got=state.badges.includes(m.badge.id);
+  return `<tr class="border-t border-slate-100">
+   <td class="py-2.5 pr-4 font-semibold">${m.icon} ${esc(m.title)}</td>
+   <td class="py-2.5 pr-4">${r?r.attempts:0}</td>
+   <td class="py-2.5 pr-4">${r?r.best+'%':'—'}</td>
+   <td class="py-2.5 pr-4">${last?`${esc(last.date)} · ${last.correct}/${last.n} · ${fmt(last.timeUsedMs)}`:'—'}</td>
+   <td class="py-2.5">${got?m.badge.icon+' '+esc(m.badge.name):'🔒 Not yet earned'}</td></tr>`;
+ }).join('');
+ return `<section class="fade-in space-y-6">
+  <button onclick="go('dashboard')" class="text-sm font-semibold text-indigo-600">← Dashboard</button>
+  <div><p class="text-xs font-bold uppercase tracking-widest text-indigo-600">Your results</p>
+   <h1 class="text-3xl font-extrabold">${esc(state.user)}’s results</h1></div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+   <div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Total points</p><p class="text-2xl font-extrabold mt-1">${totalPoints()}</p></div>
+   <div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Assessment best</p><p class="text-2xl font-extrabold mt-1">${ex.bestPct}%</p></div>
+   <div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Assessment attempts</p><p class="text-2xl font-extrabold mt-1">${ex.attempts}</p></div>
+   <div class="card"><p class="text-xs uppercase font-bold tracking-wide text-slate-500">Badges</p><p class="text-2xl font-extrabold mt-1">${badgesEarned()}/${ALL_BADGES.length}${heroEarned()?' + 🦸':''}</p></div>
+  </div>
+  <div>
+   <h2 class="text-xl font-extrabold mb-2">🎓 Final Assessment attempts</h2>
+   ${historyTable(ex.history)}
+   <div class="mt-4 flex flex-wrap gap-3">
+    <button onclick="reviewLastExam()" class="btn btn-ghost">📋 Review last assessment</button>
+    <button onclick="startExam()" class="btn btn-primary">🔁 Retake Final Assessment</button>
+   </div>
+  </div>
+  <div class="card overflow-x-auto"><h2 class="text-lg font-bold mb-3">📖 Module quizzes</h2>
+   <table class="w-full text-sm text-left"><thead class="text-xs uppercase tracking-wide text-slate-500"><tr>
+    <th class="pb-2 pr-4">Module</th><th class="pb-2 pr-4">Attempts</th><th class="pb-2 pr-4">Best</th><th class="pb-2 pr-4">Last attempt</th><th class="pb-2">Badge</th></tr></thead>
+   <tbody>${rows}</tbody></table></div>
+  <div class="rounded-3xl bg-gradient-to-br from-indigo-700 via-indigo-600 to-sky-500 text-white p-6 shadow-lg flex flex-wrap items-center justify-between gap-4">
+   <div><p class="font-extrabold text-lg">Share your achievement</p><p class="text-indigo-100 text-sm">Create a badge card with your name, points, badges and assessment score.</p></div>
+   <button onclick="openShareCard()" class="btn btn-sm" style="background:#fff;color:#4338ca">📤 Create my badge</button>
+  </div>
+ </section>`;
+}
+function reviewLastExam(){
+ if(!state.exam||!state.exam.review){toast('No review available yet. Retake the assessment to see your answers.');return}
+ openReview(state.exam.review,'Final Assessment');
+}
 
-        // === Gamification Functions ===
-        function awardBadge(badgeName) { if (!user.badges) user.badges = []; if (user.badges.includes(badgeName)) return; user.badges.push(badgeName); saveUser(); showBadgeNotification(badgeName); }
-        function showBadgeNotification(badgeName) { const badge = badges[badgeName]; if (!badge) return; toastText.innerHTML = `🏆 Badge Unlocked: <strong>${badgeName}</strong>`; toast.classList.remove('hidden'); setTimeout(() => toast.classList.add('hidden'), 4000); }
-        
-        // === Timer Functions ===
-        function formatTime(ms) {
-            const totalSeconds = Math.floor(ms / 1000);
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-            return [hours, minutes, seconds].map(v => v.toString().padStart(2, '0')).join(':');
-        }
+/* ================= REVIEW MODAL ================= */
+function openReview(items,title){
+ if(!items||!items.length){toast('No review available yet.');return}
+ const correct=items.filter(i=>i.correct).length;
+ const list=items.map((it,i)=>{
+  const na=it.sel<0;
+  const st=na?{t:'Not answered',c:'bg-amber-100 text-amber-800',ic:'⏰'}:it.correct?{t:'Correct',c:'bg-emerald-100 text-emerald-800',ic:'✅'}:{t:'Incorrect',c:'bg-rose-100 text-rose-800',ic:'❌'};
+  return `<div class="rounded-xl border p-4 ${it.correct?'border-emerald-200 bg-emerald-50/40':'border-rose-200 bg-rose-50/40'}">
+   <div class="flex justify-between items-start gap-3"><p class="font-semibold">Q${i+1}. ${esc(it.q)}</p>
+   <span class="shrink-0 text-xs font-bold px-2 py-1 rounded-full ${st.c}">${st.ic} ${st.t}</span></div>
+   <p class="mt-2 text-sm"><span class="text-slate-500">Your answer:</span> ${na?'<em>No answer</em>':esc(it.options[it.sel])}</p>
+   ${!it.correct?`<p class="text-sm"><span class="text-slate-500">Correct answer:</span> <strong class="text-emerald-700">${esc(it.options[it.answer])}</strong></p>`:''}
+   <p class="mt-2 text-sm text-slate-700">💡 ${esc(it.explain)}</p></div>`;
+ }).join('');
+ $('#modal-body').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+   <h3 class="text-xl font-bold">📋 Review · ${esc(title)}</h3>
+   <p class="text-sm font-semibold text-slate-600">✅ ${correct} correct · ❌ ${items.length-correct} incorrect</p></div>
+  <div class="space-y-3">${list}</div>`;
+ showModal();
+}
 
-        function updateTimer() {
-            if (user.completionTime) {
-                const duration = user.completionTime - user.startTime;
-                timerEl.textContent = formatTime(duration);
-                clearInterval(timerInterval);
-                return;
-            }
-            if (user.startTime) {
-                const elapsed = Date.now() - user.startTime;
-                timerEl.textContent = formatTime(elapsed);
-            }
-        }
+/* ================= ACHIEVEMENT CARD (canvas: download or share) ================= */
+async function buildCard(){
+ try{await document.fonts.load('800 40px Inter');await document.fonts.load('400 24px Inter')}catch(e){}
+ const W=1200,H=960,c=document.createElement('canvas');c.width=W;c.height=H;
+ const x=c.getContext('2d'),F='Inter, system-ui, sans-serif',hero=heroEarned(),best=state.exam.bestPct,rank=rankFor(best);
+ const rr=(X,Y,w,h,r)=>{x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+w,Y,X+w,Y+h,r);x.arcTo(X+w,Y+h,X,Y+h,r);x.arcTo(X,Y+h,X,Y,r);x.arcTo(X,Y,X+w,Y,r);x.closePath()};
+ const txt=(s,X,Y,size,wt,col,al='left')=>{x.font=`${wt} ${size}px ${F}`;x.fillStyle=col;x.textAlign=al;x.fillText(s,X,Y)};
+ const fit=(s,X,Y,maxW,size,wt,col)=>{let z=size;do{x.font=`${wt} ${z}px ${F}`;z-=2}while(x.measureText(s).width>maxW&&z>22);x.fillStyle=col;x.textAlign='left';x.fillText(s,X,Y)};
 
-        // === App Logic ===
-        function showView(viewName) { Object.values(allViews).forEach(v => v && v.classList.add('hidden')); if(allViews[viewName]) allViews[viewName].classList.remove('hidden'); }
-        
-        function updateMainMenu() {
-            welcomeMessage.textContent = `Welcome, ${user.name}!`;
-            quizList.innerHTML = quizzes.map(q => {
-                const quizData = user.scores ? user.scores[q.title] : null;
-                const bestScore = quizData ? quizData.score : 0;
-                const isCompleted = !!quizData;
-                return `<div class="quiz-card bg-white p-6 rounded-xl shadow-md cursor-pointer flex flex-col justify-between" data-quiz-title="${q.title}"><div><div class="text-4xl mb-4">${q.icon}</div><h3 class="text-xl font-bold text-gray-800 mb-2">${q.title}</h3></div><div class="mt-4 pt-4 border-t border-gray-200">${isCompleted ? `<p class="text-sm font-semibold text-gray-700">Best Score: <span class="text-purple-600">${bestScore}/${q.questions.length}</span></p>`:`<p class="text-sm font-medium text-gray-500">Not attempted yet</p>`}</div></div>`
-            }).join('');
-            
-            document.querySelectorAll('.quiz-card').forEach(c => c.addEventListener('click', e => {
-                const clickedQuizTitle = e.currentTarget.dataset.quizTitle;
-                const selectedQuiz = quizzes.find(q => q.title === clickedQuizTitle);
-                const completedQuizData = user.scores ? user.scores[clickedQuizTitle] : null;
-                if(completedQuizData) {
-                    showReviewModal(selectedQuiz, completedQuizData.answers);
-                } else {
-                    startQuiz(selectedQuiz);
-                }
-            }));
+ const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,hero?'#78350f':'#312e81');g.addColorStop(1,hero?'#b45309':'#0369a1');
+ x.fillStyle=g;x.fillRect(0,0,W,H);
+ x.fillStyle='rgba(255,255,255,.07)';x.beginPath();x.arc(W-120,120,260,0,Math.PI*2);x.fill();x.beginPath();x.arc(60,H-40,220,0,Math.PI*2);x.fill();
 
-            const scores = user.scores || {};
-            const completedCount = Object.keys(scores).length;
-            overallProgressBar.style.width = `${(completedCount / quizzes.length) * 100}%`;
-            completionText.textContent = `${completedCount}/${quizzes.length} Quizzes`;
-            totalScoreEl.textContent = Object.values(scores).reduce((s, c) => s + (c.score || 0), 0);
+ txt('INFOSEC ACADEMY',80,90,30,800,'#ffffff');
+ txt('Training & Awareness',80,126,22,400,'#bae6fd');
+ if(hero){rr(W-380,52,300,58,29);x.fillStyle='#fde68a';x.fill();txt('🦸 CYBER HERO',W-230,92,26,800,'#451a03','center')}
 
-            if (user.badges && user.badges.length > 0) {
-                badgesContainer.classList.remove('hidden');
-                badgesList.innerHTML = user.badges.map(bName => `<div class="badge"><span class="icon">${badges[bName]?.icon || '🏅'}</span> ${bName}</div>`).join('');
-            } else {
-                badgesContainer.classList.add('hidden');
-            }
-            
-            clearInterval(timerInterval);
-            updateTimer();
-            if (user.startTime && !user.completionTime) {
-                timerInterval = setInterval(updateTimer, 1000);
-            }
+ txt('CYBER AWARENESS ACHIEVEMENT',80,200,22,700,'#fcd34d');
+ fit(state.user,80,266,1040,84,800,'#ffffff');
+ txt(`Rank: ${rank.icon} ${rank.name}`,80,322,34,700,'#bae6fd');
 
-            const allQuizzesCompleted = completedCount === quizzes.length;
-            summaryBtn.disabled = !allQuizzesCompleted;
-            if (allQuizzesCompleted) {
-                summaryBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
-                summaryBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-            } else {
-                summaryBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
-                summaryBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
-            }
-        }
-        
-        function startQuiz(quiz) {
-            currentQuiz = quiz;
-            currentQuestionIndex = 0;
-            score = 0;
-            currentStreak = 0;
-            userAnswers = [];
-            saveQuizState();
-            showView('quiz');
-            allViews.quiz.classList.add('fade-in');
-            quizTitle.textContent = currentQuiz.title;
-            displayQuestion();
-        }
+ const stats=[['TOTAL POINTS',String(totalPoints())],['ASSESSMENT BEST',best+'%'],['BADGES',`${badgesEarned()}/${ALL_BADGES.length}`]];
+ stats.forEach(([l,v],i)=>{const X=80+i*350;rr(X,360,320,130,22);x.fillStyle='rgba(255,255,255,.14)';x.fill();txt(l,X+24,408,18,700,'#bae6fd');txt(v,X+24,467,50,800,'#ffffff')});
 
-        function displayQuestion() {
-            selectedOption = null;
-            explanationContainer.classList.add('hidden');
-            explainBtn.classList.add('hidden');
-            
-            if (currentQuestionIndex < userAnswers.length) {
-                isQuestionAnswered = true;
-                const answeredData = userAnswers[currentQuestionIndex];
-                selectedOption = answeredData.userAnswer;
-                
-                nextBtn.textContent = 'Next →';
-                nextBtn.disabled = false;
-                explainBtn.classList.remove('hidden');
-            } else {
-                isQuestionAnswered = false;
-                nextBtn.textContent = 'Submit';
-                nextBtn.disabled = true;
-            }
+ txt('BADGES EARNED',80,555,22,700,'#fcd34d');
+ const list=ALL_BADGES.filter(b=>state.badges.includes(b.id)).map(b=>`${b.icon} ${b.name}`);
+ if(hero)list.push(`🦸 ${HERO.name}`);
+ if(!list.length)txt('No module badges yet. Keep learning!',80,600,26,400,'#e0e7ff');
+ else{
+  let X=80,Y=578;
+  list.forEach(label=>{
+   x.font=`600 24px ${F}`;const w=x.measureText(label).width+40;
+   if(X+w>1120){X=80;Y+=62}
+   rr(X,Y,w,48,24);x.fillStyle=label.startsWith('🦸')?'#fbbf24':'rgba(255,255,255,.2)';x.fill();
+   txt(label,X+20,Y+33,24,600,label.startsWith('🦸')?'#451a03':'#ffffff');
+   X+=w+14;
+  });
+ }
 
-            prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
-            const question = currentQuiz.questions[currentQuestionIndex];
-            
-            if (question.image) {
-                questionImage.src = question.image;
-                questionImage.classList.remove('hidden');
-            } else {
-                questionImage.classList.add('hidden');
-            }
+ if(hero){
+  rr(80,740,1040,120,24);x.fillStyle='rgba(251,191,36,.18)';x.fill();
+  txt('🦸 CYBER HERO',110,790,34,800,'#fde68a');
+  txt('A perfect 30 out of 30. You are a true guardian of your organisation’s data.',110,834,24,400,'#ffffff');
+ }
+ txt(`Issued ${today()} · Verified in InfoSec Academy`,80,H-40,20,400,'#bae6fd');
+ return c;
+}
 
-            questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuiz.questions.length}`;
-            questionText.textContent = question.question;
-            progressBar.style.width = `${(currentQuestionIndex / currentQuiz.questions.length) * 100}%`;
-            streakCounter.textContent = currentStreak > 1 ? `🔥 ${currentStreak}` : '';
-            streakCounter.classList.toggle('scale-0', currentStreak < 2);
-            
-            const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
-            optionsContainer.innerHTML = shuffledOptions.map(o => `<button class="option-btn w-full text-left p-4 rounded-lg bg-gray-100 hover:bg-gray-200">${o}</button>`).join('');
-            
-            optionsContainer.querySelectorAll('.option-btn').forEach(b => {
-                if(isQuestionAnswered) {
-                    b.disabled = true;
-                    const answeredData = userAnswers[currentQuestionIndex];
-                    if (b.textContent === answeredData.correctAnswer) b.classList.add('correct');
-                    else if (b.textContent === answeredData.userAnswer) b.classList.add('incorrect');
-                } else {
-                    b.addEventListener('click', () => selectOption(b, b.textContent));
-                }
-            });
-        }
-        
-        function selectOption(button, option) {
-            if (isQuestionAnswered) return;
-            selectedOption = option;
-            document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
-            button.classList.add('selected');
-            nextBtn.disabled = false;
-        }
+async function openShareCard(){
+ if(!state.exam){toast('Complete the Final Assessment to create your badge.');return}
+ const canvas=await buildCard();
+ cardBlob=await new Promise(res=>canvas.toBlob(res,'image/png'));
+ if(cardUrl)URL.revokeObjectURL(cardUrl);
+ cardUrl=URL.createObjectURL(cardBlob);
+ const fname=`infosec-achievement-${slug(state.user)}.png`;
+ const canShareFiles=!!(navigator.canShare&&navigator.canShare({files:[new File([cardBlob],fname,{type:'image/png'})]}));
+ $('#modal-body').innerHTML=`
+  <h3 class="text-xl font-bold mb-4">📤 Your achievement badge</h3>
+  <img src="${cardUrl}" alt="Your InfoSec Academy achievement badge" class="w-full rounded-2xl shadow-lg border border-slate-200">
+  <div class="mt-5 flex flex-wrap gap-3 justify-center">
+   <a href="${cardUrl}" download="${fname}" class="btn btn-primary">⬇️ Download PNG</a>
+   ${canShareFiles?`<button onclick="shareCard('${fname}')" class="btn btn-dark">📤 Share</button>`:''}
+  </div>
+  <p class="text-xs text-slate-500 text-center mt-4">Download the image and post it on LinkedIn, Teams or anywhere you like. Sharing directly is available on phones and supported browsers.</p>`;
+ showModal();
+}
+async function shareCard(fname){
+ try{
+  const file=new File([cardBlob],fname,{type:'image/png'});
+  await navigator.share({files:[file],title:'My InfoSec Academy achievement',text:`${state.user} scored ${state.exam.bestPct}% on the InfoSec Academy Final Assessment.`});
+ }catch(e){ if(e&&e.name!=='AbortError')toast('Sharing was not available. Please use Download instead.') }
+}
 
-        function handleSubmitAnswer() {
-            if (!selectedOption) return;
-            isQuestionAnswered = true;
-            
-            const question = currentQuiz.questions[currentQuestionIndex];
-            const isCorrect = selectedOption === question.answer;
+/* ================= PROFILE ================= */
+function resetProfile(){
+ if(!confirm('Reset your profile? This clears your name, scores, badges and progress on this device.'))return;
+ stopTimer();localStorage.removeItem(STORE_KEY);
+ state=defState();Q=null;urlGame={};
+ view={name:'onboard',id:null,page:0};closeModal();render();
+ toast('Profile reset. Enter your name to begin again.');
+}
 
-            if (isCorrect) {
-                score++;
-                currentStreak++;
-            } else {
-                currentStreak = 0;
-            }
-            streakCounter.textContent = currentStreak > 1 ? `🔥 ${currentStreak}` : '';
-            streakCounter.classList.toggle('scale-0', currentStreak < 2);
+/* ================= KEYBOARD ================= */
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){closeModal();return}
+ if(view.name!=='quiz'||!Q||Q.done||!$('#modal').classList.contains('hidden'))return;
+ if(/^[1-4]$/.test(e.key)){const i=Number(e.key)-1;if(i<Q.qs[Q.idx].options.length)pick(i)}
+ else if(e.key==='Enter'&&e.target.tagName!=='BUTTON'){
+  if(Q.kind==='module')Q.submitted?next():submitAnswer();
+  else next();
+ }
+});
 
-            userAnswers.push({ question: question.question, userAnswer: selectedOption, correctAnswer: question.answer, isCorrect: isCorrect });
-            
-            optionsContainer.querySelectorAll('.option-btn').forEach(btn => {
-                btn.disabled = true;
-                if (btn.textContent === question.answer) btn.classList.add('correct');
-                else if (btn.textContent === selectedOption) btn.classList.add('incorrect');
-            });
-            
-            explainBtn.classList.remove('hidden');
-            nextBtn.textContent = 'Next →';
-            saveQuizState();
-        }
-
-        function showScore() {
-            showView('score');
-            clearQuizState();
-            
-            const currentBest = (user.scores && user.scores[currentQuiz.title]?.score) || 0;
-            if (score >= currentBest) {
-                 user.scores[currentQuiz.title] = { score: score, answers: userAnswers };
-                 saveUser();
-            }
-
-            if (score === currentQuiz.questions.length) {
-                const badgeMap = { "Phishing Fundamentals": "Phishing Phenom", "Password Security": "Digital Locksmith", "Malware Awareness": "Malware Master", "Public Wi-Fi Safety": "Coffee Shop Commando", "Social Engineering": "Social Sleuth", "Finance Security": "Finance Fortress", "Spot the URL": "URL Eagle-Eye" };
-                const badgeName = badgeMap[currentQuiz.title];
-                if (badgeName) awardBadge(badgeName);
-            }
-
-            if (user.scores && Object.keys(user.scores).length === quizzes.length) {
-                awardBadge("Cybersecurity Champion");
-                 if (!user.completionTime) {
-                    user.completionTime = Date.now();
-                    saveUser();
-                }
-                const allPerfect = quizzes.every(q => (user.scores[q.title]?.score || 0) === q.questions.length);
-                if(allPerfect) awardBadge("Perfectionist");
-            }
-            
-            scoreText.textContent = `Your score: ${score} out of ${currentQuiz.questions.length}`;
-            scoreFeedback.textContent = (score/currentQuiz.questions.length) >= 0.8 ? "Excellent Work!" : (score/currentQuiz.questions.length) >= 0.5 ? "Good effort!" : "Keep learning!";
-        }
-        
-        function showReviewModal(quiz, answers) {
-            reviewModalTitle.textContent = `Review: ${quiz.title}`;
-            reviewModalContent.innerHTML = answers.map(ans => {
-                const icon = ans.isCorrect ? '✅' : '❌';
-                const bgColor = ans.isCorrect ? 'bg-green-50' : 'bg-red-50';
-                const borderColor = ans.isCorrect ? 'border-green-200' : 'border-red-200';
-                return `<div class="p-3 rounded-lg border ${bgColor} ${borderColor}"><p class="font-medium text-gray-800">${ans.question}</p><p class="text-sm mt-1">Your answer: <span class="font-semibold">${ans.userAnswer}</span> ${icon}</p>${!ans.isCorrect ? `<p class="text-sm text-green-700">Correct answer: <span class="font-semibold">${ans.correctAnswer}</span></p>` : ''}</div>`;
-            }).join('');
-            reviewModal.classList.remove('hidden');
-        }
-
-        function showSummaryDashboard() {
-            const scores = user.scores || {};
-            const totalUserScore = Object.values(scores).reduce((sum, quizData) => sum + quizData.score, 0);
-            const MAX_POSSIBLE_SCORE = quizzes.length * 5;
-
-            let animal = {};
-            if (totalUserScore === MAX_POSSIBLE_SCORE) { animal = { name: "Lion", message: "King of the Cybersecurity Jungle!" }; } 
-            else if (totalUserScore >= 30) { animal = { name: "Wolf", message: "A formidable pack leader!" }; } 
-            else if (totalUserScore >= 25) { animal = { name: "Fox", message: "Quick, clever, and cunning!" }; } 
-            else if (totalUserScore >= 20) { animal = { name: "Dog", message: "A loyal and reliable defender!" }; } 
-            else if (totalUserScore >= 15) { animal = { name: "Cat", message: "Curious and learning the ropes!" }; } 
-            else if (totalUserScore >= 10) { animal = { name: "Rabbit", message: "Quick to learn, but still cautious!" }; } 
-            else { animal = { name: "Mouse", message: "Even the smallest creature can learn to roar!" }; }
-
-            summaryModalTitle.textContent = `Congratulations! You're a ${animal.name}!`;
-            summaryModalScore.textContent = `Overall Score: ${totalUserScore} / ${MAX_POSSIBLE_SCORE}`;
-            summaryModalText.textContent = animal.message;
-            summaryModalTime.textContent = user.completionTime ? `Total Time: ${formatTime(user.completionTime - user.startTime)}` : "";
-            
-            summaryModal.classList.remove('hidden');
-        }
-
-        function setupEventListeners() {
-            startBtn.addEventListener('click', () => { 
-                const name = nameInput.value.trim();
-                if (name) {
-                    user = { name: name, scores: {}, badges: [], startTime: Date.now() };
-                    saveUser();
-                    showView('mainMenu');
-                    updateMainMenu();
-                }
-            });
-            resetUserBtn.addEventListener('click', () => {
-                localStorage.removeItem('cyberQuizUser');
-                sessionStorage.removeItem('cyberQuizSession');
-                user = {};
-                showView('nameEntry');
-            });
-            
-            nextBtn.addEventListener('click', () => {
-                if (isQuestionAnswered) {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < currentQuiz.questions.length) {
-                        displayQuestion();
-                        saveQuizState();
-                    }
-                    else showScore();
-                } else {
-                    handleSubmitAnswer();
-                }
-            });
-            prevBtn.addEventListener('click', () => {
-                if (currentQuestionIndex > 0) {
-                    currentQuestionIndex--;
-                    displayQuestion();
-                    saveQuizState();
-                }
-            });
-
-            closeModalBtn.addEventListener('click', () => reviewModal.classList.add('hidden'));
-            reviewModal.addEventListener('click', (e) => { if (e.target.id === 'review-modal') reviewModal.classList.add('hidden'); });
-
-            closeSummaryModalBtn.addEventListener('click', () => summaryModal.classList.add('hidden'));
-            summaryModal.addEventListener('click', (e) => { if (e.target.id === 'summary-modal') summaryModal.classList.add('hidden'); });
-
-            mainMenuBtnScore.addEventListener('click', () => {
-                clearQuizState();
-                showView('mainMenu');
-                updateMainMenu();
-            });
-            backToMenuFromQuizBtn.addEventListener('click', () => {
-                clearQuizState();
-                showView('mainMenu');
-                updateMainMenu();
-            });
-            explainBtn.addEventListener('click', () => {
-                const question = currentQuiz.questions[currentQuestionIndex];
-                explanationContent.textContent = question.explanation;
-                explanationContainer.classList.remove('hidden');
-            });
-            summaryBtn.addEventListener('click', showSummaryDashboard);
-        }
-
-        // --- Initial Load ---
-        document.addEventListener('DOMContentLoaded', () => {
-            setupEventListeners();
-            if (loadUser()) {
-                const savedStateJSON = sessionStorage.getItem('cyberQuizSession');
-                if (savedStateJSON) {
-                    const savedState = JSON.parse(savedStateJSON);
-                    currentQuiz = quizzes.find(q => q.title === savedState.quizTitle);
-                    if (currentQuiz) {
-                        currentQuestionIndex = savedState.currentQuestionIndex;
-                        score = savedState.score;
-                        currentStreak = savedState.currentStreak;
-                        userAnswers = savedState.userAnswers;
-                        showView('quiz');
-                        displayQuestion();
-                        return;
-                    }
-                }
-                 showView('mainMenu');
-                 updateMainMenu();
-            } else {
-                showView('nameEntry');
-            }
-        });
-    </script>
+/* ================= BOOT ================= */
+render();
+</script>
 </body>
 </html>
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
